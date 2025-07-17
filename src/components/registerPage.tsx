@@ -93,7 +93,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
         <div
           className={`fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform transform ${
             isRegisterOpen ? "translate-x-0" : "translate-x-full"
-          } bg-white w-1/3 dark:bg-gray-800`}
+          } w-1/3 bg-gray-800`}
           tabIndex={-1}
           aria-labelledby="drawer-label"
         >
@@ -105,7 +105,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
           <button
             type="button"
             onClick={() => setIsRegisterOpen(!isRegisterOpen)}
-            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white"
+            className="text-gray-400 bg-transparent rounded-lg text-sm w-8 h-8 absolute top-2.5 right-2.5 flex items-center justify-center hover:bg-gray-600 hover:text-white"
           >
             <svg
               className="w-3 h-3"
@@ -134,7 +134,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
                   type="text"
                   name="firstname"
                   placeholder="First name"
-                  className="bg-gray-50 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className=" text-sm rounded-lg ring-blue-500  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-[#8253e1] focus:border-[#8253e1]"
                 />
                 <ErrorMessage
                   name="firstname"
@@ -150,7 +150,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
                   type="text"
                   name="lastname"
                   placeholder="Last name"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="text-sm rounded-lg ring-blue-500  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-[#8253e1] focus:border-[#8253e1]"
                 />
                 <ErrorMessage
                   name="lastname"
@@ -164,7 +164,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
                   type="email"
                   name="email"
                   placeholder="john.doe@company.com"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="text-sm rounded-lg ring-blue-500  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-[#8253e1] focus:border-[#8253e1]"
                 />
                 <ErrorMessage
                   name="email"
@@ -180,7 +180,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
                   type="tel"
                   name="phonenumber"
                   placeholder="123-45-678"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="text-sm rounded-lg ring-blue-500  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-[#8253e1] focus:border-[#8253e1]"
                 />
                 <ErrorMessage
                   name="phonenumber"
@@ -196,7 +196,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
                   type="password"
                   name="password"
                   placeholder="•••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="text-sm rounded-lg ring-blue-500  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-[#8253e1] focus:border-[#8253e1]"
                 />
                 <ErrorMessage
                   name="password"
@@ -212,7 +212,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
                   type="password"
                   name="confirmpassword"
                   placeholder="•••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="text-sm rounded-lg ring-blue-500  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-[#8253e1] focus:border-[#8253e1]"
                 />
                 <ErrorMessage
                   name="confirmpassword"
@@ -229,7 +229,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
                   name="address"
                   rows={4}
                   placeholder="Write your address here..."
-                  className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="block p-2.5 w-full text-sm  rounded-lg border  bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-[#8253e1] focus:border-[#8253e1]"
                 />
                 <ErrorMessage
                   name="address"
@@ -240,7 +240,7 @@ const RegisterPage: React.FC<RegisterPageProps> = (props) => {
               <div className="grid grid-cols-1 gap-4 text-center">
                 <button
                   type="submit"
-                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-800 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                  className="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-[#8253e1] hover:bg-green-400 rounded-lg  focus:ring-4   focus:outline-none focus:ring-blue-800"
                 >
                   Register
                   <svg

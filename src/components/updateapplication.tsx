@@ -86,7 +86,7 @@ function UpdateApplication() {
               <Field
                 type="text"
                 name="Application_Name"
-                className="bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="border   text-sm rounded-lg focus:ring-[#9468ec] focus:border-[#9468ec] block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 "
                 placeholder="Accrix"
                 required
               />
@@ -103,7 +103,7 @@ function UpdateApplication() {
               <Field
                 type="Date"
                 name="Application_lanch_date"
-                className="bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-500 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="border   text-sm rounded-lg focus:ring-[#9468ec] focus:border-[#9468ec] block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 "
                 required
               />
               <ErrorMessage
@@ -119,7 +119,7 @@ function UpdateApplication() {
               <Field
                 type="text"
                 name="Application_url"
-                className="bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="border   text-sm rounded-lg focus:ring-[#9468ec] focus:border-[#9468ec] block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 "
                 placeholder="WWW.Vineatz.com"
                 required
               />
@@ -137,7 +137,7 @@ function UpdateApplication() {
                 as="textarea"
                 name="Application_Description"
                 rows={4}
-                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="border   text-sm rounded-lg focus:ring-[#9468ec] focus:border-[#9468ec] block w-full p-2.5 bg-gray-200 border-gray-600 placeholder-gray-400 "
                 placeholder="Write your thoughts here..."
               ></Field>
               <ErrorMessage
