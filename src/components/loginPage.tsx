@@ -2,6 +2,7 @@ import * as Yup from "yup";
 import { Formik, ErrorMessage, Form, Field } from "formik";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useState } from "react";
 interface LoginPageProps {
   isDrawerOpen: boolean;
   setIsDrawerOpen: (isOpen: boolean) => void;
@@ -108,7 +109,7 @@ const LoginPage: React.FC<LoginPageProps> = (props) => {
             </button>
             <Form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 gap-8">
-                <div className="grid grid-cols-1 gap-4">
+                <div className="grid grid-cols-1 gap-4" >
                   <label className="text-lg text-gray-50 capitalize">
                     Email
                   </label>
