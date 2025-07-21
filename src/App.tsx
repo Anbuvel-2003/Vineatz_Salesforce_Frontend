@@ -10,8 +10,10 @@ import Createtask from "./components/createtask";
 import UpdateTask from "./components/UpdateTask";
 import Createapplication from "./components/createapplication";
 import Applicationlist from "./components/applicationlist";
+import Applicationslist from "./components/applicationslist";
 import Login from "./components/login";
 import UpdateApplication from "./components/updateapplication";
+import ManageApplication from "./components/manageapplication";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -20,11 +22,13 @@ function App(): JSX.Element {
   return (
     <>
       <BrowserRouter>
-        {parsedUser ? (
+        {!parsedUser ? (
           <>
             <Layoutpage />
             <div className="sm:ml-64">
               <Routes>
+                <Route path="/" element={<ManageApplication />} />
+                <Route path="/" element={<Applicationslist />} />
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/AddProject" element={<AddProject />} />
                 <Route path="/UpdateProject/:id" element={<UpdateProject />} />
@@ -35,7 +39,6 @@ function App(): JSX.Element {
                   path="/createapplication"
                   element={<Createapplication />}
                 />
-                <Route path="/Applicationlist" element={<Applicationlist />} />
                 <Route
                   path="/UpdateApplication/:id"
                   element={<UpdateApplication />}
