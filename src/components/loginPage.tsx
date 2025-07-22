@@ -74,8 +74,9 @@ const LoginPage: React.FC<LoginPageProps> = (props) => {
       >
         {({ handleSubmit }) => (
           <div
-            className={`fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform transform ${isDrawerOpen ? "translate-x-0" : "translate-x-full"
-              }  w-1/3 bg-gray-800 `}
+            className={`fixed top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform transform ${
+              isDrawerOpen ? "translate-x-0" : "translate-x-full"
+            }  w-1/3 bg-gray-800 `}
             tabIndex={-1}
             aria-labelledby="drawer-label"
           >
@@ -108,7 +109,7 @@ const LoginPage: React.FC<LoginPageProps> = (props) => {
             </button>
             <Form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 gap-8">
-                <div className="grid grid-cols-1 gap-4" >
+                <div className="grid grid-cols-1 gap-4">
                   <label className="text-lg text-gray-50 capitalize">
                     Email
                   </label>

@@ -14,7 +14,7 @@ import Applicationslist from "./components/applicationslist";
 import Login from "./components/login";
 import UpdateApplication from "./components/updateapplication";
 import ManageApplication from "./components/manageapplication";
-import Clientmanagement from "./components/clientmanagement";
+import Employeelist from "./components/employeelist";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -28,11 +28,11 @@ function App(): JSX.Element {
             <Layoutpage />
             <div className="sm:ml-64">
               <Routes>
-                <Route path="/" element={<Clientmanagement />} />
-                <Route path="/application" element={<ManageApplication />} />
-                <Route path="/list" element={<Applicationslist />} />
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/manageleadlist" element={<ManageApplication />} />
+                <Route path="/Applicationlist" element={<Applicationslist />} />
                 <Route path="/AddProject" element={<AddProject />} />
+                <Route path="/Employeelist" element={<Employeelist />} />
                 <Route path="/UpdateProject/:id" element={<UpdateProject />} />
                 <Route path="/TaskDashboard" element={<TaskDashboard />} />
                 <Route path="/CreateTask" element={<Createtask />} />

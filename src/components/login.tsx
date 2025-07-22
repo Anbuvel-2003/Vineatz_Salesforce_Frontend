@@ -22,10 +22,9 @@ const LoginPage: React.FC<LoginProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
       .min(8, "Password must be at least 8 characters *")
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-        "Password must contain uppercase, lowercase, number, and special character *"
+        "Password must contain uppercase, lowercase, number, and special character *" 
       ),
   });
-
   return (
     <section className="h-screen flex items-center justify-center">
       <div className="flex w-full h-full">
@@ -63,7 +62,9 @@ const LoginPage: React.FC<LoginProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
                     className="border border-gray-200 rounded-xl font-poppins p-2 mb-1"
                   />
                   {touched.email && errors.email && (
-                    <div className="text-red-500 text-sm mb-2">{errors.email}</div>
+                    <div className="text-red-500 text-sm mb-2">
+                      {errors.email}
+                    </div>
                   )}
 
                   <label>Password</label>
@@ -88,7 +89,9 @@ const LoginPage: React.FC<LoginProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
                     </button>
                   </div>
                   {touched.password && errors.password && (
-                    <div className="text-red-500 text-sm mb-2">{errors.password}</div>
+                    <div className="text-red-500 text-sm mb-2">
+                      {errors.password}
+                    </div>
                   )}
 
                   <a
@@ -114,7 +117,7 @@ const LoginPage: React.FC<LoginProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
           <img
             src={img1}
             alt="profile"
-            className="w-full h-[100%] object-contain"
+            className="w-full h-[100%] object-cover"
           />
         </div>
       </div>
