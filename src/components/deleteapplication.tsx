@@ -66,7 +66,7 @@ interface RejectApplicationProps {
   children: ReactNode;
 }
 
-export default function RejectApplication({
+export default function DeleteApplication({
   appid,
   clientname,
   children,
@@ -77,7 +77,7 @@ export default function RejectApplication({
       <DialogContent className="h-[550px] rounded-xl">
         <DialogHeader>
           <DialogTitle className="text-[24px] font-poppins font-semibold !pb-5">
-            Reject Application
+            Delete Application
           </DialogTitle>
           <hr />
         </DialogHeader>
@@ -85,7 +85,7 @@ export default function RejectApplication({
           <div className="grid gap-4">
             <div className="grid gap-3">
               <Label htmlFor="subject" className="text-[20px] font-poppins font-semibold">
-                Rejection Subject
+                 Subject
               </Label>
               <Input
                 id="subject"
@@ -100,17 +100,17 @@ export default function RejectApplication({
               </Label>
               <Textarea
                 id="details"
-                placeholder="Rejection Details (Brief)"
-                className="h-[200px] bg-[#FAFAFA] text-[#808080] text-[18px]"
+                placeholder="Details (Brief)"
+                className="h-[200px] bg-[#FAFAFA] text-[#808080] text-[18px] "
               />
             </div>
           </div>
           <DialogFooter>
             <Button
               type="submit"
-              className="bg-[#E6001D] hover:bg-[#C10019] text-white w-full text-[22px] font-poppins"
+              className="bg-[#E6001D] hover:bg-[#C10019] text-white w-full text-[22px]  font-poppins"
             >
-              Reject
+              Delete
             </Button>
           </DialogFooter>
         </form>
@@ -118,4 +118,4 @@ export default function RejectApplication({
     </Dialog>
   );
 }
-export { RejectApplication };
+export { DeleteApplication };

@@ -8,6 +8,8 @@ import { GoPlus } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
+import RejectApplication from "./rejectapplication";
+import DeleteApplication from "./deleteapplication";
 
 function Employeelist() {
   const navigate = useNavigate();
@@ -235,10 +237,13 @@ function Employeelist() {
                         <CiEdit />
                         Edit
                       </button>
-                      <button className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500 flex items-center !gap-2 ">
-                        <MdDelete />
-                        Delete
-                      </button>
+                      <DeleteApplication appid={item.appid} clientname={item.clientname}>
+
+                        <button className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500 flex items-center !gap-2 ">
+                          <MdDelete />
+                          Delete
+                        </button>
+                      </DeleteApplication>
                     </div>
                   )}
                 </td>

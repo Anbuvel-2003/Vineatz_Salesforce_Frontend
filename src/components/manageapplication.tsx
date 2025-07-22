@@ -5,6 +5,7 @@ import { FaFileAlt } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { IoIosMore } from "react-icons/io";
 import { useState } from "react";
+import RejectApplication from '../components/rejectapplication';
 
 function ManageApplication() {
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
@@ -103,7 +104,8 @@ function ManageApplication() {
     // /top section
     <section>
       <div className="bg-[#F4FFFE] min-h-screen w-full">
-        <div className="flex items-center bg-[#F4FFFE] gap-2 py-4 px-5">
+        <div className="flex items-center justify-between bg-[#F4FFFE] gap-2 py-4 ml-10 mr-20">
+          <div>
           <a href="/Applicationslist" className="text-[#9E9E9E]">
             {" "}
             Application &gt;{" "}
@@ -112,18 +114,21 @@ function ManageApplication() {
             {" "}
             Vineatz Technologies{" "}
           </a>
+          </div>
+          <div>
           <div>
             <a
               href="/"
               className="bg-[#4FD1C5] w-10 h-10 flex rounded-sm items-center justify-center  "
-            >
+              >
               {" "}
               <FaPlus color="#fff" className="size-6" />
             </a>
           </div>
+              </div>
         </div>
 
-        <div>
+        <div className="mx-10">
           <div className="grid grid-cols-7 space-x-4 my-4 mx-8">
             <div className="flex items-center">
               <span className="text-[#030229]">Application id</span>
@@ -187,9 +192,11 @@ function ManageApplication() {
                       <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-[#4FD1C5]">
                         Move
                       </button>
+                        <RejectApplication appid={item.appid} clientname={item.clientname}>
                       <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500">
                         Reject
                       </button>
+                        </RejectApplication>
                     </div>
                   )}
                 </div>
