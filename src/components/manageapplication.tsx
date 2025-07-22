@@ -110,7 +110,7 @@ function ManageApplication() {
     return (
         // /top section
         <section ><div className="bg-[#F4FFFE] min-h-screen w-full">
-            <div className="flex items-center bg-[#F4FFFE] gap-2 my-4 mx-5">
+            <div className="flex items-center bg-[#F4FFFE] gap-2  mx-5">
                 <a href="/Applicationslist" className="text-[#9E9E9E]"> Application &gt; </a>
                 <a href="/manageapplication" className="text-[#000000]"> Vineatz Technologies  </a>
                 <div>

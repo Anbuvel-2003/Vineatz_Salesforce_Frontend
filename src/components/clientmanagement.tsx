@@ -45,115 +45,172 @@ function Clientmanagement() {
             img1: avatar1,
             img2: avatar2,
         },
+        {
+            id: 2,
+            name: "Harish",
+            type: "Employee",
+            eid: "01",
+            profile: profile,
+            img1: avatar1,
+            img2: avatar2,
+        },
+        {
+            id: 3,
+            name: "Harish",
+            type: "Employee",
+            eid: "01",
+            profile: profile,
+            img1: avatar1,
+            img2: avatar2,
+        },
+        {
+            id: 4,
+            name: "Harish",
+            type: "Employee",
+            eid: "01",
+            profile: profile,
+            img1: avatar1,
+            img2: avatar2,
+        },
+        {
+            id: 5,
+            name: "Harish",
+            type: "Employee",
+            eid: "01",
+            profile: profile,
+            img1: avatar1,
+            img2: avatar2,
+        },
+        {
+            id: 6,
+            name: "Harish",
+            type: "Employee",
+            eid: "01",
+            profile: profile,
+            img1: avatar1,
+            img2: avatar2,
+        },
+        {
+            id: 7,
+            name: "Harish",
+            type: "Employee",
+            eid: "01",
+            profile: profile,
+            img1: avatar1,
+            img2: avatar2,
+        },
+        {
+            id: 8,
+            name: "Harish",
+            type: "Employee",
+            eid: "01",
+            profile: profile,
+            img1: avatar1,
+            img2: avatar2,
+        },
+        {
+            id: 9,
+            name: "Harish",
+            type: "Employee",
+            eid: "01",
+            profile: profile,
+            img1: avatar1,
+            img2: avatar2,
+        },
+        {
+            id: 10,
+            name: "Harish",
+            type: "Employee",
+            eid: "01",
+            profile: profile,
+            img1: avatar1,
+            img2: avatar2,
+        },
     ];
     return (
-        <div>
-            {/* top section */}
-            <div className=" bg-[#F4FFFE] w-full min-h-screen">
-                <div className="flex items-center gap-2 my-4 mx-5">
-                    <a href="/Applicationslist" className="text-[#9E9E9E]"> Application &gt; </a>
-                    <a href="/manageapplication" className="text-[#9E9E9E]"> Vineatz Technologies &gt; </a>
-                    <div>
-                        <a href="/" className="   "> 01</a>
-                    </div>
-                </div>
-                <div>
-                    <div className="grid grid-cols-7 rounded-xl items-center justify-items-center px-6 py-4  !m-5 ">
-                        <div className="flex items-center">
-                            <span className="text-[#030229]">Application id</span>
-                            <MdOutlineArrowDropDown />
-                        </div>
-                        <div className="flex items-center">
-                            <span className="text-[#030229]">Application name</span>
-                            <MdOutlineArrowDropDown />
-                        </div>
-                        <div className="flex items-center">
-                            <span className="text-[#030229]">Client id</span>
-                            <MdOutlineArrowDropDown />
-                        </div>
-                        <div className="flex items-center">
-                            <span className="text-[#030229]">Client name</span>
-                            <MdOutlineArrowDropDown />
-                        </div>
-                        <div className="flex items-center">
-                            <span className="text-[#030229]">Status</span>
-                            <MdOutlineArrowDropDown />
-                        </div>
-                        <div className="flex items-center">
-                            <span className="text-[#030229]">Application details</span>
-                            <MdOutlineArrowDropDown />
-                        </div>
-                        <div className="flex items-center">
-                            <span className="text-[#030229]">Client details</span>
-                            <MdOutlineArrowDropDown />
-                        </div>
-                    </div>
-                    <div className="">
+        <div className="bg-[#F4FFFE] w-full min-h-screen px-10">
+            {/* Breadcrumb */}
+            <div className="flex items-center gap-2 mx-5 py-4">
+                <a href="/Applicationslist" className="text-[#9E9E9E]">Application &gt;</a>
+                <a href="/manageapplication" className="text-[#9E9E9E]">Vineatz Technologies &gt;</a>
+                <a href="/" className="">01</a>
+            </div>
+
+            {/* Table */}
+            <div className="overflow-x-auto">
+                <table className="min-w-full bg-white rounded-xl shadow-sm">
+                    <thead className="bg-[#F0F4F8] text-[#030229] text-left">
+                        <tr className="grid grid-cols-[repeat(7,1fr)_auto]  items-center px-6 py-4 rounded-t-xl">
+                            <th className="flex items-center gap-1">Application id <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center gap-1">Application name <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center gap-1">Client id <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center gap-1">Client name <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center gap-1">Status <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center gap-1">Application details <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center gap-1">Client details <MdOutlineArrowDropDown /></th>
+                            <th className="w-[80px] ">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {details.map((item) => (
-                            <div className="grid grid-cols-7 bg-white shadow-sm rounded-xl items-center justify-items-center hover:bg-[#F8F9FF] transition px-6 py-4  !m-5 ">
-                                <span className="text-[#030229]">{item.appid}</span>
-                                <span className="text-[#030229]">{item.name}</span>
-                                <span className="text-[#030229]">{item.clientid}</span>
-                                <div className="flex items-center gap-2">
+                            <tr key={item.id} className="grid grid-cols-[repeat(7,1fr)_auto]  items-center px-6 py-4 hover:bg-[#F8F9FF] transition border-t border-gray-100">
+                                <td>{item.appid}</td>
+                                <td>{item.name}</td>
+                                <td>{item.clientid}</td>
+                                <td className="flex items-center gap-2">
                                     <img src={item.img} alt="client" className="w-6 h-6 rounded-full object-cover" />
-                                    <span className="text-[#030229]">{item.clientname}</span>
-                                </div>
-                                <span className="text-[#030229]">{item.status}</span>
-                                <span className="text-[#030229] items-start ">{item.icon}</span>
-                                <div className="relative items-center flex !gap-16">
-                                    <span className="text-[#030229]">{item.profile}</span>
-                                    <div className="relative flex justify-end">
+                                    {item.clientname}
+                                </td>
+                                <td>{item.status}</td>
+                                <td>{item.icon}</td>
+                                <td>{item.profile}</td>
+                                <td className="w-[80px] flex items-center">
 
-                                        <Popconfirm
-                                            title="Do you want to delete the client?"
-                                            onConfirm={confirm}
-                                            onOpenChange={() => console.log('open change')}
+                                    <Popconfirm
+                                        title="Do you want to delete the client?"
+                                        onConfirm={confirm}
+                                        onOpenChange={() => console.log('open change')}
+                                    >
+                                        <Button
+                                            type="primary"
+                                            className='bg-[#FEF4F5] text-[#E71D36] flex items-center gap-1 text-xs px-2 py-1'
                                         >
-                                            <Button
-                                                type="primary"
-                                                className='bg-[#FEF4F5] text-[#E71D36] flex items-center gap-2'
-                                            >
-                                                <MdDelete className='text-lg' /> Reject
-                                            </Button>
-
-                                        </Popconfirm>
-                                    </div>
-                                </div>
-
-                            </div>
+                                            <MdDelete className='text-sm' /> Reject
+                                        </Button>
+                                    </Popconfirm>
+                                </td>
+                            </tr>
                         ))}
-                    </div>
-                    <div className='grid grid-cols-4 '>
-                        <div className="grid bg-blue-100 shadow-xl rounded-xl  py-4  !m-5 ">
-                            <div className="flex ">
-                                {details1.map((item) => (
-                                    <div className="flex bg-amber-300 gap-10">
-                                        <div className="flex flex-col gap-2">
-                                            <span className="text-[#030229]">{item.name}</span>
-                                            <div className="flex items-center gap-2">
-                                                <span className="text-[#030229]">{item.type}</span>
-                                                <span className="text-[#030229]">({item.eid})</span>
-                                            </div>
-                                            <div className='flex items-center '>
-                                                <img src={item.img1} alt="client" className="w-6 h-6 rounded-full " />
-                                                <img src={item.img2} alt="client" className="w-6 h-6 rounded-full -ml-2" />
-                                            </div>
-                                        </div>
-                                        <div className='justify-end'>
-                                            <img src={item.profile} alt="client"
-                                                className="w-12 h-12 rounded-full object-cover"
-                                            />
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
+                    </tbody>
+                </table>
+            </div>
 
+            {/* Employee Cards */}
+            <div className='grid grid-cols-4 gap-10 mx-4 mt-10'>
+                {details1.map((item) => (
+                    <div key={item.id} className="bg-white shadow-xl hover:bg-[#F8F9FF] transition rounded-xl p-4">
+                        <div className="flex items-center justify-between mb-4">
+                            <div>
+                                <h2 className="text-[#202020] font-poppins font-medium text-lg">{item.name}</h2>
+                                <div className="flex items-center gap-2">
+                                    <span className="text-[#626262] font-poppins font-medium text-sm">{item.type}</span>
+                                    <span className="text-[#626262] font-poppins font-medium text-sm">({item.eid})</span>
+                                </div>
+                                <div className='flex items-center mt-2'>
+                                    <img src={item.img1} alt="avatar1" className="w-8 h-8 rounded-full" />
+                                    <img src={item.img2} alt="avatar2" className="w-8 h-8 rounded-full -ml-2" />
+                                </div>
+                            </div>
+                            <img src={item.profile} alt="profile" className="w-16 h-16 rounded-full object-cover" />
                         </div>
+                        <button className="w-full py-2 rounded-full bg-[#4FD1C5] text-white font-poppins text-sm font-medium hover:bg-[#35c0e8] transition">
+                            Assign
+                        </button>
                     </div>
-                </div>
+                ))}
             </div>
         </div>
-    )
+    );
 }
 
 export default Clientmanagement;
