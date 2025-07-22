@@ -7,116 +7,121 @@ import { IoIosMore } from "react-icons/io";
 import { useState } from "react";
 
 function ManageApplication() {
-    const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
-    const details = [
-        {
-            id: 1,
-            appid: "01",
-            name: "John Doe",
-            clientid: "01",
-            img: img1,
-            clientname: "John Doe",
-            status: "Initial",
-            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+  const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
+  const details = [
+    {
+      id: 1,
+      appid: "01",
+      name: "John Doe",
+      clientid: "01",
+      img: img1,
+      clientname: "John Doe",
+      status: "Initial",
+      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+    },
+    {
+      id: 2,
+      appid: "01",
+      name: "John Doe",
+      clientid: "01",
+      img: img1,
+      clientname: "John Doe",
+      status: "Initial",
+      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+    },
+    {
+      id: 3,
+      appid: "01",
+      name: "John Doe",
+      clientid: "01",
+      img: img1,
+      clientname: "John Doe",
+      status: "Initial",
+      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+    },
+    {
+      id: 4,
+      appid: "01",
+      name: "John Doe",
+      clientid: "01",
+      img: img1,
+      clientname: "John Doe",
+      status: "Initial",
+      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+    },
+    {
+      id: 5,
+      appid: "01",
+      name: "John Doe",
+      clientid: "01",
+      img: img1,
+      clientname: "John Doe",
+      status: "Initial",
+      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+    },
+    {
+      id: 6,
+      appid: "01",
+      name: "John Doe",
+      clientid: "01",
+      img: img1,
+      clientname: "John Doe",
+      status: "Initial",
+      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+    },
+    {
+      id: 7,
+      appid: "01",
+      name: "John Doe",
+      clientid: "01",
+      img: img1,
+      clientname: "John Doe",
+      status: "Initial",
+      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+    },
+    {
+      id: 8,
+      appid: "01",
+      name: "John Doe",
+      clientid: "01",
+      img: img1,
+      clientname: "John Doe",
+      status: "Initial",
+      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+    },
+  ];
 
-        },
-        {
-            id: 2,
-            appid: "01",
-            name: "John Doe",
-            clientid: "01",
-            img: img1,
-            clientname: "John Doe",
-            status: "Initial",
-            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
-
-        },
-        {
-            id: 3,
-            appid: "01",
-            name: "John Doe",
-            clientid: "01",
-            img: img1,
-            clientname: "John Doe",
-            status: "Initial",
-            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
-
-        },
-        {
-            id: 4,
-            appid: "01",
-            name: "John Doe",
-            clientid: "01",
-            img: img1,
-            clientname: "John Doe",
-            status: "Initial",
-            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
-
-        },
-        {
-            id: 5,
-            appid: "01",
-            name: "John Doe",
-            clientid: "01",
-            img: img1,
-            clientname: "John Doe",
-            status: "Initial",
-            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
-
-        },
-        {
-            id: 6,
-            appid: "01",
-            name: "John Doe",
-            clientid: "01",
-            img: img1,
-            clientname: "John Doe",
-            status: "Initial",
-            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
-
-        },
-        {
-            id: 7,
-            appid: "01",
-            name: "John Doe",
-            clientid: "01",
-            img: img1,
-            clientname: "John Doe",
-            status: "Initial",
-            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
-
-        },
-        {
-            id: 8,
-            appid: "01",
-            name: "John Doe",
-            clientid: "01",
-            img: img1,
-            clientname: "John Doe",
-            status: "Initial",
-            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
-                
-        },
-    ];
-
-    return (
-        // /top section
-        <section ><div className="bg-[#F4FFFE] min-h-screen w-full">
-            <div className="flex items-center bg-[#F4FFFE] gap-2  mx-5">
-                <a href="/Applicationslist" className="text-[#9E9E9E]"> Application &gt; </a>
-                <a href="/manageapplication" className="text-[#000000]"> Vineatz Technologies  </a>
-                <div>
-                    <a href="/" className="bg-[#4FD1C5] w-10 h-10 flex rounded-sm items-center justify-center  ">  <FaPlus color="#fff" className="size-6" /></a>
-                </div>
-            </div>
+  return (
+    // /top section
+    <section>
+      <div className="bg-[#F4FFFE] min-h-screen w-full">
+        <div className="flex items-center bg-[#F4FFFE] gap-2 my-4 mx-5">
+          <a href="/Applicationslist" className="text-[#9E9E9E]">
+            {" "}
+            Application &gt;{" "}
+          </a>
+          <a href="/manageapplication" className="text-[#000000]">
+            {" "}
+            Vineatz Technologies{" "}
+          </a>
+          <div>
+            <a
+              href="/"
+              className="bg-[#4FD1C5] w-10 h-10 flex rounded-sm items-center justify-center  "
+            >
+              {" "}
+              <FaPlus color="#fff" className="size-6" />
+            </a>
+          </div>
+        </div>
 
         <div>
           <div className="grid grid-cols-7 space-x-4 my-4 mx-8">

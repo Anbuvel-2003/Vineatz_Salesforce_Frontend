@@ -32,7 +32,7 @@ function SidebarNavigation() {
       name: "admins",
       label: "Admins",
       icon: <GrUserWorker size={24} />,
-      to: "/Applicationlist",
+      to: "/adminlist",
     },
     {
       name: "logout",

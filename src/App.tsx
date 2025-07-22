@@ -15,6 +15,11 @@ import Login from "./components/login";
 import UpdateApplication from "./components/updateapplication";
 import ManageApplication from "./components/manageapplication";
 import Employeelist from "./components/employeelist";
+import Adminlist from "./components/adminlist";
+import Adduser from "./components/adduser";
+import Updateuser from "./components/updateuser";
+import Updateemployee from "./components/Updateemployee";
+import Addemployee from "./components/addemployee";
 import Clientmanagement from "./components/clientmanagement";
 import Rejectapplication from "./components/rejectapplication";
 
@@ -25,7 +30,7 @@ function App(): JSX.Element {
   return (
     <>
       <BrowserRouter>
-        {!parsedUser ? (
+        {parsedUser ? (
           <>
             <Layoutpage />
             <div className="sm:ml-64">
@@ -37,6 +42,11 @@ function App(): JSX.Element {
                 <Route path="/Applicationlist" element={<Applicationslist />} />
                 <Route path="/AddProject" element={<AddProject />} />
                 <Route path="/Employeelist" element={<Employeelist />} />
+                <Route path="/addemployee" element={<Addemployee />} />
+                <Route path="/adminlist" element={<Adminlist />} />
+                <Route path="/adduser" element={<Adduser />} />
+                <Route path="/updateuser/:id" element={<Updateuser />} />
+                <Route path="/updateemployee/:id" element={<Updateemployee />} />
                 <Route path="/UpdateProject/:id" element={<UpdateProject />} />
                 <Route path="/TaskDashboard" element={<TaskDashboard />} />
                 <Route path="/CreateTask" element={<Createtask />} />

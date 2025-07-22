@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 
-function Employeelist() {
+function Adminlist() {
   const navigate = useNavigate();
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
   const details = [
@@ -148,10 +148,10 @@ function Employeelist() {
   return (
     <section className="bg-[#F4FFFE] min-h-screen w-full px-6 py-4">
       <div className="flex items-center justify-between">
-        <div className="text-[#9E9E9E] mb-4">Employees &gt;</div>
+        <div className="text-[#9E9E9E] mb-4">Admins &gt;</div>
         <div
           className="flex items-center gap-2 bg-[#4FD1C5] px-4 py-2 rounded-md cursor-pointer"
-          onClick={() => navigate("/addemployee")}
+          onClick={() => navigate("/adduser")}
         >
           <GoPlus size={24} className="text-[#FFFF]" />
         </div>
@@ -163,22 +163,17 @@ function Employeelist() {
             <tr>
               <th className="px-6 py-3">
                 <div className="flex items-center gap-1">
-                  Employee ID <MdOutlineArrowDropDown />
+                  Admin ID <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
                 <div className="flex items-center gap-1">
-                  Employee Name <MdOutlineArrowDropDown />
+                  Admin Name <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
                 <div className="flex items-center gap-1">
                   Mobile Number 1 <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
-                  Mobile Number 2 <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
@@ -190,6 +185,9 @@ function Employeelist() {
                 <div className="flex items-center gap-1">
                   Joining Date <MdOutlineArrowDropDown />
                 </div>
+              </th>
+              <th className="px-6 py-3">
+                <div className="flex items-center gap-1"></div>
               </th>
               <th className="px-6 py-3">
                 <div className="flex items-center gap-1"></div>
@@ -214,7 +212,7 @@ function Employeelist() {
                 <td className="px-6 py-4">{item.mobilenumber1}</td>
                 <td className="px-6 py-4">{item.mobilenumber2}</td>
                 <td className="px-6 py-4">122324@gmail.com</td>
-                <td className="px-6 py-4">12 Jun 2025</td>
+                <td className="px-6 py-4"></td>
                 <td className="px-6 py-4 relative">
                   <button
                     onClick={() =>
@@ -230,7 +228,7 @@ function Employeelist() {
                     <div className="absolute right-0 top-8 bg-white shadow-lg rounded-lg w-28 z-20">
                       <button
                         className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-[#4FD1C5] flex items-center !gap-2 "
-                        onClick={() => navigate(`/updateemployee/${item.id}`)}
+                        onClick={() => navigate(`/Updateuser/${item.id}`)}
                       >
                         <CiEdit />
                         Edit
@@ -251,4 +249,4 @@ function Employeelist() {
   );
 }
 
-export default Employeelist;
+export default Adminlist;
