@@ -19,8 +19,8 @@ function ManageApplication() {
             img: img1,
             clientname: "John Doe",
             status: "Initial",
-            icon: <FaFileAlt className="text-[#4FD1C5]" />,
-            profile: <ImProfile className="text-[#4FD1C5]" />,
+            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
 
         },
         {
@@ -31,8 +31,8 @@ function ManageApplication() {
             img: img1,
             clientname: "John Doe",
             status: "Initial",
-            icon: <FaFileAlt className="text-[#4FD1C5]" />,
-            profile: <ImProfile className="text-[#4FD1C5]" />,
+            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
 
         },
         {
@@ -43,8 +43,8 @@ function ManageApplication() {
             img: img1,
             clientname: "John Doe",
             status: "Initial",
-            icon: <FaFileAlt className="text-[#4FD1C5]" />,
-            profile: <ImProfile className="text-[#4FD1C5]" />,
+            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
 
         },
         {
@@ -55,8 +55,8 @@ function ManageApplication() {
             img: img1,
             clientname: "John Doe",
             status: "Initial",
-            icon: <FaFileAlt className="text-[#4FD1C5]" />,
-            profile: <ImProfile className="text-[#4FD1C5]" />,
+            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
 
         },
         {
@@ -67,8 +67,8 @@ function ManageApplication() {
             img: img1,
             clientname: "John Doe",
             status: "Initial",
-            icon: <FaFileAlt className="text-[#4FD1C5]" />,
-            profile: <ImProfile className="text-[#4FD1C5]" />,
+            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
 
         },
         {
@@ -79,8 +79,8 @@ function ManageApplication() {
             img: img1,
             clientname: "John Doe",
             status: "Initial",
-            icon: <FaFileAlt className="text-[#4FD1C5]" />,
-            profile: <ImProfile className="text-[#4FD1C5]" />,
+            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
 
         },
         {
@@ -91,8 +91,8 @@ function ManageApplication() {
             img: img1,
             clientname: "John Doe",
             status: "Initial",
-            icon: <FaFileAlt className="text-[#4FD1C5]" />,
-            profile: <ImProfile className="text-[#4FD1C5]" />,
+            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
 
         },
         {
@@ -103,9 +103,9 @@ function ManageApplication() {
             img: img1,
             clientname: "John Doe",
             status: "Initial",
-            icon: <FaFileAlt className="text-[#4FD1C5]" />,
-            profile: <ImProfile className="text-[#4FD1C5]" />,
-
+            icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
+            profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+                
         },
     ];
 
@@ -113,10 +113,10 @@ function ManageApplication() {
         // /top section
         <section ><div className="bg-[#F4FFFE] min-h-screen w-full">
             <div className="flex items-center bg-[#F4FFFE] gap-2 my-4 mx-5">
-                <a href="/applicationlist" className="text-[#9E9E9E]"> Application &gt; </a>
+                <a href="/Applicationslist" className="text-[#9E9E9E]"> Application &gt; </a>
                 <a href="/manageapplication" className="text-[#000000]"> Vineatz Technologies  </a>
-                <div className="bg-[#4FD1C5] w-10 h-10 flex rounded-sm items-center justify-center  ">
-                    <a href="/">  <FaPlus color="#fff" className="size-6" /></a>
+                <div>
+                    <a href="/" className="bg-[#4FD1C5] w-10 h-10 flex rounded-sm items-center justify-center  ">  <FaPlus color="#fff" className="size-6" /></a>
                 </div>
             </div>
 

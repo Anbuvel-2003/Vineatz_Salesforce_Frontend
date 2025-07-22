@@ -23,6 +23,12 @@ function Applicationslist() {
   return (
     <div className="bg-[#F4FFFE] min-h-screen w-full ">
       <div className="grid grid-cols-4 gap-4 px-5 mx-10 mb-10 !py-10">
+      <a
+        href={app.link}
+        target="_blank"
+       
+        className="mt-2 block text-[24px] font-bold text-[#030229]"
+      >
         {apps.map((app, index) => (
           <div
             key={index}
@@ -39,17 +45,11 @@ function Applicationslist() {
             <p className="text-[14px] my-2 font-poppins text-[#030229]">
               Total Leads
             </p>
-            <a
-              href={app.link}
-              target="_blank"
-             
-              className="mt-2 block text-[24px] font-bold text-[#030229]"
-            >
               {app.leads}
-            </a>
             <p className="text-sm text-[#4079ED] font-poppins">{app.growth}</p>
           </div>
         ))}
+        </a>
       </div>
     </div>
   );
