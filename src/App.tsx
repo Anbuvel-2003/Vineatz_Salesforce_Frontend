@@ -37,9 +37,9 @@ function App(): JSX.Element {
             <div className="sm:ml-64">
               <Routes>
                 <Route path="/" element={<Applicationdetails />} />
+                <Route path="/" element={<Dashboard />} />
                 <Route path="/" element={<Clientmanagement />} />
                 <Route path="/" element={<Rejectapplication appid={""} clientname={""} children={undefined} />} />
-                <Route path="/" element={<Dashboard />} />
                 <Route path="/manageleadlist" element={<ManageApplication />} />
                 <Route path="/Applicationlist" element={<Applicationslist />} />
                 <Route path="/AddProject" element={<AddProject />} />
