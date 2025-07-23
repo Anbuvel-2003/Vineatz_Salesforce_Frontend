@@ -22,7 +22,6 @@ import Updateemployee from "./components/Updateemployee";
 import Addemployee from "./components/addemployee";
 import Clientmanagement from "./components/clientmanagement";
 import Rejectapplication from "./components/rejectapplication";
-import Applicationdetails from "./components/applicationdetails";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -31,15 +30,15 @@ function App(): JSX.Element {
   return (
     <>
       <BrowserRouter>
-        {!parsedUser ? (
+        {parsedUser ? (
           <>
             <Layoutpage />
             <div className="sm:ml-64">
               <Routes>
-                <Route path="/" element={<Applicationdetails />} />
+                {/* <Route path="/" element={<Applicationdetails />} /> */}
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/" element={<Clientmanagement />} />
-                <Route path="/" element={<Rejectapplication appid={""} clientname={""} children={undefined} />} />
+                {/* <Route path="/" element={<Clientmanagement />} /> */}
+                {/* <Route path="/" element={<Rejectapplication appid={""} clientname={""} children={undefined} />} /> */}
                 <Route path="/manageleadlist" element={<ManageApplication />} />
                 <Route path="/Applicationlist" element={<Applicationslist />} />
                 <Route path="/AddProject" element={<AddProject />} />
