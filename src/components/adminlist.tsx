@@ -148,57 +148,33 @@ function Adminlist() {
   ];
 
   return (
-    <section className="bg-[#FDFBFF] min-h-screen w-full px-6 py-4">
+    <section className="bg-[#FDFBFF] min-h-screen w-full px-6 pr-16">
       <div className="flex items-center justify-between">
-        <a href="/" className="text-[#9E9E9E]  m-4">Admins &gt;</a>
+        <div className="text-[#9E9E9E] ">Admin &gt;</div>
         <div
           className="flex items-center gap-2 bg-[#BF9FFF] px-4 py-2 rounded-md cursor-pointer"
-          onClick={() => navigate("/adduser")}
+          onClick={() => navigate("/addemployee")}
         >
-          <GoPlus size={24} className="text-[#FFFF]" />
+          <GoPlus size={24} className="text-[#FFFF] " />
         </div>
       </div>
 
-      <div className=" bg-[#FDFBFF] rounded-xl ">
-        <table className="min-w-full text-sm text-left border-separate border-spacing-y-4">
-          <thead className="bg-[#FDFBFF] text-[#030229] text-left">
-          <tr className="grid grid-cols-7 bg-white text-center  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1">
-                  Admin ID <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1">
-                  Admin Name <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1">
-                  Mobile Number 1 <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1">
-                  Email Id <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1">
-                  Joining Date <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1"></div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1"></div>
-              </th>
+      <div className=" bg-[#FDFBFF] px-10 ">
+           <table className="min-w-full">
+          <thead className="bg-[#F4FFFE] text-[#030229] text-left">
+            <tr className="grid grid-cols-[repeat(6,1fr)_auto]   items-center rounded-[70px] px-6 py-4 ">
+              <th className="flex items-center justify-center gap-1">Admin id <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center justify-center gap-1">Admin name <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center justify-center gap-1">Mobile number 1 <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center justify-center gap-1">Email id <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center justify-center gap-1">Joining date <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center justify-center gap-1"></th>
+              <th className="w-[50px]">Action</th>
             </tr>
           </thead>
           <tbody className=" rounded-[60px] space-y-3 drop-shadow-md  ">
             {details.map((item) => (
-              <tr key={item.id} className="grid grid-cols-7 bg-white text-center py-5  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
+              <tr key={item.id} className="grid grid-cols-[repeat(6,1fr)_auto] bg-white text-center px-6 py-3  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
                 <td>{item.appid}</td>
                 <td className="flex items-center justify-center gap-2">
                   <img src={item.img} alt="client" className="w-6 h-6 rounded-full object-cover" />
@@ -208,8 +184,8 @@ function Adminlist() {
                 <td>{item.email}</td>
                 <td>{item.date}</td>
                 <td></td>
-                <td className="w-[80px] flex justify-end items-end">
-                  <div className="relative flex gap-20">
+                <td className="w-[50px] flex items-">
+                  <div className="relative flex ">
                   <button
                     onClick={() =>
                       setOpenMenuIndex(
@@ -243,7 +219,7 @@ function Adminlist() {
             ))}
           </tbody>
         </table>
-      </div>
+        </div>
     </section>
   );
 }
