@@ -61,14 +61,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 
 interface RejectApplicationProps {
-  appid: string;
-  clientname: string;
   children: ReactNode;
 }
 
 export default function RejectApplication({
-  appid,
-  clientname,
   children,
 }: RejectApplicationProps) {
   return (

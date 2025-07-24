@@ -46,7 +46,7 @@ function App(): JSX.Element {
                 <Route path="/" element={<Clientmanagement />} />
                 <Route path="/Applicationdetailsmanual" element={<Applicationdetailsmanual />} />
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/" element={<Rejectapplication appid={""} clientname={""} children={undefined} />} />
+                <Route path="/" element={<Rejectapplication children={undefined} />} />
                 <Route path="/manageleadlist" element={<ManageApplication />} />
                 <Route path="/applicationdetails" element={<Applicationdetails />} />
                 <Route path="/Applicationlist" element={<Applicationslist />} />

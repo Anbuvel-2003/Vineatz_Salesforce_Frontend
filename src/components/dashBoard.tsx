@@ -18,6 +18,7 @@ import dashboard06 from "../assets/dashboard06.png";
 import TopApplicationComponent from "./topapplication";
 
 function Dashboard() {
+  
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [Data, setData] = useState([]);

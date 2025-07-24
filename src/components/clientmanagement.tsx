@@ -176,7 +176,7 @@ function Clientmanagement() {
 
                                 <td>{item.profile}</td>
                                 <td className="w-[80px] flex items-center">
-                                    <RejectApplication appid={item.appid} clientname={item.clientname}>
+                                    <RejectApplication >
                                         <Button
                                             type="primary"
                                             className='bg-[#FEF4F5] hover:bg-red-500 hover:text-white text-[#E71D36] flex items-center gap-1 text-xs px-2 py-1'

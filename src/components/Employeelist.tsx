@@ -245,8 +245,6 @@ function Employeelist() {
                         Edit
                       </button>
                       <DeleteApplication
-                        appid={item.appid}
-                        clientname={item.clientname}
                       >
                         <button className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500 flex items-center !gap-2 ">
                           <MdDelete />
