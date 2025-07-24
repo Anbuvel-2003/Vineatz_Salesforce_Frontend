@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 import { DeleteApplication } from "./deleteapplication";
+import { date } from "yup";
 
 function Adminlist() {
   const navigate = useNavigate();
@@ -20,10 +21,10 @@ function Adminlist() {
       name: "John Doe",
       clientid: "01",
       mobilenumber1: "1234567890",
-      mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "01/01/2023",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -33,10 +34,10 @@ function Adminlist() {
       name: "John Doe",
       clientid: "01",
       mobilenumber1: "1234567890",
-      mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "01/01/2023",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -46,10 +47,10 @@ function Adminlist() {
       name: "John Doe",
       clientid: "01",
       mobilenumber1: "1234567890",
-      mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "01/01/2023",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -59,10 +60,10 @@ function Adminlist() {
       name: "John Doe",
       clientid: "01",
       mobilenumber1: "1234567890",
-      mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "01/01/2023",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -72,10 +73,10 @@ function Adminlist() {
       name: "John Doe",
       clientid: "01",
       mobilenumber1: "1234567890",
-      mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "01/01/2023",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -86,9 +87,9 @@ function Adminlist() {
       clientid: "01",
       img: img1,
       mobilenumber1: "1234567890",
-      mobilenumber2: "1234567890",
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "2023-01-01",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -98,10 +99,10 @@ function Adminlist() {
       name: "John Doe",
       clientid: "01",
       mobilenumber1: "1234567890",
-      mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "2023-01-01",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -111,10 +112,10 @@ function Adminlist() {
       name: "John Doe",
       clientid: "01",
       mobilenumber1: "1234567890",
-      mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "2023-01-01",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -124,10 +125,10 @@ function Adminlist() {
       name: "John Doe",
       clientid: "01",
       mobilenumber1: "1234567890",
-      mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "2023-01-01",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -137,10 +138,10 @@ function Adminlist() {
       name: "John Doe",
       clientid: "01",
       mobilenumber1: "1234567890",
-      mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "2023-01-01",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -149,7 +150,7 @@ function Adminlist() {
   return (
     <section className="bg-[#FDFBFF] min-h-screen w-full px-6 py-4">
       <div className="flex items-center justify-between">
-        <div className="text-[#9E9E9E] mb-4">Admins &gt;</div>
+        <a href="/" className="text-[#9E9E9E]  m-4">Admins &gt;</a>
         <div
           className="flex items-center gap-2 bg-[#BF9FFF] px-4 py-2 rounded-md cursor-pointer"
           onClick={() => navigate("/adduser")}
@@ -158,63 +159,57 @@ function Adminlist() {
         </div>
       </div>
 
-      <div className=" bg-[#FDFBFF] rounded-xl shadow-md">
-        <table className="min-w-full divide-y divide-gray-200 text-sm text-left border-separate border-spacing-y-4">
+      <div className=" bg-[#FDFBFF] rounded-xl ">
+        <table className="min-w-full text-sm text-left border-separate border-spacing-y-4">
           <thead className="bg-[#FDFBFF] text-[#030229] text-left">
-            <tr>
+          <tr className="grid grid-cols-7 bg-white text-center  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                   Admin ID <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                   Admin Name <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                   Mobile Number 1 <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                   Email Id <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                   Joining Date <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1"></div>
+                <div className="flex items-center justify-center gap-1"></div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1"></div>
+                <div className="flex items-center justify-center gap-1"></div>
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100 !mb-10">
+          <tbody className=" rounded-[60px] space-y-3 drop-shadow-md  ">
             {details.map((item) => (
-              <tr
-                key={item.id}
-                className="hover:bg-[#F8F9FF] bg-white transition duration-200 "
-              >
-                <td className="px-6 py-4">{item.appid}</td>
-                <td className="px-6 py-4 flex items-center gap-2">
-                  <img
-                    src={item.img}
-                    alt="profile"
-                    className="w-6 h-6 rounded-full object-cover"
-                  />
-                  <span>{item.clientname}</span>
+              <tr key={item.id} className="grid grid-cols-7 bg-white text-center py-5  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
+                <td>{item.appid}</td>
+                <td className="flex items-center justify-center gap-2">
+                  <img src={item.img} alt="client" className="w-6 h-6 rounded-full object-cover" />
+                  {item.clientname}
                 </td>
-                <td className="px-6 py-4">{item.mobilenumber1}</td>
-                <td className="px-6 py-4">{item.mobilenumber2}</td>
-                <td className="px-6 py-4">122324@gmail.com</td>
-                <td className="px-6 py-4"></td>
-                <td className="px-6 py-4 relative">
+                <td>{item.mobilenumber1}</td>
+                <td>{item.email}</td>
+                <td>{item.date}</td>
+                <td></td>
+                <td className="w-[80px] flex justify-end items-end">
+                  <div className="relative flex gap-20">
                   <button
                     onClick={() =>
                       setOpenMenuIndex(
@@ -226,9 +221,9 @@ function Adminlist() {
                   </button>
 
                   {openMenuIndex === item.id && (
-                    <div className="absolute right-0 top-8 bg-white shadow-lg rounded-lg w-28 z-20">
-                      <button
-                        className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-[#4FD1C5] flex items-center !gap-2 "
+                    <div className="absolute left-4 top-3 bg-white shadow-md p-3 space-y-2 rounded-2xl w-36 z-30">
+
+                      <button className="flex items-center gap-2 w-full text-left px-4 py-2 rounded-xl bg-[#FCFAFF]  hover:bg-gray-100 text-[#4FD1C5]"
                         onClick={() => navigate(`/Updateuser/${item.id}`)}
                       >
                         <CiEdit />
@@ -245,6 +240,7 @@ function Adminlist() {
                       </DeleteApplication>
                     </div>
                   )}
+                  </div>
                 </td>
               </tr>
             ))}

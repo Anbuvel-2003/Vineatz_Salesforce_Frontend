@@ -6,14 +6,13 @@ import { CgProfile } from "react-icons/cg";
 import { MdOutlineArrowDropDown, MdDelete } from 'react-icons/md';
 import RejectApplication from '../components/rejectapplication';
 import { Button } from './ui/button';
-import { Input } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
 import { MdOutlineEmail } from "react-icons/md";
 import { MdOutlineLocalPhone } from "react-icons/md";
 import { SlNotebook } from "react-icons/sl";
 
 
-function Applicationdetails() {
+function 
+Applicationdetails() {
 
   const confirm = () =>
     new Promise((resolve) => {
@@ -53,10 +52,10 @@ function Applicationdetails() {
       </div>
 
 
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white rounded-xl shadow-sm">
+      <div className="overflow-x-auto ">
+        <table className="min-w-full bg-white rounded-xl border-separate shadow-sm">
           <thead className="bg-[#F0F4F8] text-[#030229] text-left">
-            <tr className="grid grid-cols-[repeat(7,1fr)_auto]  items-center px-6 py-4 rounded-t-xl">
+            <tr className="grid grid-cols-8 items-center px-6 py-4 rounded-t-xl">
               <th className="flex items-center gap-1">Application id <MdOutlineArrowDropDown /></th>
               <th className="flex items-center gap-1">Application name <MdOutlineArrowDropDown /></th>
               <th className="flex items-center gap-1">Client id <MdOutlineArrowDropDown /></th>
@@ -69,7 +68,7 @@ function Applicationdetails() {
           </thead>
           <tbody>
             {details.map((item) => (
-              <tr key={item.id} className="grid grid-cols-[repeat(7,1fr)_auto]  items-center px-6 py-4 hover:bg-[#F8F9FF] transition border-t border-gray-100">
+              <tr key={item.id} className="grid grid-cols-8  items-center px-6 py-4 hover:bg-[#F8F9FF] transition border-t border-gray-100">
                 <td>{item.appid}</td>
                 <td>{item.name}</td>
                 <td>{item.clientid}</td>
@@ -83,7 +82,7 @@ function Applicationdetails() {
                 <td className="w-[80px] flex items-center">
                   <RejectApplication appid={item.appid} clientname={item.clientname}>
                     <Button
-                      type="primary"
+                      type="button"
                       className='bg-[#FEF4F5] hover:bg-red-500 hover:text-white text-[#E71D36] flex items-center gap-1 text-xs px-2 py-1'
                     >
                       <MdDelete className='text-lg' /> Reject

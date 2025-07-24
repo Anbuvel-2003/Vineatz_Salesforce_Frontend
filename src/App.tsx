@@ -25,6 +25,8 @@ import Rejectapplication from "./components/rejectapplication";
 import Applicationdetails from "./components/applicationdetails";
 import Applicationdetailsmanual from "./components/applicationdetailmanual";
 import Admincreation from "./components/admincreation";
+import ProspectlistApplication from "./components/prospectlist";
+import ProspectMoveLeads from "./components/prospect_move";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -33,18 +35,20 @@ function App(): JSX.Element {
   return (
     <>
       <BrowserRouter>
-        {parsedUser ? (
+        {!parsedUser ? (
           <>
             <Layoutpage />
             <div className="sm:ml-64">
               <Routes>
+                <Route path="/" element={<ProspectlistApplication />} />
+                <Route path="/" element={<ProspectMoveLeads />} />
+                <Route path="/" element={<Admincreation />} />
                 <Route path="/" element={<Clientmanagement />} />
-                <Route path="/Admincreation" element={<Admincreation />} />
                 <Route path="/Applicationdetailsmanual" element={<Applicationdetailsmanual />} />
-                <Route path="/applicationdetails" element={<Applicationdetails />} />
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/" element={<Rejectapplication appid={""} clientname={""} children={undefined} />} />
                 <Route path="/manageleadlist" element={<ManageApplication />} />
+                <Route path="/applicationdetails" element={<Applicationdetails />} />
                 <Route path="/Applicationlist" element={<Applicationslist />} />
                 <Route path="/AddProject" element={<AddProject />} />
                 <Route path="/Employeelist" element={<Employeelist />} />

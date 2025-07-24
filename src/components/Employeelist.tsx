@@ -14,7 +14,7 @@ import DeleteApplication from "./deleteapplication";
 function Employeelist() {
   const navigate = useNavigate();
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
-  const details = [
+ const details = [
     {
       id: 1,
       appid: "01",
@@ -24,7 +24,8 @@ function Employeelist() {
       mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "01/01/2023",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -37,7 +38,8 @@ function Employeelist() {
       mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "01/01/2023",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -50,7 +52,8 @@ function Employeelist() {
       mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "01/01/2023",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -63,7 +66,8 @@ function Employeelist() {
       mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "01/01/2023",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -76,7 +80,8 @@ function Employeelist() {
       mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "01/01/2023",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -89,7 +94,8 @@ function Employeelist() {
       mobilenumber1: "1234567890",
       mobilenumber2: "1234567890",
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "2023-01-01",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -102,7 +108,8 @@ function Employeelist() {
       mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "2023-01-01",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -115,7 +122,8 @@ function Employeelist() {
       mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "2023-01-01",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -128,7 +136,8 @@ function Employeelist() {
       mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "2023-01-01",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -141,7 +150,8 @@ function Employeelist() {
       mobilenumber2: "1234567890",
       img: img1,
       clientname: "John Doe",
-      status: "Initial",
+      email: "12345@gmail.com",
+      date: "2023-01-01",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -155,55 +165,52 @@ function Employeelist() {
           className="flex items-center gap-2 bg-[#BF9FFF] px-4 py-2 rounded-md cursor-pointer"
           onClick={() => navigate("/addemployee")}
         >
-          <GoPlus size={24} className="text-[#FFFF]" />
+          <GoPlus size={24} className="text-[#FFFF] " />
         </div>
       </div>
 
-      <div className=" bg-[#FDFBFF] rounded-xl shadow-md">
-        <table className="min-w-full divide-y divide-gray-200 text-sm text-left border-separate border-spacing-y-4">
+      <div className=" bg-[#FDFBFF] rounded-xl ">
+        <table className="min-w-full text-sm text-left border-separate border-spacing-y-4">
           <thead className="bg-[#FDFBFF] text-[#030229] text-left">
-            <tr>
+          <tr className="grid grid-cols-7 bg-white text-center  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                   Employee ID <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                   Employee Name <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                   Mobile Number 1 <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                   Mobile Number 2 <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                   Email Id <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-center gap-1">
                   Joining Date <MdOutlineArrowDropDown />
                 </div>
               </th>
               <th className="px-6 py-3">
-                <div className="flex items-center gap-1"></div>
+                <div className="flex items-center justify-center  gap-1"></div>
               </th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100 !mb-10">
+          <tbody className=" rounded-[60px] space-y-3 drop-shadow-md  ">
             {details.map((item) => (
-              <tr
-                key={item.id}
-                className="hover:bg-[#F8F9FF] bg-white transition duration-200 "
-              >
+                            <tr key={item.id} className="grid grid-cols-7 bg-white text-center py-2  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
                 <td className="px-6 py-4">{item.appid}</td>
                 <td className="px-6 py-4 flex items-center gap-2">
                   <img
