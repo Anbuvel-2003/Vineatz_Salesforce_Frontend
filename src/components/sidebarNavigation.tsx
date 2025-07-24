@@ -48,7 +48,7 @@ function SidebarNavigation() {
       className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
       aria-label="Sidebar"
     >
-      <div className="h-full px-3 py-4 overflow-y-auto bg-[#F4FFFE]">
+      <div className="h-full px-3 py-4 overflow-y-auto bg-[#FDFBFF]">
         <ul className="space-y-2 font-medium">
           <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white pb-6">
             <p
@@ -67,8 +67,8 @@ function SidebarNavigation() {
               }}
               className={`flex items-center p-2 rounded-lg group ${
                 activeItem === item.name
-                  ? "bg-[#4FD1C5] text-white"
-                  : "text-gray-900 hover:bg-[#4FD1C5] hover:text-white"
+                  ? "bg-[#BF9FFF] text-white"
+                  : "text-gray-900 hover:bg-[#BF9FFF] hover:text-white"
               }`}
             >
               <div

@@ -23,7 +23,7 @@ function Applicationslist() {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-[#F4FFFE] min-h-screen w-full">
+    <div className="bg-[#FDFBFF] min-h-screen w-full">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-5 mx-10 py-10">
         {apps.map((app, index) => (
           <div

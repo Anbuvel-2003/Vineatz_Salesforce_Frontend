@@ -52,7 +52,10 @@ function App(): JSX.Element {
                 <Route path="/adminlist" element={<Adminlist />} />
                 <Route path="/adduser" element={<Adduser />} />
                 <Route path="/updateuser/:id" element={<Updateuser />} />
-                <Route path="/updateemployee/:id" element={<Updateemployee />} />
+                <Route
+                  path="/updateemployee/:id"
+                  element={<Updateemployee />}
+                />
                 <Route path="/UpdateProject/:id" element={<UpdateProject />} />
                 <Route path="/TaskDashboard" element={<TaskDashboard />} />
                 <Route path="/CreateTask" element={<Createtask />} />

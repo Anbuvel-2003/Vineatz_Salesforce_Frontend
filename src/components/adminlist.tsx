@@ -147,20 +147,20 @@ function Adminlist() {
   ];
 
   return (
-    <section className="bg-[#F4FFFE] min-h-screen w-full px-6 py-4">
+    <section className="bg-[#FDFBFF] min-h-screen w-full px-6 py-4">
       <div className="flex items-center justify-between">
         <div className="text-[#9E9E9E] mb-4">Admins &gt;</div>
         <div
-          className="flex items-center gap-2 bg-[#4FD1C5] px-4 py-2 rounded-md cursor-pointer"
+          className="flex items-center gap-2 bg-[#BF9FFF] px-4 py-2 rounded-md cursor-pointer"
           onClick={() => navigate("/adduser")}
         >
           <GoPlus size={24} className="text-[#FFFF]" />
         </div>
       </div>
 
-      <div className=" bg-[#F4FFFE] rounded-xl shadow-md">
+      <div className=" bg-[#FDFBFF] rounded-xl shadow-md">
         <table className="min-w-full divide-y divide-gray-200 text-sm text-left border-separate border-spacing-y-4">
-          <thead className="bg-[#F4FFFE] text-[#030229] text-left">
+          <thead className="bg-[#FDFBFF] text-[#030229] text-left">
             <tr>
               <th className="px-6 py-3">
                 <div className="flex items-center gap-1">
@@ -234,13 +234,15 @@ function Adminlist() {
                         <CiEdit />
                         Edit
                       </button>
-                       <DeleteApplication appid={item.appid} clientname={item.clientname}>
-                      <button className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500 flex items-center !gap-2 ">
-                        <MdDelete />
-                        Delete
-                      </button>
-                       </DeleteApplication>
-                      
+                      <DeleteApplication
+                        appid={item.appid}
+                        clientname={item.clientname}
+                      >
+                        <button className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500 flex items-center !gap-2 ">
+                          <MdDelete />
+                          Delete
+                        </button>
+                      </DeleteApplication>
                     </div>
                   )}
                 </td>

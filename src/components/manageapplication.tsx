@@ -18,8 +18,8 @@ function ManageApplication() {
       img: img1,
       clientname: "John Doe",
       status: "Initial",
-      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+      icon: <FaFileAlt size={30} className="text-[#BF9FFF]" />,
+      profile: <ImProfile size={30} className="text-[#BF9FFF]" />,
     },
     {
       id: 2,
@@ -29,8 +29,8 @@ function ManageApplication() {
       img: img1,
       clientname: "John Doe",
       status: "Initial",
-      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+      icon: <FaFileAlt size={30} className="text-[#BF9FFF]" />,
+      profile: <ImProfile size={30} className="text-[#BF9FFF]" />,
     },
     {
       id: 3,
@@ -40,8 +40,8 @@ function ManageApplication() {
       img: img1,
       clientname: "John Doe",
       status: "Initial",
-      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+      icon: <FaFileAlt size={30} className="text-[#BF9FFF]" />,
+      profile: <ImProfile size={30} className="text-[#BF9FFF]" />,
     },
     {
       id: 4,
@@ -51,8 +51,8 @@ function ManageApplication() {
       img: img1,
       clientname: "John Doe",
       status: "Initial",
-      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+      icon: <FaFileAlt size={30} className="text-[#BF9FFF]" />,
+      profile: <ImProfile size={30} className="text-[#BF9FFF]" />,
     },
     {
       id: 5,
@@ -62,8 +62,8 @@ function ManageApplication() {
       img: img1,
       clientname: "John Doe",
       status: "Initial",
-      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+      icon: <FaFileAlt size={30} className="text-[#BF9FFF]" />,
+      profile: <ImProfile size={30} className="text-[#BF9FFF]" />,
     },
     {
       id: 6,
@@ -73,8 +73,8 @@ function ManageApplication() {
       img: img1,
       clientname: "John Doe",
       status: "Initial",
-      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+      icon: <FaFileAlt size={30} className="text-[#BF9FFF]" />,
+      profile: <ImProfile size={30} className="text-[#BF9FFF]" />,
     },
     {
       id: 7,
@@ -84,8 +84,8 @@ function ManageApplication() {
       img: img1,
       clientname: "John Doe",
       status: "Initial",
-      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+      icon: <FaFileAlt size={30} className="text-[#BF9FFF]" />,
+      profile: <ImProfile size={30} className="text-[#BF9FFF]" />,
     },
     {
       id: 8,
@@ -95,16 +95,16 @@ function ManageApplication() {
       img: img1,
       clientname: "John Doe",
       status: "Initial",
-      icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
-      profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
+      icon: <FaFileAlt size={30} className="text-[#BF9FFF]" />,
+      profile: <ImProfile size={30} className="text-[#BF9FFF]" />,
     },
   ];
 
   return (
     // /top section
     <section>
-      <div className="bg-[#F4FFFE] min-h-screen w-full">
-        <div className="flex items-center justify-between bg-[#F4FFFE] gap-2 py-4 ml-10 mr-20">
+      <div className="bg-[#FDFBFF] min-h-screen w-full">
+        <div className="flex items-center justify-between bg-[#FDFBFF] gap-2 py-4 ml-10 mr-20">
           <div>
             <a href="/Applicationslist" className="text-[#9E9E9E]">
               {" "}
@@ -119,7 +119,7 @@ function ManageApplication() {
             <div>
               <a
                 href="/"
-                className="bg-[#4FD1C5] w-10 h-10 flex rounded-sm items-center justify-center  "
+                className="bg-[#BF9FFF] w-10 h-10 flex rounded-sm items-center justify-center  "
               >
                 {" "}
                 <FaPlus color="#fff" className="size-6" />
@@ -189,7 +189,7 @@ function ManageApplication() {
 
                   {openMenuIndex === item.id && (
                     <div className="absolute right-0 top-8 bg-white shadow-md rounded-lg w-28 z-20">
-                      <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-[#4FD1C5]">
+                      <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-[#BF9FFF]">
                         Move
                       </button>
                       <RejectApplication

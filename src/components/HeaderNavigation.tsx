@@ -41,6 +41,7 @@ function HeaderNavigation() {
   ]);
   useEffect(() => {
     getuserdata();
+    getnotoficationdata();
   }, []);
   const getuserdata = () => {
     try {
@@ -53,8 +54,14 @@ function HeaderNavigation() {
       console.log(error, "Get User Error Message");
     }
   };
+  const getnotoficationdata = () => {
+    try {
+    } catch (error) {
+      console.log(error, "Get All  Error Message");
+    }
+  };
   return (
-    <nav className=" border-gray-200 bg-[#F4FFFE]">
+    <nav className=" border-gray-200 bg-[#FDFBFF]">
       <div className="flex justify-between !p-3">
         <div className="!pl-[15%]">
           <h2 className="text-[24px] font-bold">{`Hi,${userdata?.first_Name}`}</h2>
@@ -66,11 +73,11 @@ function HeaderNavigation() {
               className="bg-white p-3 rounded-full relative cursor-pointer z-50"
               onClick={() => setIsopennotification(!isopennotification)}
             >
-              <FaRegBell size={25} color="#4FD1C5" />
-              <div className="absolute top-1  right-2 w-2 h-2 bg-[#4FD1C5] rounded-full">
+              <FaRegBell size={25} color="#BE9EFE" />
+              <div className="absolute top-1  right-2 w-2 h-2 bg-[#BE9EFE] rounded-full">
                 <span></span>
               </div>
-            </div>
+            </div> 
             {isopennotification && (
               <div className="absolute right-20 top-20 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
                 <div className="flex items-center justify-between p-4">
@@ -90,7 +97,7 @@ function HeaderNavigation() {
                         className={`mb-4 px-4 py-2 rounded ${
                           item.isview
                             ? "bg-[#FFFF]"
-                            : "bg-[#E5F8F6] cursor-pointer"
+                            : "bg-[#F5F1FF] cursor-pointer"
                         }`}
                       >
                         <p className="text-[16px] text-black py-1">
@@ -113,7 +120,9 @@ function HeaderNavigation() {
               <img src={Profileimg} className="" />
             </div>
             <div>
-              <h3 className="text-black font-bold text-[16px]">{userdata?.first_Name}</h3>
+              <h3 className="text-black font-bold text-[16px]">
+                {userdata?.first_Name}
+              </h3>
               <h3 className="text-[#737791] text-[14px]">Admin</h3>
             </div>
           </div>
