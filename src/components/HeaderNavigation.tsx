@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginPage from "./loginPage";
 import RegisterPage from "./registerPage";
 import { FaRegBell } from "react-icons/fa";
@@ -12,7 +12,7 @@ interface NotificationItem {
 }
 function HeaderNavigation() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-
+  const [userdata, setUserdata] = useState<any>(null);
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [isopennotification, setIsopennotification] = useState<boolean>(false);
@@ -39,12 +39,25 @@ function HeaderNavigation() {
         "The lead has been received for vineatz technologies, please check and process it",
     },
   ]);
+  useEffect(() => {
+    getuserdata();
+  }, []);
+  const getuserdata = () => {
+    try {
+      const user = localStorage.getItem("user_data");
+      const parsedUser = user ? JSON.parse(user) : null;
+      console.log("parsedUser", parsedUser);
 
+      setUserdata(parsedUser);
+    } catch (error) {
+      console.log(error, "Get User Error Message");
+    }
+  };
   return (
     <nav className=" border-gray-200 bg-[#F4FFFE]">
       <div className="flex justify-between !p-3">
         <div className="!pl-[15%]">
-          <h2 className="text-[24px] font-bold">Hi,Vineatz</h2>
+          <h2 className="text-[24px] font-bold">{`Hi,${userdata?.first_Name}`}</h2>
           <h2>Let’s check your Dashboard</h2>
         </div>
         <div>
@@ -100,7 +113,7 @@ function HeaderNavigation() {
               <img src={Profileimg} className="" />
             </div>
             <div>
-              <h3 className="text-black font-bold text-[16px]">Vineeth</h3>
+              <h3 className="text-black font-bold text-[16px]">{userdata?.first_Name}</h3>
               <h3 className="text-[#737791] text-[14px]">Admin</h3>
             </div>
           </div>

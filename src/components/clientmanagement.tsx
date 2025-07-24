@@ -9,6 +9,7 @@ import { MdOutlineArrowDropDown } from 'react-icons/md';
 import { Button, Popconfirm } from 'antd';
 import { MdDelete } from "react-icons/md";
 import RejectApplication from '../components/rejectapplication';
+import { useNavigate } from 'react-router-dom';
 
 function Clientmanagement() {
 
@@ -24,16 +25,18 @@ function Clientmanagement() {
         {
             id: 1,
             appid: "01",
-            name: "John Doe",
+            name: "John De",
             clientid: "01",
             img: img1,
             clientname: "John Doe",
             status: "Initial",
+            link: "/applicationdetails",
             icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
             profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
 
         },
     ];
+    const navigate = useNavigate();
 
     const details1 = [
         {
@@ -162,7 +165,15 @@ function Clientmanagement() {
                                     {item.clientname}
                                 </td>
                                 <td>{item.status}</td>
-                                <td>{item.icon}</td>
+                                <td>
+                                    <div
+                                        className="cursor-pointer hover:scale-110 transition"
+                                        onClick={() => navigate(item.link)}
+                                    >
+                                        {item.icon}
+                                    </div>
+                                </td>
+
                                 <td>{item.profile}</td>
                                 <td className="w-[80px] flex items-center">
                                     <RejectApplication appid={item.appid} clientname={item.clientname}>

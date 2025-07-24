@@ -75,8 +75,9 @@ export default function RejectApplication({
     <Dialog>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent className="h-[550px] rounded-xl">
+      {/* <DialogContent className="h-[550px] rounded-xl backdrop-blur-md bg-white/90"> */}
         <DialogHeader>
-          <DialogTitle className="text-[24px] font-poppins font-semibold !pb-5">
+          <DialogTitle className="text-[24px] font-poppins font-semibold !pb-5 ">
             Reject Application
           </DialogTitle>
           <hr />

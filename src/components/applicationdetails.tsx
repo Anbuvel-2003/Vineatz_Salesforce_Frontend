@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import img1 from "../assets/Image & bg.png";
-import avatar1 from "../assets/avatar1.png";
-import avatar2 from "../assets/avatar2.png";
-import profile from "../assets/profile.png";
 import { FaFileAlt } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
-import { Button, Popconfirm } from 'antd';
+import { CgProfile } from "react-icons/cg";
 import { MdOutlineArrowDropDown, MdDelete } from 'react-icons/md';
 import RejectApplication from '../components/rejectapplication';
+import { Button } from './ui/button';
+import { Input } from 'antd';
+import TextArea from 'antd/es/input/TextArea';
+import { MdOutlineEmail } from "react-icons/md";
+import { MdOutlineLocalPhone } from "react-icons/md";
+import { SlNotebook } from "react-icons/sl";
 
 
 function Applicationdetails() {
@@ -28,12 +31,17 @@ function Applicationdetails() {
       clientid: "01",
       img: img1,
       clientname: "John Doe",
+      email: "oZVv3@example.com",
+      mobilenumber1: "1234567890",
       status: "Initial",
       icon: <FaFileAlt size={30} className="text-[#4FD1C5]" />,
       profile: <ImProfile size={30} className="text-[#4FD1C5]" />,
 
     },
   ];
+  const [clientName, setClientName] = useState(details[0].clientname);
+  const [clientEmail, setClientEmail] = useState(details[0].email);
+  const [clientNumber, setClientNumber] = useState(details[0].mobilenumber1);
 
   return (
     <div className="bg-[#F4FFFE] w-full min-h-screen px-10">
@@ -87,15 +95,131 @@ function Applicationdetails() {
           </tbody>
         </table>
       </div>
-      <div className="py-5 ">
-        <span className="text-[#000000] text-[20px] font-poppins py-10">Application Details</span>
-        <div className="min-w-full h-[500px] bg-white rounded-xl shadow-sm">
-          <div className='flex items-center justify-between px-5 py-4'>
-            <span className="text-[#4FD1C5] text-[20px] font-poppins ">Personal Details</span>
-
-
-          </div>
+      <div className="  ">
+        <div className='py-5'>
+          <span className="text-[#000000] text-[20px] font-poppins py-10">Application Details</span>
         </div>
+        <div className="min-w-full h-[fit] bg-white rounded-xl px-10 pb-8 shadow-sm">
+          <div className=' items-center justify-between px-5 py-6'>
+            <span className="text-[#4FD1C5] text-[20px] font-poppins  ">Personal Details</span>
+          </div>
+          <div className='px-5'>
+            <form>
+              <div className='flex gap-y-4 gap-x-32'>
+                <div className=' '>
+                  {/* Name Input */}
+                  <div className='py-3'>
+                    <div className='flex px-3 border rounded-xl w-[450px] h-[50px] border-[#4FD1C5]  items-center'>
+                      <CgProfile color='#4FD1C5' size={20} className='mr-2' />
+                      <input
+                        type="text"
+                        value={clientName}
+                        onChange={(e) => setClientName(e.target.value)}
+                        placeholder="Client Name"
+                        className="bg-transparent border-none outline-none text-[#4FD1C5] text-[16px] font-poppins w-full placeholder:text-[#A0AEC0]"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Email Input */}
+                  <div className='py-3'>
+                    <div className='flex px-3 border rounded-xl w-[450px] h-[50px]  border-[#4FD1C5] items-center'>
+                      <MdOutlineEmail color='#4FD1C5' size={20} className='mr-2' />
+                      <input
+                        type="email"
+                        value={clientEmail}
+                        onChange={(e) => setClientEmail(e.target.value)}
+                        placeholder="Email"
+                        className="bg-transparent border-none outline-none text-[#4FD1C5] text-[16px] font-poppins w-full placeholder:text-[#A0AEC0]"
+                      />
+                    </div>
+                  </div>
+                  {/* Mobile Number Input */}
+                  <div className='py-3'>
+                    <div className='flex px-3 border rounded-xl w-[450px] h-[50px]  border-[#4FD1C5] items-center'>
+                      <MdOutlineLocalPhone color='#4FD1C5' size={20} className='mr-2' />
+                      <input
+                        type="text"
+                        value={clientNumber}
+                        onChange={(e) => setClientNumber(e.target.value)}
+                        placeholder="Mobile Number"
+                        className="bg-transparent border-none outline-none text-[#4FD1C5] text-[16px] font-poppins w-full placeholder:text-[#A0AEC0]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Read-only field (as per your 2nd column) */}
+                <div className='py-3'>
+                  <div className='flex px-3 py-2 border rounded-xl w-[850px] h-[200px] border-[#4FD1C5] '>
+                    <SlNotebook color='#4FD1C5' size={20} className='mt-3 mr-1' />
+                    <textarea
+                      placeholder="Hello"
+                      className="bg-transparent border-none outline-none resize-none text-[#4FD1C5] text-[16px]  font-poppins w-full h-full"
+                    />
+                  </div>
+                </div>
+              </div>
+
+
+            </form>
+
+
+        </div>
+          <div className=' items-center justify-between px-5 py-6'>
+            <span className="text-[#4FD1C5] text-[20px] font-poppins  ">Organization Details</span>
+          </div>
+          <div className='px-5'>
+            <form>
+              <div className='flex gap-y-4 gap-x-32'>
+                <div className=' '>
+                  {/* Name Input */}
+                  <div className='py-3'>
+                    <div className='flex px-3 border rounded-xl w-[450px] h-[50px] border-[#4FD1C5]  items-center'>
+                      <input
+                        placeholder="Company Name"
+                        className="bg-transparent border-none outline-none text-[#4FD1C5] text-[16px] font-poppins w-full placeholder:text-[#A0AEC0]"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Email Input */}
+                  <div className='py-3'>
+                    <div className='flex px-3 border rounded-xl w-[450px] h-[50px]  border-[#4FD1C5] items-center'>
+                      <input
+                        placeholder="Registered Certificate Number"
+                        className="bg-transparent border-none outline-none text-[#4FD1C5] text-[16px] font-poppins w-full placeholder:text-[#A0AEC0]"
+                      />
+                    </div>
+                  </div>
+                  {/* Mobile Number Input */}
+                  <div className='py-3'>
+                    <div className='flex px-3 border rounded-xl w-[450px] h-[50px]  border-[#4FD1C5] items-center'>
+                      <input
+                        placeholder="Financial"
+                        className="bg-transparent border-none outline-none text-[#4FD1C5] text-[16px] font-poppins w-full placeholder:text-[#A0AEC0]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Read-only field (as per your 2nd column) */}
+                <div className='py-3'>
+                    <div className='flex px-3 border rounded-xl w-[450px] h-[50px]  border-[#4FD1C5] items-center'>
+                      <input
+                        placeholder="GST Number"
+                        className="bg-transparent border-none outline-none text-[#4FD1C5] text-[16px] font-poppins w-full placeholder:text-[#A0AEC0]"
+                      />
+                    </div>
+                  
+                </div>
+              </div>
+
+
+            </form>
+
+</div>
+          </div>
       </div>
     </div>
   )
