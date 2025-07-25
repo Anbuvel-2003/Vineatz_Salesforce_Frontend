@@ -162,21 +162,21 @@ function Adminlist() {
       <div className=" bg-[#FDFBFF] px-10 ">
            <table className="min-w-full">
           <thead className="bg-[#F4FFFE] text-[#030229] text-left">
-            <tr className="grid grid-cols-[repeat(6,1fr)_auto]   items-center rounded-[70px] px-6 py-4 ">
-              <th className="flex items-center justify-center gap-1">Admin id <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center justify-center gap-1">Admin name <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center justify-center gap-1">Mobile number 1 <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center justify-center gap-1">Email id <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center justify-center gap-1">Joining date <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center justify-center gap-1"></th>
-              <th className="w-[50px]">Action</th>
+            <tr className="grid grid-cols-7  items-center rounded-[70px]  py-4 ">
+              <th className="flex items-center  gap-1">Admin id <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center  gap-1">Admin name <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center  gap-1">Mobile number 1 <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center  gap-1">Email id <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center  gap-1">Joining date <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center  gap-1"></th>
+              <th className=""></th>
             </tr>
           </thead>
           <tbody className=" rounded-[60px] space-y-3 drop-shadow-md  ">
             {details.map((item) => (
-              <tr key={item.id} className="grid grid-cols-[repeat(6,1fr)_auto] bg-white text-center px-6 py-3  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
-                <td>{item.appid}</td>
-                <td className="flex items-center justify-center gap-2">
+              <tr key={item.id} className="grid grid-cols-7 bg-white  py-3  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
+                <td className="px-5">{item.appid}</td>
+                <td className="flex items-center justify- gap-2">
                   <img src={item.img} alt="client" className="w-6 h-6 rounded-full object-cover" />
                   {item.clientname}
                 </td>
@@ -184,7 +184,7 @@ function Adminlist() {
                 <td>{item.email}</td>
                 <td>{item.date}</td>
                 <td></td>
-                <td className="w-[50px] flex items-">
+                <td className="px-32 ">
                   <div className="relative flex ">
                   <button
                     onClick={() =>
@@ -200,7 +200,7 @@ function Adminlist() {
                     <div className="absolute left-4 top-3 bg-white shadow-md p-3 space-y-2 rounded-2xl w-36 z-30">
 
                       <button className="flex items-center gap-2 w-full text-left px-4 py-2 rounded-xl bg-[#FCFAFF]  hover:bg-gray-100 text-[#4FD1C5]"
-                        onClick={() => navigate(`/Updateuser/${item.id}`)}
+                        onClick={() => navigate("/Adminupdation")}
                       >
                         <CiEdit />
                         Edit

@@ -145,7 +145,7 @@ function ManageApplication() {
       <div className="bg-[#FDFBFF] px-10">
         <table className="min-w-full">
           <thead className="bg-[#F4FFFE] text-[#030229] text-left">
-            <tr className="grid grid-cols-[repeat(7,1fr)_auto] items-center rounded-[70px] px-6 py-4">
+            <tr className="grid grid-cols-8 items-center rounded-[70px]  py-4">
               <th className="flex items-center gap-1">Application id <MdOutlineArrowDropDown /></th>
               <th className="flex items-center gap-1">Application name <MdOutlineArrowDropDown /></th>
               <th className="flex items-center gap-1">Client id <MdOutlineArrowDropDown /></th>
@@ -153,13 +153,13 @@ function ManageApplication() {
               <th className="flex items-center gap-1">Status <MdOutlineArrowDropDown /></th>
               <th className="flex items-center gap-1">Application details <MdOutlineArrowDropDown /></th>
               <th className="flex items-center gap-1">Client details <MdOutlineArrowDropDown /></th>
-              <th className="w-[80px]">Action</th>
+              <th className=""></th>
             </tr>
           </thead>
 
           <tbody className="rounded-[60px] space-y-3 drop-shadow-md">
             {details.map((item) => (
-              <tr key={item.id} className="grid grid-cols-[repeat(7,1fr)_auto] bg-white items-center px-6 py-2 hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
+              <tr key={item.id} className="grid grid-cols-8 bg-white items-center px-6 py-2 hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
                 <td>{item.appid}</td>
                 <td>{item.name}</td>
                 <td>{item.clientid}</td>
@@ -170,8 +170,8 @@ function ManageApplication() {
                 <td className="border-none rounded-[20px] text-[#8144FB] bg-[#F9F5FF] text-[16px] font-sans w-fit px-2">{item.status}</td>
                 <td>{item.icon}</td>
                 <td>{item.profile}</td>
-                <td className="w-[80px]">
-                  <div className="relative flex gap-20">
+                <td className="">
+                  <div className="">
                     <button
                       onClick={() =>
                         setOpenMenuIndex(openMenuIndex === item.id ? null : item.id)

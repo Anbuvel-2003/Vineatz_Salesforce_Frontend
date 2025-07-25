@@ -25,7 +25,7 @@ function Employeelist() {
       img: img1,
       clientname: "John Doe",
       email: "12345@gmail.com",
-      date: "01/01/2023",
+      date: "12 Jun 2025",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -39,7 +39,7 @@ function Employeelist() {
       img: img1,
       clientname: "John Doe",
       email: "12345@gmail.com",
-      date: "01/01/2023",
+      date: "12 Jun 2025",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -53,7 +53,7 @@ function Employeelist() {
       img: img1,
       clientname: "John Doe",
       email: "12345@gmail.com",
-      date: "01/01/2023",
+      date: "12 Jun 2025",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -67,7 +67,7 @@ function Employeelist() {
       img: img1,
       clientname: "John Doe",
       email: "12345@gmail.com",
-      date: "01/01/2023",
+      date: "12 Jun 2025",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -81,7 +81,7 @@ function Employeelist() {
       img: img1,
       clientname: "John Doe",
       email: "12345@gmail.com",
-      date: "01/01/2023",
+      date: "12 Jun 2025",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -95,7 +95,7 @@ function Employeelist() {
       mobilenumber2: "1234567890",
       clientname: "John Doe",
       email: "12345@gmail.com",
-      date: "2023-01-01",
+      date: "12 Jun 2025",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -109,7 +109,7 @@ function Employeelist() {
       img: img1,
       clientname: "John Doe",
       email: "12345@gmail.com",
-      date: "2023-01-01",
+      date: "12 Jun 2025",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -123,7 +123,7 @@ function Employeelist() {
       img: img1,
       clientname: "John Doe",
       email: "12345@gmail.com",
-      date: "2023-01-01",
+      date: "12 Jun 2025",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -137,7 +137,7 @@ function Employeelist() {
       img: img1,
       clientname: "John Doe",
       email: "12345@gmail.com",
-      date: "2023-01-01",
+      date: "12 Jun 2025",
       icon: <FaFileAlt className="text-[#4FD1C5]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -151,7 +151,7 @@ function Employeelist() {
       img: img1,
       clientname: "John Doe",
       email: "12345@gmail.com",
-      date: "2023-01-01",
+      date: "12 Jun 2025",
       icon: <FaFileAlt className="text-[#4FD1C5] bg-[#F2ECFF]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
@@ -173,28 +173,28 @@ function Employeelist() {
         <table className="min-w-full">
           <thead className="bg-[#FDFBFF] text-[#030229] text-left">
               <tr className="grid grid-cols-7  items-center rounded-[70px]  py-4 ">
-              <th className="flex items-center justify-center gap-1">Employee id <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center justify-center gap-1">Employee name <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center justify-center gap-1">Mobile number 1 <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center justify-center gap-1">Mobile number 2 <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center justify-center gap-1">Email id <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center justify-center gap-1">Joining date <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center gap-1">Employee id <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center gap-1">Employee name <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center gap-1">Mobile number 1 <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center gap-1">Mobile number 2 <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center gap-1">Email id <MdOutlineArrowDropDown /></th>
+              <th className="flex items-center gap-1">Joining date <MdOutlineArrowDropDown /></th>
               <th className=""></th>
             </tr>
           </thead>
            <tbody className=" rounded-[60px] space-y-3 drop-shadow-md ">
             {details.map((item) => (
               <tr key={item.id} className="grid grid-cols-7 bg-white items-center  py-2  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
-                <td className="flex justify-center">{item.appid}</td>
-                <td className="flex justify-center items-center gap-2">
+                <td className="px-5">{item.appid}</td>
+                <td className="flex items-center gap-2">
                   <img src={item.img} alt="client" className="w-6 h-7 rounded-full object-cover" />
                   {item.clientname}
                 </td>
-                <td className="flex justify-center">{item.mobilenumber1}</td>
-                <td className="flex justify-center">{item.mobilenumber2}</td>
- <td className="flex justify-center">{item.email}</td>
-                <td className="flex justify-center">{item.date}</td>
-                <td className="w-[80px] flex justify-end">
+                <td>{item.mobilenumber1}</td>
+                <td>{item.mobilenumber2}</td>
+ <td>{item.email}</td>
+                <td>{item.date}</td>
+                <td className="px-10">
                   <div className="relative flex justify-end  gap-20">
                   <button
                     onClick={() =>
@@ -207,7 +207,7 @@ function Employeelist() {
                   </button>
 
                   {openMenuIndex === item.id && (
-                    <div className="absolute left-3 top-3 bg-white shadow-lg rounded-lg w-28 z-20">
+                    <div className="absolute left-32 top-3 bg-white shadow-lg rounded-lg w-28 z-20">
                       <button
                         className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-[#BF9FFF] flex items-center !gap-2 "
                         onClick={() => navigate(`/updateemployee/${item.id}`)}

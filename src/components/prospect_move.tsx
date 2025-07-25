@@ -54,10 +54,10 @@ const ProspectMoveLeads: React.FC = () => {
             </div>
 
             {/* Table */}
-            <div className="overflow-x-auto px-16 pb-5 ">
+            <div className="overflow-x-auto px-10 pb-5 ">
                 <table className="min-w-full rounded-2xl ">
                     <thead className="bg-[#FDFBFF] text-[#030229] text-left">
-                        <tr className="grid grid-cols-[repeat(7,1fr)_auto] items-center px-6 py-4 rounded-t-xl">
+                        <tr className="grid grid-cols-8 items-center  py-4 rounded-[70px]">
                             <th className="flex items-center gap-1">
                                 Application id <MdOutlineArrowDropDown />
                             </th>
@@ -79,16 +79,16 @@ const ProspectMoveLeads: React.FC = () => {
                             <th className="flex items-center gap-1">
                                 Client details <MdOutlineArrowDropDown />
                             </th>
-                            <th className="w-[80px]">Action</th>
+                            <th className=""></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className=" rounded-[60px] space-y-3 drop-shadow-md ">
                         {details.map((item) => (
                             <tr
                                 key={item.id}
-                                className="grid grid-cols-[repeat(7,1fr)_auto] items-center px-6 py-4 bg-white hover:bg-[#F8F9FF] drop-shadow-lg rounded-[15px] border-gray-100"
-                            >
-                                <td>{item.appid}</td>
+                                className="grid grid-cols-8 items-center  py-2 bg-white hover:bg-[#F8F9FF] drop-shadow-lg rounded-[15px] border-gray-100" >
+
+                                <td className="px-5">{item.appid}</td>
                                 <td>{item.name}</td>
                                 <td>{item.clientid}</td>
                                 <td className="flex items-center gap-2">
@@ -99,10 +99,10 @@ const ProspectMoveLeads: React.FC = () => {
                                     />
                                     {item.clientname}
                                 </td>
-                                <td className="border-none rounded-[20px] text-[#8144FB] bg-[#F9F5FF] text-[16px] font-sans w-fit p-3">{item.status}</td>
+                                <td className="border-none rounded-[20px] text-[#8144FB] bg-[#F9F5FF] text-[16px] font-sans w-fit p-2">{item.status}</td>
                                 <td>{item.icon}</td>
                                 <td>{item.profile}</td>
-                                <td className="w-[80px] flex items-center">
+                                <td className="px-16 ">
                                     <RejectApplication
                                         appid={item.appid}
                                         clientname={item.clientname}
