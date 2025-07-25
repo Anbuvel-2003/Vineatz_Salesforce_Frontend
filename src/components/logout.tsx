@@ -13,11 +13,13 @@ import {
 import React from 'react'
 
 function Logout() {
+
+    
     return (
         <div>
             <div className="flex items-center justify-center">
             <AlertDialog>
-                <AlertDialogTrigger ></AlertDialogTrigger>
+                <AlertDialogTrigger> </AlertDialogTrigger>
                 <AlertDialogContent className="flex items-center w-[350px] h-[200px] justify-center" >
                 <div className=" items-center   ">
                     <AlertDialogHeader>

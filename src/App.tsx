@@ -27,8 +27,8 @@ import Applicationdetailsmanual from "./components/applicationdetailmanual";
 import Admincreation from "./components/admincreation";
 import ProspectlistApplication from "./components/prospectlist";
 import ProspectMoveLeads from "./components/prospect_move";
-import Logout from "./components/logout";
 import Adminupdation from "./components/adminupdation";
+import LogoutPopup from "./components/logout";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -53,7 +53,7 @@ function App(): JSX.Element {
                 <Route path="/Applicationdetailsmanual" element={<Applicationdetailsmanual />} />
                 <Route path="/Rejectapplication" element={<Rejectapplication children={undefined} appid={undefined}  />} />
                 <Route path="/Applicationlist" element={<Applicationslist />} />
-                <Route path="/Logout" element={<Logout />} />
+                <Route path="/Logout" element={<LogoutPopup open={undefined} onOpenChange={undefined} onConfirm={undefined} />} />
                 <Route path="/AddProject" element={<AddProject />} />
                 <Route path="/Employeelist" element={<Employeelist />} />
                 <Route path="/addemployee" element={<Addemployee />} />
@@ -81,7 +81,9 @@ function App(): JSX.Element {
           </>
         ) : (
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login isDrawerOpen={false} setIsDrawerOpen={function (isOpen: boolean): void {
+                throw new Error("Function not implemented.");
+              } } />} />
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         )}
