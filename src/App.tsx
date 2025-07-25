@@ -39,7 +39,7 @@ function App(): JSX.Element {
   return (
     <>
       <BrowserRouter>
-        {!parsedUser ? (
+        {parsedUser ? (
           <>
             <Layoutpage />
             <div className="sm:ml-64">

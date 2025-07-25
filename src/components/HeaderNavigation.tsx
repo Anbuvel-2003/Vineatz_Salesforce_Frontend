@@ -4,6 +4,7 @@ import RegisterPage from "./registerPage";
 import { FaRegBell } from "react-icons/fa";
 import Profileimg from "../assets/profile.png";
 import { MdOutlineCancel } from "react-icons/md";
+import { authApi } from "@/config/fetchData";
 interface NotificationItem {
   id: number;
   name: string;
@@ -16,32 +17,10 @@ function HeaderNavigation() {
   const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [isopennotification, setIsopennotification] = useState<boolean>(false);
-  const [notificationdata, setNotificationdata] = useState<NotificationItem[]>([
-    {
-      id: 1,
-      name: "Lead Received!",
-      isview: false,
-      message:
-        "The lead has been received for vineatz technologies, please check and process it",
-    },
-    {
-      id: 2,
-      name: "Lead Received!",
-      isview: false,
-      message:
-        "The lead has been received for vineatz technologies, please check and process it",
-    },
-    {
-      id: 3,
-      name: "Lead Received!",
-      isview: true,
-      message:
-        "The lead has been received for vineatz technologies, please check and process it",
-    },
-  ]);
+  const [notificationdata, setNotificationdata] = useState<any[]>([]);
   useEffect(() => {
     getuserdata();
-    getnotoficationdata();
+    getNotificationData();
   }, []);
   const getuserdata = () => {
     try {
@@ -54,10 +33,17 @@ function HeaderNavigation() {
       console.log(error, "Get User Error Message");
     }
   };
-  const getnotoficationdata = () => {
+  const getNotificationData = async () => {
     try {
+      const response = await authApi.NotificationApi();
+      if (response?.success) {
+        console.log("Notification Data:", response.data);
+        setNotificationdata(response.data);
+      } else {
+        console.log("Failed to fetch notifications");
+      }
     } catch (error) {
-      console.log(error, "Get All  Error Message");
+      console.log(error, "Get All Error Message");
     }
   };
   return (
@@ -77,7 +63,7 @@ function HeaderNavigation() {
               <div className="absolute top-1  right-2 w-2 h-2 bg-[#BE9EFE] rounded-full">
                 <span></span>
               </div>
-            </div> 
+            </div>
             {isopennotification && (
               <div className="absolute right-20 top-20 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
                 <div className="flex items-center justify-between p-4">
@@ -95,16 +81,16 @@ function HeaderNavigation() {
                       <div
                         key={item.id}
                         className={`mb-4 px-4 py-2 rounded ${
-                          item.isview
+                          item.is_read
                             ? "bg-[#FFFF]"
                             : "bg-[#F5F1FF] cursor-pointer"
                         }`}
                       >
                         <p className="text-[16px] text-black py-1">
-                          {item.name}
+                          Lead Received!
                         </p>
                         <p className="text-sm text-[#808080] pb-1">
-                          {item.message}
+                          {`The lead has been received for ${item?.Application_Name}, please check and process it`}
                         </p>
                       </div>
                     ))

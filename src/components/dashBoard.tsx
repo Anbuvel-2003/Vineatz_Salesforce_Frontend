@@ -78,7 +78,7 @@ function Dashboard() {
   };
 
   return (
-    <div className="bg-[#FBFAFD]   min-h-full">
+    <div className="bg-[#FDFAFE]   min-h-full">
       <div className="grid grid-cols-4 gap-4 px-10 ">
         <div className="flex items-center bg-white gap-4 p-10 rounded-[10px]">
           <img src={dashboard1} alt="" />

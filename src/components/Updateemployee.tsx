@@ -3,15 +3,20 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
 import { format } from "date-fns";
 
 import { CgProfile } from "react-icons/cg";
-import { GoPlus } from "react-icons/go";
 import { TbLockPassword } from "react-icons/tb";
 import { MdOutlineEmail, MdOutlineLocalPhone } from "react-icons/md";
 import { SlNotebook } from "react-icons/sl";
 import { CalendarIcon } from "lucide-react";
+import { authApi } from "@/config/fetchData";
+import { toast } from "react-toastify";
 
 interface FormValues {
   name: string;
@@ -40,41 +45,71 @@ const initialValues: FormValues = {
 };
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required("Required"),
-  email: Yup.string().email("Invalid").required("Required"),
-  contact: Yup.string().required("Required"),
-  password: Yup.string().required("Required"),
+  name: Yup.string().required("Required name"),
+  email: Yup.string().email("Invalid email").required("Required email"),
+  contact: Yup.string()
+    .required("Required contact number")
+    .matches(/^[0-9]{10}$/, "Contact must be exactly 10 digits"),
+  password: Yup.string()
+    .required("Required password")
+    .min(8, "Password must be at least 8 characters")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
+      "Must include uppercase, lowercase, number & special character"
+    ),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords must match")
-    .required("Required"),
-  address: Yup.string().required("Required"),
-  emergencyContact: Yup.string().required("Required"),
-  bikeNumber: Yup.string().required("Required"),
-  licenseNumber: Yup.string().required("Required"),
+    .required("Required confirm password"),
+  address: Yup.string().required("Required address"),
+  emergencyContact: Yup.string()
+    .required("Required emergency contact")
+    .matches(/^[0-9]{10}$/, "Emergency contact must be exactly 10 digits"),
+  bikeNumber: Yup.string()
+    .required("Required bike number")
+    .matches(
+      /^[A-Z]{2}\d{2}[A-Z]{1,2}\d{4}$/,
+      "Enter valid bike number (e.g., TN01AB1234)"
+    ),
+  licenseNumber: Yup.string()
+    .required("Required license number")
+    .matches(
+      /^[A-Z]{2}\d{2}\d{11}$/,
+      "Enter valid license number (e.g., TN1020201234567)"
+    ),
   joiningDate: Yup.date().required("Joining Date is required"),
 });
 
 const Updateemployee = () => {
   const navigate = useNavigate();
-
-  const handleSubmit = (values: FormValues) => {
+  const handleSubmit = async (values: FormValues) => {
     console.log("Submitted Values:", values);
+    const createapi = await authApi?.CreateEmployee({
+      Employee_Name: values.name,
+      Employee_Email: values.email,
+      Employee_Mobilenumber: values.contact,
+      Employee_Alternative_Mobilenumber: values.emergencyContact,
+      Employee_Address: values.address,
+      Employee_Bike_Number: values.bikeNumber,
+      Employee_Driving_License_Number: values.licenseNumber,
+      Employee_Password: values.password,
+      Employee_joining_date: values.joiningDate
+        ? values.joiningDate.toISOString()
+        : "",
+    });
+    if (createapi?.success) {
+      toast?.success(createapi?.message);
+      setTimeout(() => {
+        navigate("/Employeelist");
+      }, 1000);
+    } else {
+      toast?.error(createapi?.message);
+    }
   };
-
   return (
-    <div className="bg-[#FDFBFF] min-h-screen w-full px-6 pr-16">
-      <div className="flex items-center justify-between">
-        <div className="text-[#000000] text-[18px] text-poppins">Employee</div>
-       <div
-          className="flex items-center gap-2 bg-[#BF9FFF] px-4 py-2 rounded-md cursor-pointer"
-          onClick={() => navigate("/addemployee")}
-        >
-          <GoPlus size={24} className="text-[#FFFF] " />
-        </div>
-      </div>
-
-      <p className="text-black text-[18px] font-semibold py-6">Edit Employee Details</p>
-
+    <div className="bg-[#FDFAFE] w-full min-h-screen px-20">
+      <p className="text-black text-[18px] font-semibold py-6">
+        Update Employee
+      </p>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
@@ -86,14 +121,40 @@ const Updateemployee = () => {
             <Section title="Personal Details" />
             <div className="grid grid-cols-2 gap-y-4 gap-x-10 px-5">
               <div>
-                <InputField name="name" icon={<CgProfile />} placeholder="Employee Name" />
-                <InputField name="email" icon={<MdOutlineEmail />} placeholder="Employee Email" />
-                <InputField name="contact" icon={<MdOutlineLocalPhone />} placeholder="Contact Number" />
+                <InputField
+                  name="name"
+                  icon={<CgProfile />}
+                  placeholder="Employee Name"
+                />
+                <InputField
+                  name="email"
+                  icon={<MdOutlineEmail />}
+                  placeholder="Employee Email"
+                />
+                <InputField
+                  name="contact"
+                  icon={<MdOutlineLocalPhone />}
+                  placeholder="Contact Number"
+                />
               </div>
               <div>
-                <InputField name="password" type="password" icon={<TbLockPassword />} placeholder="Password" />
-                <InputField name="confirmPassword" type="password" icon={<TbLockPassword />} placeholder="Confirm Password" />
-                <InputField name="address" icon={<SlNotebook />} placeholder="Address" />
+                <InputField
+                  name="password"
+                  type="password"
+                  icon={<TbLockPassword />}
+                  placeholder="Password"
+                />
+                <InputField
+                  name="confirmPassword"
+                  type="password"
+                  icon={<TbLockPassword />}
+                  placeholder="Confirm Password"
+                />
+                <InputField
+                  name="address"
+                  icon={<SlNotebook />}
+                  placeholder="Address"
+                />
               </div>
             </div>
 
@@ -101,24 +162,37 @@ const Updateemployee = () => {
             <Section title="Other Details" />
             <div className="grid grid-cols-2 gap-y-4 gap-x-10 px-5">
               <div>
-                <InputField name="emergencyContact" icon={<MdOutlineLocalPhone />} placeholder="Emergency Contact" />
-                <InputField name="bikeNumber" icon={<SlNotebook />} placeholder="Bike Number" />
+                <InputField
+                  name="emergencyContact"
+                  icon={<MdOutlineLocalPhone />}
+                  placeholder="Emergency Contact"
+                />
+                <InputField
+                  name="bikeNumber"
+                  icon={<SlNotebook />}
+                  placeholder="Bike Number"
+                />
               </div>
               <div>
-                <InputField name="licenseNumber" icon={<SlNotebook />} placeholder="Driving License Number" />
-
+                <InputField
+                  name="licenseNumber"
+                  icon={<SlNotebook />}
+                  placeholder="Driving License Number"
+                />
                 {/* Joining Date */}
                 <div className="py-3">
                   <Popover>
                     <PopoverTrigger asChild>
                       <button
                         type="button"
-                        className="w-[600px] h-[50px] flex justify-between  items-center px-4 border border-[#BF9FFF] rounded-xl text-left bg-transparent text-[#4FD1C5] font-poppins"
+                        className="w-[600px] h-[50px] flex justify-between  items-center px-4 border border-[#BF9FFF] rounded-xl text-left bg-transparent text-[#BF9FFF] font-poppins"
                       >
-                        {values.joiningDate ? (     
-                            format(values.joiningDate, "dd-MM-yyyy")
+                        {values.joiningDate ? (
+                          format(values.joiningDate, "dd-MM-yyyy")
                         ) : (
-                            <span className="text-[#A0AEC0] pl-8">Joining Date</span>
+                          <span className="text-[#A0AEC0] pl-8">
+                            Joining Date
+                          </span>
                         )}
                         <CalendarIcon color="#A0AEC0" />
                       </button>
@@ -140,7 +214,6 @@ const Updateemployee = () => {
                 </div>
               </div>
             </div>
-
             {/* Submit Button */}
             <div className=" px-5 pt-6">
               <button
@@ -164,7 +237,6 @@ const Section = ({ title }: { title: string }) => (
   </div>
 );
 
-// InputField with Formik <Field />
 const InputField = ({
   name,
   placeholder,
@@ -176,19 +248,58 @@ const InputField = ({
   type?: string;
   icon: React.ReactNode;
 }) => (
-  <div className="py-3">
-    <div className="flex px-3 border rounded-xl w-[600px] h-[50px] border-[#BF9FFF] items-center">
-      <div className="mr-2 text-[#BF9FFF]">{icon}</div>
-      <Field
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        className="bg-transparent border-none outline-none text-[#4FD1C5] text-[16px] font-poppins w-full placeholder:text-[#A0AEC0]"
-      />
-    </div>
-    <ErrorMessage name={name} component="div" className="text-red-500 text-sm mt-1" />
-  </div>
+  <Field name={name}>
+    {({ field, form }: any) => {
+      // Custom logic
+      const upperCaseFields = ["bikeNumber", "licenseNumber"];
+      const maxLengthMap: Record<string, number> = {
+        contact: 10,
+        emergencyContact: 10,
+        bikeNumber: 10,
+        licenseNumber: 15,
+      };
+      const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let value = e.target.value;
+        // Allow only alphanumeric for bike/license; only numbers for contact
+        if (["bikeNumber", "licenseNumber"].includes(name)) {
+          value = value.replace(/[^a-zA-Z0-9]/g, "");
+        } else if (["contact", "emergencyContact"].includes(name)) {
+          value = value.replace(/[^0-9]/g, "");
+        }
+        // Enforce uppercase
+        if (upperCaseFields.includes(name)) {
+          value = value.toUpperCase();
+        }
+        // Enforce max length
+        const maxLength = maxLengthMap[name];
+        if (maxLength) {
+          value = value.slice(0, maxLength);
+        }
+        form.setFieldValue(name, value);
+      };
+
+      return (
+        <div className="py-3">
+          <div className="flex px-3 border rounded-xl w-[600px] h-[50px] border-[#BF9FFF] items-center">
+            <div className="mr-2 text-[#BF9FFF]">{icon}</div>
+            <input
+              {...field}
+              type={type}
+              placeholder={placeholder}
+              value={field.value}
+              onChange={handleChange}
+              className="bg-transparent border-none outline-none text-[#BF9FFF] text-[16px] font-poppins w-full placeholder:text-[#A0AEC0]"
+            />
+          </div>
+          <ErrorMessage
+            name={name}
+            component="div"
+            className="text-red-500 text-sm mt-1"
+          />
+        </div>
+      );
+    }}
+  </Field>
 );
 
 export default Updateemployee;
-
