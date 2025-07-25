@@ -153,7 +153,7 @@ function Adminlist() {
         <div className="text-[#9E9E9E] ">Admin &gt;</div>
         <div
           className="flex items-center gap-2 bg-[#BF9FFF] px-4 py-2 rounded-md cursor-pointer"
-          onClick={() => navigate("/addemployee")}
+          onClick={() => navigate("/Admincreation")}
         >
           <GoPlus size={24} className="text-[#FFFF] " />
         </div>

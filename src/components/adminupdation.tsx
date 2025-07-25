@@ -10,16 +10,16 @@ function Adminupdation() {
 
     return (
         <div>
-            <div className="bg-[#F4FFFE] w-full min-h-screen px-20">
+    <div className="bg-[#FDFBFF] min-h-screen w-full px-6 pr-16">
                 {/* Breadcrumb */}
                 <div className="flex items-center justify-between">
                     <div className="text-[#000000] text-[18px] text-poppins">Update Admin Details </div>
-                    <div
-                        className="flex items-center gap-2 bg-[#BF9FFF] px-2 py-2 rounded-md cursor-pointer"
-                        onClick={() => navigate("/Admincreation")}
-                    >
-                        <GoPlus size={35} className="text-[#FFFF]" />
-                    </div>
+                   <div
+          className="flex items-center gap-2 bg-[#BF9FFF] px-4 py-2 rounded-md cursor-pointer"
+          onClick={() => navigate("/Admincreation")}
+        >
+          <GoPlus size={24} className="text-[#FFFF] " />
+        </div>
                 </div>
                 <div className=' '>
                 <p className="text-black text-[18px] font-semibold  py-6">Admin Update</p>

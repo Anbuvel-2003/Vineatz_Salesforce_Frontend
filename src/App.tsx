@@ -29,6 +29,8 @@ import ProspectlistApplication from "./components/prospectlist";
 import ProspectMoveLeads from "./components/prospect_move";
 import Adminupdation from "./components/adminupdation";
 import LogoutPopup from "./components/logout";
+import ForgotPassword from "./components/forgotpassword";
+import Otpscreen from "./components/otpscreen";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -42,6 +44,8 @@ function App(): JSX.Element {
             <Layoutpage />
             <div className="sm:ml-64">
               <Routes>
+                {/* <Route path="/" element={<Otpscreen />} /> */}
+                {/* <Route path="/" element={<ForgotPassword />} /> */}
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/applicationdetails" element={<Applicationdetails />} />
                 <Route path="/manageleadlist" element={<ManageApplication />} />
@@ -57,6 +61,7 @@ function App(): JSX.Element {
                 <Route path="/AddProject" element={<AddProject />} />
                 <Route path="/Employeelist" element={<Employeelist />} />
                 <Route path="/addemployee" element={<Addemployee />} />
+                <Route path="/updateemployee" element={<Updateemployee />} />
                 <Route path="/adminlist" element={<Adminlist />} />
                 <Route path="/adduser" element={<Adduser />} />
                 <Route path="/updateuser/:id" element={<Updateuser />} />
