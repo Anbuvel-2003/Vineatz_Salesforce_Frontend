@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar";
 import {
   Popover,
@@ -22,8 +22,6 @@ interface FormValues {
   name: string;
   email: string;
   contact: string;
-  password: string;
-  confirmPassword: string;
   address: string;
   emergencyContact: string;
   bikeNumber: string;
@@ -31,35 +29,12 @@ interface FormValues {
   joiningDate: Date | undefined;
 }
 
-const initialValues: FormValues = {
-  name: "",
-  email: "",
-  contact: "",
-  password: "",
-  confirmPassword: "",
-  address: "",
-  emergencyContact: "",
-  bikeNumber: "",
-  licenseNumber: "",
-  joiningDate: undefined,
-};
-
 const validationSchema = Yup.object().shape({
   name: Yup.string().required("Required name"),
   email: Yup.string().email("Invalid email").required("Required email"),
   contact: Yup.string()
     .required("Required contact number")
     .matches(/^[0-9]{10}$/, "Contact must be exactly 10 digits"),
-  password: Yup.string()
-    .required("Required password")
-    .min(8, "Password must be at least 8 characters")
-    .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
-      "Must include uppercase, lowercase, number & special character"
-    ),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Passwords must match")
-    .required("Required confirm password"),
   address: Yup.string().required("Required address"),
   emergencyContact: Yup.string()
     .required("Required emergency contact")
@@ -80,29 +55,48 @@ const validationSchema = Yup.object().shape({
 });
 
 const Updateemployee = () => {
+  const params = useParams<{ id: string }>();
+  console.log("params", params);
+
   const navigate = useNavigate();
+  let { state } = useLocation();
+  const initialValues: FormValues = {
+    name: state?.value?.Employee_Name || "",
+    email: state?.value?.Employee_Email || "",
+    contact: state?.value?.Employee_Mobilenumber || "",
+    address: state?.value?.Employee_Address || "",
+    emergencyContact: state?.value?.Employee_Alternative_Mobilenumber || "",
+    bikeNumber: state?.value?.Employee_Bike_Number || "",
+    licenseNumber: state?.value?.Employee_Driving_License_Number || "",
+    joiningDate: new Date(state?.value?.Employee_joining_date || ""),
+  };
   const handleSubmit = async (values: FormValues) => {
-    console.log("Submitted Values:", values);
-    const createapi = await authApi?.CreateEmployee({
-      Employee_Name: values.name,
-      Employee_Email: values.email,
-      Employee_Mobilenumber: values.contact,
-      Employee_Alternative_Mobilenumber: values.emergencyContact,
-      Employee_Address: values.address,
-      Employee_Bike_Number: values.bikeNumber,
-      Employee_Driving_License_Number: values.licenseNumber,
-      Employee_Password: values.password,
-      Employee_joining_date: values.joiningDate
-        ? values.joiningDate.toISOString()
-        : "",
-    });
-    if (createapi?.success) {
-      toast?.success(createapi?.message);
+    if (!params.id) {
+      toast?.error("Invalid employee ID");
+      return;
+    }
+    const updateapi = await authApi?.updateEmployee(
+      {
+        Employee_Name: values.name,
+        Employee_Email: values.email,
+        Employee_Mobilenumber: values.contact,
+        Employee_Alternative_Mobilenumber: values.emergencyContact,
+        Employee_Address: values.address,
+        Employee_Bike_Number: values.bikeNumber,
+        Employee_Driving_License_Number: values.licenseNumber,
+        Employee_joining_date: values.joiningDate
+          ? values.joiningDate.toISOString()
+          : "",
+      },
+      params.id
+    );
+    if (updateapi?.success) {
+      toast?.success(updateapi?.message);
       setTimeout(() => {
         navigate("/Employeelist");
       }, 1000);
     } else {
-      toast?.error(createapi?.message);
+      toast?.error(updateapi?.message);
     }
   };
   return (
@@ -131,24 +125,12 @@ const Updateemployee = () => {
                   icon={<MdOutlineEmail />}
                   placeholder="Employee Email"
                 />
+              </div>
+              <div>
                 <InputField
                   name="contact"
                   icon={<MdOutlineLocalPhone />}
                   placeholder="Contact Number"
-                />
-              </div>
-              <div>
-                <InputField
-                  name="password"
-                  type="password"
-                  icon={<TbLockPassword />}
-                  placeholder="Password"
-                />
-                <InputField
-                  name="confirmPassword"
-                  type="password"
-                  icon={<TbLockPassword />}
-                  placeholder="Confirm Password"
                 />
                 <InputField
                   name="address"
@@ -277,7 +259,6 @@ const InputField = ({
         }
         form.setFieldValue(name, value);
       };
-
       return (
         <div className="py-3">
           <div className="flex px-3 border rounded-xl w-[600px] h-[50px] border-[#BF9FFF] items-center">

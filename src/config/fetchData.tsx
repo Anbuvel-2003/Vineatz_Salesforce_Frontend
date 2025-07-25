@@ -16,6 +16,16 @@ export interface EmployeePayload {
   Employee_Password: string;
   Employee_joining_date: string;
 }
+export interface updateEmployeePayload {
+  Employee_Name: string;
+  Employee_Email: string;
+  Employee_Mobilenumber: string;
+  Employee_Alternative_Mobilenumber: string;
+  Employee_Address: string;
+  Employee_Bike_Number: string;
+  Employee_Driving_License_Number: string;
+  Employee_joining_date: string;
+}
 
 export interface LoginResponse {
   token: string;
@@ -27,6 +37,20 @@ export interface LoginResponse {
   data: any;
   success: boolean;
   message?: string;
+}
+export interface PaginationMeta {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  hasNextPage: boolean;
+  hasPrevPage: boolean;
+}
+
+export interface GetEmployeesResponse {
+  success: boolean;
+  data: EmployeePayload[];
+  pagination: PaginationMeta;
 }
 
 // Exported API functions
@@ -42,5 +66,17 @@ export const authApi = {
   CreateEmployee: async (payload: EmployeePayload): Promise<any> => {
     const url = `/employee`;
     return api.postMethod(url, payload);
+  },
+  GetEmployee: async (page = 1, limit = 10): Promise<GetEmployeesResponse> => {
+    const url = `/employee?page=${page}&limit=${limit}`;
+    return api.getMethod(url);
+  },
+  updateEmployee: async (payload: updateEmployeePayload,id:string): Promise<any> => {
+    const url = `/employee/${id}`;
+    return api.putMethod(url, payload);
+  },
+  DeleteEmployee: async (id: string): Promise<any> => {
+    const url = `/employee/${id}`;
+    return api.deleteMethod(url);
   },
 };
