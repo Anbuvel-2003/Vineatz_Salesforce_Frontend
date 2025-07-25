@@ -19,13 +19,12 @@ function Logout() {
         <div>
             <div className="flex items-center justify-center">
             <AlertDialog>
-                <AlertDialogTrigger> </AlertDialogTrigger>
                 <AlertDialogContent className="flex items-center w-[350px] h-[200px] justify-center" >
                 <div className=" items-center   ">
                     <AlertDialogHeader>
                         <AlertDialogTitle className="text-center text-[25px]">Logout</AlertDialogTitle>
                         <AlertDialogDescription className="text-center text-[16px] py-5">
-                           Are you sure
+                           Are you sure?
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter className="flex justify-between gap-2">
