@@ -155,19 +155,19 @@ function ProspectlistApplication() {
                 <table className="min-w-full">
                     <thead className="bg-[#F4FFFE] text-[#030229] text-left">
                         <tr className="grid grid-cols-[repeat(7,1fr)_auto]  items-center rounded-[70px] px-6 py-4 ">
-                            <th className="flex items-center gap-1">Application id <MdOutlineArrowDropDown /></th>
-                            <th className="flex items-center gap-1">Application name <MdOutlineArrowDropDown /></th>
-                            <th className="flex items-center gap-1">Client id <MdOutlineArrowDropDown /></th>
-                            <th className="flex items-center gap-1">Client name <MdOutlineArrowDropDown /></th>
-                            <th className="flex items-center gap-1">Status <MdOutlineArrowDropDown /></th>
-                            <th className="flex items-center gap-1">Application details <MdOutlineArrowDropDown /></th>
-                            <th className="flex items-center gap-1">Client details <MdOutlineArrowDropDown /></th>
-                            <th className="w-[80px] ">Action</th>
+                            <th className="flex items-center justify-center gap-1">Application id <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center justify-center gap-1">Application name <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center justify-center gap-1">Client id <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center justify-center gap-1">Client name <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center justify-center gap-1">Status <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center justify-center gap-1">Application details <MdOutlineArrowDropDown /></th>
+                            <th className="flex items-center justify-center gap-1">Client details <MdOutlineArrowDropDown /></th>
+                            <th className="w-[80px] "></th>
                         </tr>
                     </thead>
                     <tbody className=" rounded-[60px] space-y-3 drop-shadow-md ">
                         {details.map((item) => (
-                            <tr key={item.id} className="grid grid-cols-[repeat(7,1fr)_auto] bg-white items-center px-6 py-2  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
+                            <tr key={item.id} className="grid grid-cols-[repeat(7,1fr)_auto]  justify-center bg-white items-center px-6 py-2  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
                                 <td>{item.appid}</td>
                                 <td>{item.name}</td>
                                 <td>{item.clientid}</td>

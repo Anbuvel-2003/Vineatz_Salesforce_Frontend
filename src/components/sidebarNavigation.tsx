@@ -38,7 +38,7 @@ function SidebarNavigation() {
       name: "logout",
       label: "Log Out",
       icon: <HiOutlineLogout size={24} />,
-      to: "/Applicationlist",
+      to: "/Logout",
     },
   ];
 

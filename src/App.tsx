@@ -27,6 +27,7 @@ import Applicationdetailsmanual from "./components/applicationdetailmanual";
 import Admincreation from "./components/admincreation";
 import ProspectlistApplication from "./components/prospectlist";
 import ProspectMoveLeads from "./components/prospect_move";
+import Logout from "./components/logout";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -40,13 +41,14 @@ function App(): JSX.Element {
             <Layoutpage />
             <div className="sm:ml-64">
               <Routes>
+                <Route path="/Logout" element={<Logout />} />
                 <Route path="/" element={<ProspectlistApplication />} />
                 <Route path="/" element={<ProspectMoveLeads />} />
                 <Route path="/" element={<Admincreation />} />
                 <Route path="/" element={<Clientmanagement />} />
                 <Route path="/Applicationdetailsmanual" element={<Applicationdetailsmanual />} />
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/" element={<Rejectapplication children={undefined} />} />
+                <Route path="/" element={<Rejectapplication children={undefined} appid={undefined}  />} />
                 <Route path="/manageleadlist" element={<ManageApplication />} />
                 <Route path="/applicationdetails" element={<Applicationdetails />} />
                 <Route path="/Applicationlist" element={<Applicationslist />} />

@@ -152,7 +152,7 @@ function Employeelist() {
       clientname: "John Doe",
       email: "12345@gmail.com",
       date: "2023-01-01",
-      icon: <FaFileAlt className="text-[#4FD1C5]" />,
+      icon: <FaFileAlt className="text-[#4FD1C5] bg-[#F2ECFF]" />,
       profile: <ImProfile className="text-[#4FD1C5]" />,
     },
   ];
@@ -172,43 +172,8 @@ function Employeelist() {
       <div className=" bg-[#FDFBFF] px-10 ">
         <table className="min-w-full">
           <thead className="bg-[#FDFBFF] text-[#030229] text-left">
-            {/* <tr className="grid grid-cols-[repeat(6,1fr)_auto] bg-[#FDFBFF] text-center  hover:bg-[#F8F9FF] transition rounded-[70px] border-gray-100">
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center bg-blue-700 gap-1">
-                  Employee ID <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1">
-                  Employee Name <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1">
-                  Mobile Number 1 <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1">
-                  Mobile Number 2 <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1">
-                  Email Id <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center gap-1">
-                  Joining Date <MdOutlineArrowDropDown />
-                </div>
-              </th>
-              <th className="px-6 py-3">
-                <div className="flex items-center justify-center  gap-1"></div>
-              </th>
-            </tr> */}
-              <tr className="grid grid-cols-7  items-center rounded-[70px] px- py-4 ">
-              <th className="flex items-center bg-blue-700 justify-center gap-1">Employee id <MdOutlineArrowDropDown /></th>
+              <tr className="grid grid-cols-7  items-center rounded-[70px]  py-4 ">
+              <th className="flex items-center justify-center gap-1">Employee id <MdOutlineArrowDropDown /></th>
               <th className="flex items-center justify-center gap-1">Employee name <MdOutlineArrowDropDown /></th>
               <th className="flex items-center justify-center gap-1">Mobile number 1 <MdOutlineArrowDropDown /></th>
               <th className="flex items-center justify-center gap-1">Mobile number 2 <MdOutlineArrowDropDown /></th>
@@ -219,18 +184,18 @@ function Employeelist() {
           </thead>
            <tbody className=" rounded-[60px] space-y-3 drop-shadow-md ">
             {details.map((item) => (
-              <tr key={item.id} className="grid grid-cols-[repeat(7,1fr)_auto] bg-white items-center px-6 py-2  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
-                <td>{item.appid}</td>
-                <td>{item.name}</td>
-                <td>{item.mobilenumber1}</td>
-                <td className="flex items-center gap-2">
-                  <img src={item.img} alt="client" className="w-6 h-6 rounded-full object-cover" />
+              <tr key={item.id} className="grid grid-cols-7 bg-white items-center  py-2  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
+                <td className="flex justify-center">{item.appid}</td>
+                <td className="flex justify-center items-center gap-2">
+                  <img src={item.img} alt="client" className="w-6 h-7 rounded-full object-cover" />
                   {item.clientname}
                 </td>
-                <td className="border-none rounded-[20px] text-[#8144FB] bg-[#F9F5FF] text-[16px] font-sans w-fit px-2">{item.mobilenumber2}</td>
-``                <td>{item.profile}</td>
-                <td className="w-[80px] flex items-center">
-                  <div className="relative flex gap-20">
+                <td className="flex justify-center">{item.mobilenumber1}</td>
+                <td className="flex justify-center">{item.mobilenumber2}</td>
+ <td className="flex justify-center">{item.email}</td>
+                <td className="flex justify-center">{item.date}</td>
+                <td className="w-[80px] flex justify-end">
+                  <div className="relative flex justify-end  gap-20">
                   <button
                     onClick={() =>
                       setOpenMenuIndex(
@@ -242,7 +207,7 @@ function Employeelist() {
                   </button>
 
                   {openMenuIndex === item.id && (
-                    <div className="absolute right-0 top-8 bg-white shadow-lg rounded-lg w-28 z-20">
+                    <div className="absolute left-3 top-3 bg-white shadow-lg rounded-lg w-28 z-20">
                       <button
                         className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-[#BF9FFF] flex items-center !gap-2 "
                         onClick={() => navigate(`/updateemployee/${item.id}`)}
