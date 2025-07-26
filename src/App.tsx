@@ -32,6 +32,7 @@ import LogoutPopup from "./components/logout";
 import ForgotPassword from "./components/forgotpassword";
 import Otpscreen from "./components/otpscreen";
 import { InputOTPDemo } from "./components/otp";
+import NewPassword from "./components/newpassword";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -92,6 +93,8 @@ function App(): JSX.Element {
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="/Otpscreen" element={<Otpscreen />} />
             <Route path="/InputOTPDemo" element={<InputOTPDemo />} />
+            <Route path="/NewPassword" element={<NewPassword />} />
+
           </Routes>
         )}
       </BrowserRouter>

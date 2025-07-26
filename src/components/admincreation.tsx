@@ -9,7 +9,8 @@ import { HiEye, HiEyeOff } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 
 interface FormValues {
-    name: string;
+    firstname: string;
+    lastname: string;
     email: string;
     contact: string;
     password: string;
@@ -18,7 +19,8 @@ interface FormValues {
 }
 
 const initialValues: FormValues = {
-    name: "",
+    firstname: "",
+    lastname: "",
     email: "",
     contact: "",
     password: "",
@@ -27,7 +29,8 @@ const initialValues: FormValues = {
 };
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Required name"),
+    firstname: Yup.string().required("Required first name"),
+    lastname: Yup.string().required("Required last name"),
     email: Yup.string().email("Invalid email").required("Required email"),
     contact: Yup.string()
         .required("Required contact number")
@@ -74,8 +77,8 @@ const AdminCreation: React.FC = () => {
 
                         <div className="grid grid-cols-2 gap-x-10 gap-y-6">
                             <div className="space-y-6">
-                                <InputField name="firstName" placeholder="First Name" icon={<CgProfile />} />
-                                <InputField name="lastName" placeholder="Last Name" icon={<CgProfile />} />
+                                <InputField name="firstname" placeholder="First Name" icon={<CgProfile />} />
+                                <InputField name="lastname" placeholder="Last Name" icon={<CgProfile />} />
                                 <InputField name="email" placeholder="Email" icon={<MdOutlineEmail />} />
 
                                 <InputField
@@ -133,12 +136,10 @@ const InputField = ({
     <Field name={name}>
         {({ field }: any) => (
             <div className="space-y-1 w-full">
-                {/* <div className="flex items-center px-3 border rounded-xl h-[50px] border-[#BF9FFF] w-full"> */}
                 <div
                     className={`flex items-start px-3 border rounded-xl w-full border-[#BF9FFF] ${name === "address" ? "h-[150px]" : "h-[50px] items-center"
                         }`}
                 >
-                    {/* <div className="mr-2 text-[#BF9FFF]">{icon}</div> */}
                     <div
                         className={`text-[#BF9FFF] ${name === "address" ? "mt-1 pt-2" : "mr-2"
                             }`}

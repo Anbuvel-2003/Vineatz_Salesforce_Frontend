@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { authApi } from "@/config/fetchData";
 import { InputOTPDemo } from "./otp";
+import { Navigate, useNavigate } from "react-router-dom";
 
 
 
@@ -14,8 +15,8 @@ interface OTPProps {
   setIsDrawerOpen: (isOpen: boolean) => void;
 }
 
-
 const Otpscreen: React.FC<OTPProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
+  const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     otp: Yup.string()
       .matches(/^\d{6}$/, "OTP must be exactly 6 digits")
@@ -23,19 +24,7 @@ const Otpscreen: React.FC<OTPProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
   });
 
   const handleSubmit = async (values: { otp: string }) => {
-    try {
-      const res = await axios.post(`${authApi}/verify-otp`, {
-        otp: values.otp,
-      });
-
-      if (res.data.success) {
-        toast.success("OTP Successfully Verified!");
-      } else {
-        toast.error(res.data.message || "Invalid OTP");
-      }
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message || "Server error");
-    }
+    navigate("/NewPassword");
   };
 
   return (
