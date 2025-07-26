@@ -74,7 +74,7 @@ const LoginPage: React.FC<LoginProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
                     value={values.Email}
                     placeholder="Your email"
                     onChange={handleChange}
-                    className="border border-gray-200 rounded-xl font-poppins text-[#A0AEC0]  pl-5 p-2 mb-1"
+                    className="border border-[#E2E8F0] rounded-xl font-poppins text-[#2D3748] placeholder:text-[#A0AEC0] pl-5 p-2 mb-1"
                   />
                   {touched.Email && errors.Email && (
                     <div className="text-red-500 text-sm mb-2">
@@ -89,7 +89,7 @@ const LoginPage: React.FC<LoginProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
                       value={values.Password}
                       placeholder="Your password"
                       onChange={handleChange}
-                      className="border border-gray-200 rounded-xl font-poppins text-[#A0AEC0] pl-5 p-2 pr-10 mb-1 w-full"
+                      className="border border-[#E2E8F0] rounded-xl font-poppins text-[#2D3748] placeholder:text-[#A0AEC0] pl-5 p-2 pr-10 mb-1 w-full"
                     />
                     <button
                       type="button"
@@ -110,13 +110,13 @@ const LoginPage: React.FC<LoginProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
                   )}
                   <a
                     href="/ForgotPassword"
-                    className="text-[#BF9FFF] hover:text-blue-700 py-3 font-poppins w-fit"
+                    className="text-[#BF9FFF] hover:text-blue-700 pt-4 font-poppins w-fit"
                   >
                     Forgot Password?
                   </a>
                   <button
                     type="submit"
-                    className="bg-[#4FD1C5] hover:bg-blue-700 text-white font-bold rounded-xl font-poppins py-3 px-4 mt-4"
+                    className="bg-[#BF9FFF] hover:bg-[#9b77e2] text-white font-bold rounded-xl font-poppins py-3 px-4 mt-4"
                   >
                     Sign in
                   </button>

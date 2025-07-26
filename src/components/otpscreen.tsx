@@ -32,7 +32,7 @@ const Otpscreen: React.FC<OTPProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
       <div className="flex w-full h-full">
         {/* Left: Form */}
         <div className="w-1/2 flex flex-col items-center justify-center">
-          <div className="w-[60%]">
+          <div className="w-[70%]">
             <h1 className="text-[42px] font-bold font-poppins mb-6">
               Enter OTP
             </h1>
@@ -51,7 +51,7 @@ const Otpscreen: React.FC<OTPProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
                 handleSubmit,
               }) => (
                 <form className="flex flex-col" onSubmit={handleSubmit}>
-                  <label className="font-poppins font-medium mb-1">OTP</label>
+                  <label className="font-poppins text-[#2D3748] mb-1">OTP</label>
 
                   <InputOTPDemo
                     value={values.otp}
@@ -67,9 +67,9 @@ const Otpscreen: React.FC<OTPProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
 
                   <button
                     type="submit"
-                    className="bg-[#BF9FFF] hover:bg-[#9b77e2] text-white font-bold rounded-xl font-poppins py-3 px-4 mt-4"
+                    className="bg-[#BF9FFF] hover:bg-[#9b77e2] text-white font-bold w-full rounded-xl font-poppins py-3 px-4 mt-4"
                   >
-                    Verify OTP
+                    Submit
                   </button>
                 </form>
               )}

@@ -52,14 +52,15 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isDrawerOpen, setIsDraw
             >
               {({ values, errors, touched, handleChange, handleSubmit }) => (
                 <form className="flex flex-col" onSubmit={handleSubmit}>
-                  <label className="font-poppins font-medium mb-1">Email</label>
+                  <label className="font-poppins text-[#2D3748]  mb-1">Email</label>
                   <input
                     type="email"
                     name="Email"
                     value={values.Email}
                     onChange={handleChange}
-                    placeholder="Enter your registered Email Address"
-                    className="border border-gray-200 text-[#A0AEC0] rounded-xl font-poppins p-4 mb-1"
+                    placeholder="Enter Your registered Email address"
+                    className="border border-[#E2E8F0] text-[#2D3748] placeholder:text-[#A0AEC0] rounded-xl font-poppins p-3 mb-1"
+                    
                   />
                   {touched.Email && errors.Email && (
                     <div className="text-red-500 text-sm mb-2">{errors.Email}</div>
@@ -67,7 +68,7 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isDrawerOpen, setIsDraw
                   <a href="/Otpscreen">
                   <button 
                     type="submit"
-                    className="bg-[#BF9FFF] hover:bg-[#9b77e2] text-white font-bold rounded-xl font-poppins py-3 px-4 mt-4"
+                    className="bg-[#BF9FFF] hover:bg-[#9b77e2] text-white font-bold rounded-xl w-full font-poppins py-3 px-4 mt-4"
                   >
                     Get OTP
                   </button>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +17,7 @@ import { SlNotebook } from "react-icons/sl";
 import { CalendarIcon } from "lucide-react";
 import { authApi } from "@/config/fetchData";
 import { toast } from "react-toastify";
+import { HiEyeOff, HiEye } from "react-icons/hi";
 
 interface FormValues {
   name: string;
@@ -81,6 +82,9 @@ const validationSchema = Yup.object().shape({
 
 const Addemployee = () => {
   const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const handleSubmit = async (values: FormValues) => {
     console.log("Submitted Values:", values);
     const createapi = await authApi?.CreateEmployee({
@@ -123,36 +127,46 @@ const Addemployee = () => {
               <div>
                 <InputField
                   name="name"
-                  icon={<CgProfile />}
+                  icon={<CgProfile size={24} />}
                   placeholder="Employee Name"
                 />
                 <InputField
                   name="email"
-                  icon={<MdOutlineEmail />}
+                  icon={<MdOutlineEmail size={24} />}
                   placeholder="Employee Email"
                 />
                 <InputField
                   name="contact"
-                  icon={<MdOutlineLocalPhone />}
+                  icon={<MdOutlineLocalPhone size={24} />}
                   placeholder="Contact Number"
                 />
               </div>
               <div>
                 <InputField
                   name="password"
-                  type="password"
-                  icon={<TbLockPassword />}
                   placeholder="Password"
+                  value={values?.password}
+                  onChange={(e) => setFieldValue("password", e.target.value)}
+                  type={showPassword ? "text" : "password"}
+                  icon={<TbLockPassword size={24} />}
+                  rightIcon={showPassword ? <HiEyeOff /> : <HiEye />}
+                  onRightIconClick={() => setShowPassword((prev) => !prev)}
                 />
                 <InputField
                   name="confirmPassword"
-                  type="password"
-                  icon={<TbLockPassword />}
                   placeholder="Confirm Password"
+                  value={values.confirmPassword}
+                  onChange={(e) =>
+                    setFieldValue("confirmPassword", e.target.value)
+                  }
+                  type={showConfirm ? "text" : "password"}
+                  icon={<TbLockPassword size={24} />}
+                  rightIcon={showConfirm ? <HiEyeOff /> : <HiEye />}
+                  onRightIconClick={() => setShowConfirm((prev) => !prev)}
                 />
                 <InputField
                   name="address"
-                  icon={<SlNotebook />}
+                  icon={<SlNotebook size={24} />}
                   placeholder="Address"
                 />
               </div>
@@ -164,19 +178,19 @@ const Addemployee = () => {
               <div>
                 <InputField
                   name="emergencyContact"
-                  icon={<MdOutlineLocalPhone />}
+                  icon={<MdOutlineLocalPhone size={24} />}
                   placeholder="Emergency Contact"
                 />
                 <InputField
                   name="bikeNumber"
-                  icon={<SlNotebook />}
+                  icon={<SlNotebook size={24} />}
                   placeholder="Bike Number"
                 />
               </div>
               <div>
                 <InputField
                   name="licenseNumber"
-                  icon={<SlNotebook />}
+                  icon={<SlNotebook size={24} />}
                   placeholder="Driving License Number"
                 />
                 {/* Joining Date */}
@@ -185,7 +199,7 @@ const Addemployee = () => {
                     <PopoverTrigger asChild>
                       <button
                         type="button"
-                        className="w-[600px] h-[50px] flex justify-between  items-center px-4 border border-[#BF9FFF] rounded-xl text-left bg-transparent text-[#BF9FFF] font-poppins"
+                        className="w-[600px] h-[50px] flex justify-between  items-center px-4 border border-[#BF9FFF] rounded-xl text-left bg-transparent text-[#AD46FF] placeholder:text-[#BF9FFF] font-poppins"
                       >
                         {values.joiningDate ? (
                           format(values.joiningDate, "dd-MM-yyyy")
@@ -202,6 +216,7 @@ const Addemployee = () => {
                         mode="single"
                         selected={values.joiningDate}
                         onSelect={(date) => setFieldValue("joiningDate", date)}
+                        
                         initialFocus
                       />
                     </PopoverContent>
@@ -242,11 +257,21 @@ const InputField = ({
   placeholder,
   type = "text",
   icon,
+  rightIcon,
+  value,
+  onChange,
+  onRightIconClick,
 }: {
   name: string;
+  value?: string;
+  onChange?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   placeholder: string;
   type?: string;
   icon: React.ReactNode;
+  rightIcon?: React.ReactNode;
+  onRightIconClick?: () => void;
 }) => (
   <Field name={name}>
     {({ field, form }: any) => {
@@ -288,8 +313,16 @@ const InputField = ({
               placeholder={placeholder}
               value={field.value}
               onChange={handleChange}
-              className="bg-transparent border-none outline-none text-[#BF9FFF] text-[16px] font-poppins w-full placeholder:text-[#A0AEC0]"
+              className="bg-transparent border-none outline-none text-[#AD46FF] text-[16px] font-poppins w-full placeholder:text-[#A0AEC0]"
             />
+              {rightIcon && (
+                  <div
+                    className="text-[#BF9FFF] cursor-pointer ml-2"
+                    onClick={onRightIconClick}
+                  >
+                    {rightIcon}
+                  </div>
+                )}
           </div>
           <ErrorMessage
             name={name}

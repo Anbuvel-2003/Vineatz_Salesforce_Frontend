@@ -15,12 +15,14 @@ export const InputOTPDemo: React.FC<InputOTPDemoProps> = ({ value, onChange }) =
   return (
     <InputOTP
       value={value}
+      className="text-[#2D3748]"
       onChange={(val) => {
         if (/^\d*$/.test(val)) {
           onChange(val);
         }
       }}
       maxLength={6}
+      containerClassName="gap-5"
     >
       {[0, 1, 2, 3, 4, 5].map((i) => (
         <InputOTPGroup key={i}>

@@ -92,21 +92,21 @@ const AdminCreation: React.FC = () => {
                   value={values.firstname}
                   onChange={(e) => setFieldValue("firstname", e.target.value)}
                   placeholder="First Name"
-                  icon={<CgProfile />}
+                  icon={<CgProfile size={24} />}
                 />
                 <InputField
                   name="lastname"
                   value={values.lastname}
                   onChange={(e) => setFieldValue("lastname", e.target.value)}
                   placeholder="Last Name"
-                  icon={<CgProfile />}
+                  icon={<CgProfile size={24} />}
                 />
                 <InputField
                   name="email"
                   value={values?.email}
                   onChange={(e) => setFieldValue("email", e.target.value)}
                   placeholder="Email"
-                  icon={<MdOutlineEmail />}
+                  icon={<MdOutlineEmail size={24} />}
                 />
 
                 <InputField
@@ -115,7 +115,7 @@ const AdminCreation: React.FC = () => {
                   value={values?.password}
                   onChange={(e) => setFieldValue("password", e.target.value)}
                   type={showPassword ? "text" : "password"}
-                  icon={<TbLockPassword />}
+                  icon={<TbLockPassword size={24} />}
                   rightIcon={showPassword ? <HiEyeOff /> : <HiEye />}
                   onRightIconClick={() => setShowPassword((prev) => !prev)}
                 />
@@ -128,7 +128,7 @@ const AdminCreation: React.FC = () => {
                     setFieldValue("confirmPassword", e.target.value)
                   }
                   type={showConfirm ? "text" : "password"}
-                  icon={<TbLockPassword />}
+                  icon={<TbLockPassword size={24}   />}
                   rightIcon={showConfirm ? <HiEyeOff /> : <HiEye />}
                   onRightIconClick={() => setShowConfirm((prev) => !prev)}
                 />
@@ -139,14 +139,14 @@ const AdminCreation: React.FC = () => {
                   value={values.contact}
                   onChange={(e) => setFieldValue("contact", e.target.value)}
                   placeholder="Mobile Number"
-                  icon={<MdOutlineLocalPhone />}
+                  icon={<MdOutlineLocalPhone size={24} />}
                 />
                 <InputField
                   name="address"
                   value={values.address}
                   onChange={(e) => setFieldValue("address", e.target.value)}
                   placeholder="Address"
-                  icon={<SlNotebook />}
+                  icon={<SlNotebook size={24} />}
                 />
               </div>
             </div>
@@ -224,7 +224,7 @@ const InputField = ({
             }`}
           >
             <div
-              className={`text-[#BF9FFF] ${isTextarea ? "mt-1 pt-2" : "mr-2"}`}
+              className={`text-[#BF9FFF] ${isTextarea ? " pt-2" : "mr-2"}`}
             >
               {icon}
             </div>
