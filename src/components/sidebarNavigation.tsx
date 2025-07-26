@@ -4,6 +4,7 @@ import { RiPieChart2Fill } from "react-icons/ri";
 import { MdBarChart } from "react-icons/md";
 import { GrUserWorker } from "react-icons/gr";
 import { HiOutlineLogout } from "react-icons/hi";
+import { toast } from "react-toastify";
 
 function SidebarNavigation() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ function SidebarNavigation() {
       name: "logout",
       label: "Log Out",
       icon: <HiOutlineLogout size={24} />,
-      to: "/Logout",
+      to: "/",
     },
   ];
 
@@ -63,7 +64,25 @@ function SidebarNavigation() {
               key={item.name}
               to={item.to}
               onClick={() => {
-                setActiveItem(item.name), navigate(item.to);
+                setActiveItem(item.name);
+                if (item.name === "logout") {
+                  const Comfirmation = window.confirm(
+                    "Are you sure you want to logout?"
+                  );
+                  if (Comfirmation == true) {
+                    try {
+                      localStorage.clear();
+                      toast.success("Logout Successfully");
+                      setTimeout(() => {
+                        window.location.reload();
+                      }, 2000);
+                    } catch (error) {
+                      console.log(error, "Error Message");
+                    }
+                  }
+                } else {
+                  navigate(item.to);
+                }
               }}
               className={`flex items-center p-2 rounded-lg group ${
                 activeItem === item.name

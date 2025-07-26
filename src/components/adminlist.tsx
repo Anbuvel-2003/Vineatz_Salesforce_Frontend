@@ -3,152 +3,53 @@ import { MdOutlineArrowDropDown } from "react-icons/md";
 import { FaFileAlt } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { IoIosMore } from "react-icons/io";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoPlus } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
-import { DeleteApplication } from "./deleteapplication";
-import { date } from "yup";
+import RejectApplication from "./rejectapplication";
+import DeleteApplication from "./deleteapplication";
+import { authApi } from "../config/fetchData";
+import { set } from "date-fns";
+import { toast } from "react-toastify";
 
 function Adminlist() {
   const navigate = useNavigate();
   const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
-  const details = [
-    {
-      id: 1,
-      appid: "01",
-      name: "John Doe",
-      clientid: "01",
-      mobilenumber1: "1234567890",
-      img: img1,
-      clientname: "John Doe",
-      email: "12345@gmail.com",
-      date: "01/01/2023",
-      icon: <FaFileAlt className="text-[#4FD1C5]" />,
-      profile: <ImProfile className="text-[#4FD1C5]" />,
-    },
-    {
-      id: 2,
-      appid: "01",
-      name: "John Doe",
-      clientid: "01",
-      mobilenumber1: "1234567890",
-      img: img1,
-      clientname: "John Doe",
-      email: "12345@gmail.com",
-      date: "01/01/2023",
-      icon: <FaFileAlt className="text-[#4FD1C5]" />,
-      profile: <ImProfile className="text-[#4FD1C5]" />,
-    },
-    {
-      id: 3,
-      appid: "01",
-      name: "John Doe",
-      clientid: "01",
-      mobilenumber1: "1234567890",
-      img: img1,
-      clientname: "John Doe",
-      email: "12345@gmail.com",
-      date: "01/01/2023",
-      icon: <FaFileAlt className="text-[#4FD1C5]" />,
-      profile: <ImProfile className="text-[#4FD1C5]" />,
-    },
-    {
-      id: 4,
-      appid: "01",
-      name: "John Doe",
-      clientid: "01",
-      mobilenumber1: "1234567890",
-      img: img1,
-      clientname: "John Doe",
-      email: "12345@gmail.com",
-      date: "01/01/2023",
-      icon: <FaFileAlt className="text-[#4FD1C5]" />,
-      profile: <ImProfile className="text-[#4FD1C5]" />,
-    },
-    {
-      id: 5,
-      appid: "01",
-      name: "John Doe",
-      clientid: "01",
-      mobilenumber1: "1234567890",
-      img: img1,
-      clientname: "John Doe",
-      email: "12345@gmail.com",
-      date: "01/01/2023",
-      icon: <FaFileAlt className="text-[#4FD1C5]" />,
-      profile: <ImProfile className="text-[#4FD1C5]" />,
-    },
-    {
-      id: 6,
-      appid: "01",
-      name: "John Doe",
-      clientid: "01",
-      img: img1,
-      mobilenumber1: "1234567890",
-      clientname: "John Doe",
-      email: "12345@gmail.com",
-      date: "2023-01-01",
-      icon: <FaFileAlt className="text-[#4FD1C5]" />,
-      profile: <ImProfile className="text-[#4FD1C5]" />,
-    },
-    {
-      id: 7,
-      appid: "01",
-      name: "John Doe",
-      clientid: "01",
-      mobilenumber1: "1234567890",
-      img: img1,
-      clientname: "John Doe",
-      email: "12345@gmail.com",
-      date: "2023-01-01",
-      icon: <FaFileAlt className="text-[#4FD1C5]" />,
-      profile: <ImProfile className="text-[#4FD1C5]" />,
-    },
-    {
-      id: 8,
-      appid: "01",
-      name: "John Doe",
-      clientid: "01",
-      mobilenumber1: "1234567890",
-      img: img1,
-      clientname: "John Doe",
-      email: "12345@gmail.com",
-      date: "2023-01-01",
-      icon: <FaFileAlt className="text-[#4FD1C5]" />,
-      profile: <ImProfile className="text-[#4FD1C5]" />,
-    },
-    {
-      id: 9,
-      appid: "01",
-      name: "John Doe",
-      clientid: "01",
-      mobilenumber1: "1234567890",
-      img: img1,
-      clientname: "John Doe",
-      email: "12345@gmail.com",
-      date: "2023-01-01",
-      icon: <FaFileAlt className="text-[#4FD1C5]" />,
-      profile: <ImProfile className="text-[#4FD1C5]" />,
-    },
-    {
-      id: 10,
-      appid: "01",
-      name: "John Doe",
-      clientid: "01",
-      mobilenumber1: "1234567890",
-      img: img1,
-      clientname: "John Doe",
-      email: "12345@gmail.com",
-      date: "2023-01-01",
-      icon: <FaFileAlt className="text-[#4FD1C5]" />,
-      profile: <ImProfile className="text-[#4FD1C5]" />,
-    },
-  ];
+  const [adminlist, setAdminlist] = useState<any[]>([]);
+  const GetAdmin = async () => {
+    const res = await authApi.GetAdmin(1, 10);
+    console.log(res);
+    if (res?.success) {
+      setAdminlist(res?.data);
+    }
+  };
 
+  useEffect(() => {
+    GetAdmin();
+  }, []);
+
+  const deleteTask = async (id: any) => {
+    const Comfirmation = window.confirm(
+      "Are you sure you want to delete this Admin?"
+    );
+    if (Comfirmation == true) {
+      try {
+        const deleteapi = await authApi.DeleteAdmin(id);
+        if (deleteapi?.success) {
+          toast.success("Admin deleted successfully!");
+          GetAdmin();
+        } else {
+          toast.error("Something went wrong");
+        }
+      } catch (error) {
+        console.log(error, "Error Message");
+      }
+    }
+  };
   return (
-    <section className="bg-[#FDFBFF] min-h-screen w-full px-6 pr-16">
+    <section className="bg-[#FDFBFF] min-h-screen w-full px-6 pr-16 ">
       <div className="flex items-center justify-between">
         <div className="text-[#9E9E9E] ">Admin &gt;</div>
         <div
@@ -158,68 +59,97 @@ function Adminlist() {
           <GoPlus size={24} className="text-[#FFFF] " />
         </div>
       </div>
-
       <div className=" bg-[#FDFBFF] px-10 ">
-           <table className="min-w-full">
-          <thead className="bg-[#F4FFFE] text-[#030229] text-left">
-            <tr className="grid grid-cols-7  items-center rounded-[70px]  py-4 ">
-              <th className="flex items-center  gap-1">Admin id <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center  gap-1">Admin name <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center  gap-1">Mobile number 1 <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center  gap-1">Email id <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center  gap-1">Joining date <MdOutlineArrowDropDown /></th>
-              <th className="flex items-center  gap-1"></th>
-              <th className=""></th>
+        <table className="min-w-full">
+          <thead className="bg-[#FDFBFF] text-[#030229] text-left">
+            <tr className="grid grid-cols-6  items-center rounded-[70px]  py-4 px-5">
+              <th className="flex items-center gap-1">
+                Admin id <MdOutlineArrowDropDown />
+              </th>
+              <th className="flex items-center gap-1">
+                Admin name <MdOutlineArrowDropDown />
+              </th>
+              <th className="flex items-center gap-1">
+                Mobile number <MdOutlineArrowDropDown />
+              </th>
+              <th className="flex items-center gap-1">
+                Email id <MdOutlineArrowDropDown />
+              </th>
+              <th className="flex items-center gap-1">
+                Address <MdOutlineArrowDropDown />
+              </th>
             </tr>
           </thead>
-          <tbody className=" rounded-[60px] space-y-3 drop-shadow-md  ">
-            {details.map((item) => (
-              <tr key={item.id} className="grid grid-cols-7 bg-white  py-3  hover:bg-[#F8F9FF] transition rounded-[15px] border-gray-100">
-                <td className="px-5">{item.appid}</td>
-                <td className="flex items-center justify- gap-2">
-                  <img src={item.img} alt="client" className="w-6 h-6 rounded-full object-cover" />
-                  {item.clientname}
-                </td>
-                <td>{item.mobilenumber1}</td>
-                <td>{item.email}</td>
-                <td>{item.date}</td>
-                <td></td>
-                <td className="px-32 ">
-                  <div className="relative flex ">
-                  <button
-                    onClick={() =>
-                      setOpenMenuIndex(
-                        openMenuIndex === item.id ? null : item.id
-                      )
-                    }
-                  >
-                    <IoIosMore className="text-xl text-[#030229]" />
-                  </button>
-
-                  {openMenuIndex === item.id && (
-                    <div className="absolute left-4 top-3 bg-white shadow-md p-3 space-y-2 rounded-2xl w-36 z-30">
-
-                      <button className="flex items-center gap-2 w-full text-left px-4 py-2 rounded-xl bg-[#FCFAFF]  hover:bg-gray-100 text-[#4FD1C5]"
-                        onClick={() => navigate("/Adminupdation")}
+          <tbody className=" rounded-[60px] space-y-3 drop-shadow-md ">
+            {adminlist.length === 0 ? (
+              <div className="flex items-center justify-center h-[300px] ">
+                <h2 className="text-[#BF9FFF] text-[20px] font-medium ">
+                  No data found
+                </h2>
+              </div>
+            ) : (
+              adminlist.map((item, index) => (
+                <tr
+                  key={item._id}
+                  className="grid grid-cols-6 items-center w-full  py-2 bg-white  hover:bg-[#F8F9FF] transition rounded-[10px] px-5 border-gray-100 relative"
+                >
+                  <td className=" ">{item?.User_Id}</td>
+                  <td className="flex items-center gap-2">
+                    <img
+                      src={img1}
+                      alt="client"
+                      className="w-6 h-7 rounded-full object-cover"
+                    />
+                    {item.first_Name}
+                  </td>
+                  <td>{item.Mobile_Number}</td>
+                  <td className="truncate max-w-[180px] overflow-hidden text-ellipsis ">
+                    <span title={item.Email}>{item.Email}</span>
+                  </td>
+                  <td className="truncate max-w-[180px] overflow-hidden text-ellipsis ">
+                    <span title={item.Address}>{item.Address}</span>
+                  </td>
+                  <div className="px-10 absolute right-0 z-20">
+                    <div className="relative flex justify-end  gap-20">
+                      <button
+                        onClick={() =>
+                          setOpenMenuIndex(
+                            openMenuIndex === item._id ? null : item._id
+                          )
+                        }
                       >
-                        <CiEdit />
-                        Edit
+                        <IoIosMore className="text-xl text-[#030229]" />
                       </button>
-                      <DeleteApplication>
-                        <button className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500 flex items-center !gap-2 ">
-                          <MdDelete />
-                          Delete
-                        </button>
-                      </DeleteApplication>
+                      {openMenuIndex === item._id && (
+                        <div className="absolute left-0 top-3 bg-white shadow-lg rounded-lg w-28 z-20">
+                          <button
+                            className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-[#BF9FFF] flex items-center !gap-2 "
+                            onClick={() =>
+                              navigate(`/updateuser/${item._id}`, {
+                                state: { value: item },
+                              })
+                            }
+                          >
+                            <CiEdit />
+                            Edit
+                          </button>
+                          <button
+                            className=" w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500 flex items-center !gap-2 "
+                            onClick={() => deleteTask(item._id)}
+                          >
+                            <MdDelete />
+                            Delete
+                          </button>
+                        </div>
+                      )}
                     </div>
-                  )}
                   </div>
-                </td>
-              </tr>
-            ))}
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
-        </div>
+      </div>
     </section>
   );
 }

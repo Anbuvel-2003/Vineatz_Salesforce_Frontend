@@ -16,6 +16,21 @@ export interface EmployeePayload {
   Employee_Password: string;
   Employee_joining_date: string;
 }
+export interface UserPayload {
+    first_Name: string;
+    last_Name: string;
+    Mobile_Number: string;
+    Email: string;
+    Password:string;
+    Address:string;
+}
+export interface updateUserPayload {
+    first_Name: string;
+    last_Name: string;
+    Mobile_Number: string;
+    Email: string;
+    Address:string;
+}
 export interface updateEmployeePayload {
   Employee_Name: string;
   Employee_Email: string;
@@ -26,7 +41,6 @@ export interface updateEmployeePayload {
   Employee_Driving_License_Number: string;
   Employee_joining_date: string;
 }
-
 export interface LoginResponse {
   token: string;
   user: {
@@ -46,13 +60,16 @@ export interface PaginationMeta {
   hasNextPage: boolean;
   hasPrevPage: boolean;
 }
-
 export interface GetEmployeesResponse {
   success: boolean;
   data: EmployeePayload[];
   pagination: PaginationMeta;
 }
-
+export interface GetAdminResponse {
+  success: boolean;
+  data: EmployeePayload[];
+  pagination: PaginationMeta;
+}
 // Exported API functions
 export const authApi = {
   LoginApi: async (payload: LoginPayload): Promise<LoginResponse> => {
@@ -77,6 +94,22 @@ export const authApi = {
   },
   DeleteEmployee: async (id: string): Promise<any> => {
     const url = `/employee/${id}`;
+    return api.deleteMethod(url);
+  },
+  GetAdmin: async (page = 1, limit = 10): Promise<GetAdminResponse> => {
+    const url = `/user?page=${page}&limit=${limit}`;
+    return api.getMethod(url);
+  },
+  CreateAdmin: async (payload:UserPayload ): Promise<any> => {
+    const url = `/user`;
+    return api.postMethod(url, payload);
+  },
+  UpdateAdmin: async (payload:updateUserPayload,id:string): Promise<any> => {
+    const url = `/user/${id}`;
+    return api.putMethod(url, payload);
+  },
+  DeleteAdmin: async (id: string): Promise<any> => {
+    const url = `/user/${id}`;
     return api.deleteMethod(url);
   },
 };

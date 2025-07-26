@@ -26,7 +26,7 @@ export const InputOTPDemo: React.FC<InputOTPDemoProps> = ({ value, onChange }) =
         <InputOTPGroup key={i}>
           <InputOTPSlot index={i} />
         </InputOTPGroup>
-      ))}
+      ))} 
     </InputOTP>
   );
 };
