@@ -1,31 +1,34 @@
+// InputOTPDemo.tsx
+
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
   InputOTPSlot,
-} from "@/components/ui/input-otp"
+} from "@/components/ui/input-otp";
 
-export function InputOTPDemo() {
-  return (
-    <InputOTP maxLength={6}>
-      <InputOTPGroup>
-        <InputOTPSlot index={0} />
-         </InputOTPGroup>
-      <InputOTPGroup>
-        <InputOTPSlot index={1} />
-        </InputOTPGroup>
-        <InputOTPGroup>
-        <InputOTPSlot index={2} />
-      </InputOTPGroup>
-      <InputOTPGroup>
-        <InputOTPSlot index={3} />
-        </InputOTPGroup>
-        <InputOTPGroup>
-        <InputOTPSlot index={4} />
-        </InputOTPGroup >
-        <InputOTPGroup>
-        <InputOTPSlot index={5} />
-      </InputOTPGroup>
-    </InputOTP>
-  )
+interface InputOTPDemoProps {
+  value: string;
+  onChange: (val: string) => void;
 }
+
+export const InputOTPDemo: React.FC<InputOTPDemoProps> = ({ value, onChange }) => {
+  return (
+    <InputOTP
+      value={value}
+      onChange={(val) => {
+        if (/^\d*$/.test(val)) {
+          onChange(val);
+        }
+      }}
+      maxLength={6}
+    >
+      {[0, 1, 2, 3, 4, 5].map((i) => (
+        <InputOTPGroup key={i}>
+          <InputOTPSlot index={i} />
+        </InputOTPGroup>
+      ))}
+    </InputOTP>
+  );
+};
+
+export default InputOTPDemo;

@@ -107,7 +107,7 @@ const LoginPage: React.FC<LoginProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
                     </div>
                   )}
                   <a
-                    href="/register"
+                    href="/ForgotPassword"
                     className="text-[#4FD1C5] hover:text-blue-700 pb-3 font-poppins w-fit"
                   >
                     Forgot Password?

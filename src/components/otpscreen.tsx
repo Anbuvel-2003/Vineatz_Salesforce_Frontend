@@ -1,21 +1,24 @@
-import React from 'react';
+import React from "react";
 import img1 from "../assets/login_img.png";
-import { Formik } from 'formik';
+import { Formik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
-import axios from 'axios';
-import { authApi } from '@/config/fetchData';
-import { InputOTPDemo } from './otp';
+import axios from "axios";
+import { authApi } from "@/config/fetchData";
+import { InputOTPDemo } from "./otp";
+
+
 
 interface OTPProps {
   isDrawerOpen: boolean;
   setIsDrawerOpen: (isOpen: boolean) => void;
 }
 
+
 const Otpscreen: React.FC<OTPProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
   const validationSchema = Yup.object().shape({
     otp: Yup.string()
-      .length(6, "OTP must be exactly 6 digits")
+      .matches(/^\d{6}$/, "OTP must be exactly 6 digits")
       .required("OTP is required"),
   });
 
@@ -40,22 +43,37 @@ const Otpscreen: React.FC<OTPProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
       <div className="flex w-full h-full">
         {/* Left: Form */}
         <div className="w-1/2 flex flex-col items-center justify-center">
-          <div className="w-[70%]">
-            <h1 className="text-[42px] font-bold font-poppins mb-6">Enter OTP</h1>
+          <div className="w-[60%]">
+            <h1 className="text-[42px] font-bold font-poppins mb-6">
+              Enter OTP
+            </h1>
 
             <Formik
               initialValues={{ otp: "" }}
               validationSchema={validationSchema}
               onSubmit={handleSubmit}
             >
-              {({ values, errors, touched, setFieldValue, handleSubmit }) => (
+              {({
+                values,
+                errors,
+                touched,
+                setFieldValue,
+                setFieldTouched,
+                handleSubmit,
+              }) => (
                 <form className="flex flex-col" onSubmit={handleSubmit}>
                   <label className="font-poppins font-medium mb-1">OTP</label>
 
-                 <InputOTPDemo />
+                  <InputOTPDemo
+                    value={values.otp}
+                    onChange={(val) => setFieldValue("otp", val)}
+                    onBlur={() => setFieldTouched("otp", true)}
+                  />
 
                   {touched.otp && errors.otp && (
-                    <div className="text-red-500 text-sm mb-2">{errors.otp}</div>
+                    <div className="text-red-500 text-sm mt-2">
+                      {errors.otp}
+                    </div>
                   )}
 
                   <button

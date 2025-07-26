@@ -5,6 +5,7 @@ import React from "react";
 import img1 from "../assets/login_img.png";
 import { toast } from "react-toastify";
 import { authApi } from "@/config/fetchData";
+import { useNavigate } from "react-router-dom";
 
 interface ForgotPasswordProps {
   isDrawerOpen: boolean;
@@ -12,6 +13,7 @@ interface ForgotPasswordProps {
 }
 
 const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
+  const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     Email: Yup.string()
       .email("Invalid email format *")
@@ -19,20 +21,21 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isDrawerOpen, setIsDraw
   });
 
   const handleSubmit = async (values: { Email: string }) => {
-    try {
-      // Replace with your actual API call
-      const res = await axios.post(`${authApi}/send-otp`, {
-        email: values.Email,
-      });
+    // try {
+    //   // Replace with your actual API call
+    //   const res = await axios.post(`${authApi}/send-otp`, {
+    //     email: values.Email,
+    //   });
 
-      if (res.data.success) {
-        toast.success("OTP sent to your email!");
-      } else {
-        toast.error(res.data.message || "Something went wrong!");
-      }
-    } catch (error: any) {
-      toast.error(error?.response?.data?.message || "Server error");
-    }
+    //   if (res.data.success) {
+    //     toast.success("OTP sent to your email!");
+    //   } else {
+    //     toast.error(res.data.message || "Something went wrong!");
+    //   }
+    // } catch (error: any) {
+    //   toast.error(error?.response?.data?.message || "Server error");
+    // }
+    navigate("/Otpscreen");
   };
 
   return (
@@ -61,12 +64,14 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isDrawerOpen, setIsDraw
                   {touched.Email && errors.Email && (
                     <div className="text-red-500 text-sm mb-2">{errors.Email}</div>
                   )}
-                  <button
+                  <a href="/Otpscreen">
+                  <button 
                     type="submit"
                     className="bg-[#BF9FFF] hover:bg-[#9b77e2] text-white font-bold rounded-xl font-poppins py-3 px-4 mt-4"
                   >
                     Get OTP
                   </button>
+                  </a>
                 </form>
               )}
             </Formik>

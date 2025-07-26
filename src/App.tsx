@@ -45,9 +45,6 @@ function App(): JSX.Element {
             <Layoutpage />
             <div className="sm:ml-64">
               <Routes>
-                <Route path="/" element={<Otpscreen />} />
-                <Route path="/InputOTPDemo" element={<InputOTPDemo />} />
-                {/* <Route path="/" element={<ForgotPassword />} /> */}
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/applicationdetails" element={<Applicationdetails />} />
                 <Route path="/manageleadlist" element={<ManageApplication />} />
@@ -89,9 +86,12 @@ function App(): JSX.Element {
         ) : (
           <Routes>
             <Route path="/login" element={<Login isDrawerOpen={false} setIsDrawerOpen={function (isOpen: boolean): void {
-                throw new Error("Function not implemented.");
-              } } />} />
+              throw new Error("Function not implemented.");
+            } } />} />
             <Route path="*" element={<Navigate to="/login" replace />} />
+            <Route path="/ForgotPassword" element={<ForgotPassword />} />
+            <Route path="/Otpscreen" element={<Otpscreen />} />
+            <Route path="/InputOTPDemo" element={<InputOTPDemo />} />
           </Routes>
         )}
       </BrowserRouter>
