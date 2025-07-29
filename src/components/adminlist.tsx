@@ -28,7 +28,6 @@ function Adminlist() {
   useEffect(() => {
     GetAdmin();
   }, []);
-
   const deleteTask = async (id: any) => {
     const Comfirmation = window.confirm(
       "Are you sure you want to delete this Admin?"
