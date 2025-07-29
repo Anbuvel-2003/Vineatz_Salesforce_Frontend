@@ -77,8 +77,11 @@ function SidebarNavigation() {
                         window.location.reload();
                       }, 2000);
                     } catch (error) {
+                      setActiveItem("dashboard");
                       console.log(error, "Error Message");
                     }
+                  }else{
+                    setActiveItem("dashboard");
                   }
                 } else {
                   navigate(item.to);

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SkeletonLoader from "./skeleton";
 import { toast } from "react-toastify";
+import LeadTableSimple from "./leadtable";
 interface Application {
   _id: string;
   Application_Name: string;
@@ -75,9 +76,12 @@ function Applicationlist() {
         </h2>
       </div>
       <div className="p-3 flex justify-end">
-        <div className="p-2 bg-[#F4EFFF] hover:bg-green-400 rounded-[10px] px-5 flex gap-1 place-items-center cursor-pointer group" onClick={()=>{
-          navigate("/createapplication")
-        }}>
+        <div
+          className="p-2 bg-[#F4EFFF] hover:bg-green-400 rounded-[10px] px-5 flex gap-1 place-items-center cursor-pointer group"
+          onClick={() => {
+            navigate("/createapplication");
+          }}
+        >
           <svg
             className="w-4 h-4 text-gray-800 dark:text-black group-hover:text-white"
             aria-hidden="true"
@@ -96,10 +100,12 @@ function Applicationlist() {
             />
           </svg>
 
-          <h2 className="text-black text-[14px] uppercase font-medium group-hover:text-white ">Create</h2>
+          <h2 className="text-black text-[14px] uppercase font-medium group-hover:text-white ">
+            Create
+          </h2>
         </div>
       </div>
-      <div className="p-3">
+      {/* <div className="p-3">
         <table className="w-full text-sm text-left rtl:text-right text-gray-400">
           <thead className="text-xs uppercase  bg-[#9468ec] text-white font-bold">
             <tr>
@@ -209,7 +215,8 @@ function Applicationlist() {
             )}
           </tbody>
         </table>
-      </div>
+      </div> */}
+      <LeadTableSimple />
     </div>
   );
 }

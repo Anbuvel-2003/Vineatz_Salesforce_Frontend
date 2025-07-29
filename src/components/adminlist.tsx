@@ -25,7 +25,6 @@ function Adminlist() {
       setAdminlist(res?.data);
     }
   };
-
   useEffect(() => {
     GetAdmin();
   }, []);

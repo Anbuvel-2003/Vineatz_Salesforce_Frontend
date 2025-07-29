@@ -56,7 +56,7 @@ function HeaderNavigation() {
         <div>
           <div className="flex place-items-center !gap-5 ">
             <div
-              className="bg-white p-3 rounded-full relative cursor-pointer z-50"
+              className="bg-white p-3 rounded-full relative cursor-pointer z-1"
               onClick={() => setIsopennotification(!isopennotification)}
             >
               <FaRegBell size={25} color="#BE9EFE" />
@@ -65,7 +65,7 @@ function HeaderNavigation() {
               </div>
             </div>
             {isopennotification && (
-              <div className="absolute right-20 top-20 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              <div className="absolute right-20 top-20 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-1 ">
                 <div className="flex items-center justify-between p-4">
                   <h3 className="text-[20px] font-semibold">Notification</h3>
                   <div
@@ -95,7 +95,7 @@ function HeaderNavigation() {
                       </div>
                     ))
                   ) : (
-                    <p className="text-sm text-gray-500">
+                    <p className="text-sm text-gray-500 text-center">
                       No new notifications
                     </p>
                   )}

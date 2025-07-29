@@ -33,6 +33,7 @@ import ForgotPassword from "./components/forgotpassword";
 import Otpscreen from "./components/otpscreen";
 import { InputOTPDemo } from "./components/otp";
 import NewPassword from "./components/newpassword";
+import Leaddetails from "./components/leaddetails";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -47,23 +48,53 @@ function App(): JSX.Element {
             <div className="sm:ml-64">
               <Routes>
                 <Route path="/" element={<Dashboard />} />
-                <Route path="/applicationdetails" element={<Applicationdetails />} />
+                <Route
+                  path="/applicationdetails"
+                  element={<Applicationdetails />}
+                />
                 <Route path="/manageleadlist" element={<ManageApplication />} />
-                <Route path="/ProspectlistApplication" element={<ProspectMoveLeads />} />
-                <Route path="/ProspectMoveLeads" element={<ProspectMoveLeads />} />
+                <Route
+                  path="/ProspectlistApplication"
+                  element={<ProspectMoveLeads />}
+                />
+                <Route
+                  path="/ProspectMoveLeads"
+                  element={<ProspectMoveLeads />}
+                />
                 <Route path="/Admincreation" element={<Admincreation />} />
                 <Route path="/Adminupdation" element={<Adminupdation />} />
-                <Route path="/Clientmanagement" element={<Clientmanagement />} />
-                <Route path="/Applicationdetailsmanual" element={<Applicationdetailsmanual />} />
-                <Route path="/Rejectapplication" element={<Rejectapplication children={undefined} appid={undefined}  />} />
+                <Route
+                  path="/Clientmanagement"
+                  element={<Clientmanagement />}
+                />
+                <Route
+                  path="/Applicationdetailsmanual"
+                  element={<Applicationdetailsmanual />}
+                />
+                <Route
+                  path="/Rejectapplication"
+                  element={
+                    <Rejectapplication children={undefined} appid={undefined} />
+                  }
+                />
                 <Route path="/Applicationlist" element={<Applicationslist />} />
-                <Route path="/Logout" element={<LogoutPopup open={undefined} onOpenChange={undefined} onConfirm={undefined} />} />
+                <Route
+                  path="/Logout"
+                  element={
+                    <LogoutPopup
+                      open={undefined}
+                      onOpenChange={undefined}
+                      onConfirm={undefined}
+                    />
+                  }
+                />
                 <Route path="/AddProject" element={<AddProject />} />
                 <Route path="/Employeelist" element={<Employeelist />} />
                 <Route path="/addemployee" element={<Addemployee />} />
                 <Route path="/updateemployee" element={<Updateemployee />} />
                 <Route path="/adminlist" element={<Adminlist />} />
                 <Route path="/adduser" element={<Adduser />} />
+                <Route path="/leaddetails/:id" element={<Leaddetails />} />
                 <Route path="/updateuser/:id" element={<Updateuser />} />
                 <Route
                   path="/updateemployee/:id"
@@ -86,15 +117,22 @@ function App(): JSX.Element {
           </>
         ) : (
           <Routes>
-            <Route path="/login" element={<Login isDrawerOpen={false} setIsDrawerOpen={function (isOpen: boolean): void {
-              throw new Error("Function not implemented.");
-            } } />} />
+            <Route
+              path="/login"
+              element={
+                <Login
+                  isDrawerOpen={false}
+                  setIsDrawerOpen={function (isOpen: boolean): void {
+                    throw new Error("Function not implemented.");
+                  }}
+                />
+              }
+            />
             <Route path="*" element={<Navigate to="/login" replace />} />
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="/Otpscreen" element={<Otpscreen />} />
             <Route path="/InputOTPDemo" element={<InputOTPDemo />} />
             <Route path="/NewPassword" element={<NewPassword />} />
-
           </Routes>
         )}
       </BrowserRouter>

@@ -1,6 +1,7 @@
 import vineatz from "../assets/vineatz.png";
 import accrix from "../assets/accrix.png";
 import { useNavigate } from "react-router-dom";
+import Leadtable from "./leadtable";
 
 const apps = [
   {
@@ -24,7 +25,7 @@ function Applicationslist() {
 
   return (
     <div className="bg-[#FDFBFF] min-h-screen w-full">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-5 mx-10 py-10">
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-5 mx-10 py-10">
         {apps.map((app, index) => (
           <div
             key={index}
@@ -50,7 +51,8 @@ function Applicationslist() {
             </p>
           </div>
         ))}
-      </div>
+      </div> */}
+      <Leadtable/>
     </div>
   );
 }
