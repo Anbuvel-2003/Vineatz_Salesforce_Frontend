@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import AddedLead from "./inputfield";
+import TabComponent from "./leaddetailstab";
 
 function Leaddetails() {
   const steper = [
@@ -54,7 +55,7 @@ function Leaddetails() {
           </div>
           <div
             onClick={() => {
-              setIsRejected(true), setIsDrawerOpen(true)
+              setIsRejected(true), setIsDrawerOpen(true);
             }}
           >
             <h2>reject</h2>
@@ -115,6 +116,13 @@ function Leaddetails() {
           })}
         </ol>
       </div>
+      <div className="flex items-center justify-between !m-10">
+        <div className="w-full">
+          <h1>Lead Details</h1>
+          <TabComponent />
+        </div>
+      </div>
+
       <AddedLead
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}
