@@ -34,7 +34,7 @@ function Leaddetails() {
       name: "account",
     },
   ];
-  const activeStep = 3;
+  const activeStep = 1;
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [isRejected, setIsRejected] = useState<boolean>(false);
   return (
@@ -43,22 +43,23 @@ function Leaddetails() {
         <div>
           <h2>LEAD ID : LEAD00001</h2>
         </div>
-        <div className="flex items-center !gap-10">
+        <div className="flex items-center !gap-5">
           <div
-            className="border border-1 border-[#BF9FFF] !p-2 rounded-[10px] "
+            className="border border-1 border-[#BF9FFF] !p-2 rounded-[10px] cursor-pointer "
             onClick={() => {
               setIsRejected(false);
               setIsDrawerOpen(true);
             }}
           >
-            <h2 className="text-[#BF9FFF] font-medium ">Move</h2>
+            <h2 className="text-[#BF9FFF] font-medium capitalize ">Move</h2>
           </div>
           <div
             onClick={() => {
               setIsRejected(true), setIsDrawerOpen(true);
             }}
+            className="border border-1 border-[#f98996] !p-2 rounded-[10px] cursor-pointer "
           >
-            <h2>reject</h2>
+            <h2 className="text-[#f98996] font-medium  capitalize">reject</h2>
           </div>
         </div>
       </div>
