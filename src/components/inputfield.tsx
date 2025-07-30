@@ -1,6 +1,19 @@
 import { useState } from "react";
+import React, { useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import ProspectMoveLeads from "./prospect_move";
+import { Button, Calendar, DatePicker, Input, Popover, Space, Switch } from 'antd';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
+import { CalendarIcon } from "lucide-react";
+import { format } from "path";
+import RejectApplication from "./rejectapplication";
+import Rejectapplication from "./rejectapplication";
+import { Textarea } from "flowbite-react";
+import { Label } from "recharts";
+
+
 
 interface AssignleadProps {
   isDrawerOpen: boolean;
@@ -34,10 +47,29 @@ const getValidationSchema = (stageId: number) => {
       });
     case 2:
       return Yup.object({
-        budget: Yup.number().required("Budget is required"),
-        timeline: Yup.string().required("Timeline is required"),
-        industry: Yup.string().required("Industry is required"),
-        priority: Yup.string().required("Priority is required"),
+        expectedAmount: Yup.number()
+          .typeError("Expected amount must be a number")
+          .required("Expected amount is required"),
+        expectedDate: Yup.string().required("Expected date is required"),
+        typeofbusiness: Yup.string().required("Type of business is required"),
+        confidence: Yup.number()
+          .typeError("Confidence must be a number")
+          .min(1, "Confidence must be between 1% to 100%")
+          .max(100, "Confidence must be below 100%")
+          .required("Confidence is required"),
+      });
+    case 3:
+      return Yup.object({
+        demoDate: Yup.date().required("Demo date is required"),
+        demoTime: Yup.string().required("Demo time is required"),
+        demoLocation: Yup.string().required("Demo location is required"),
+      });
+    case 4:
+      return Yup.object({
+        finalizeAmount: Yup.number()
+          .typeError("Finalize amount must be a number")
+          .required("Finalize amount is required"),
+        dueDate: Yup.date().required("Due date is required"),
       });
     case 5:
       return Yup.object({
@@ -53,8 +85,8 @@ const getFieldsByStage = (
   stageId: number,
   setIsDrawerOpen: (isOpen: boolean) => void,
   reject: boolean,
-  setReject: (value: boolean) => void          
-) =>  {
+  setReject: (value: boolean) => void
+) => {
   if (reject) {
     return (
       <>
@@ -71,13 +103,53 @@ const getFieldsByStage = (
             ✕
           </button>
         </div>
+
+
         <div className="text-gray-500">
           This lead has been marked as <strong>rejected</strong>. No form data
           is required.
+          <div className=" w-full rounded-xl shadow-md bg-white px-6 py-6">
+            <h2 className="text-[20px] text-center font-poppins font-semibold mb-4">
+              Reject Application
+            </h2>
+            {/* Rejection Subject */}
+            <div className="flex  mb-4">
+              <label className="text-[16px] font-medium">
+                Rejection Subject
+              </label>
+              <Field
+                id="subject"
+                name="subject"
+                placeholder="Subject"
+                className="text-[#808080] w-full bg-[#FAFAFA] border border-gray-300 rounded-md px-4 py-2 mt-1"
+              />
+            </div>
+
+            {/* Rejection Details */}
+            <div className="flex mb-4">
+              <label className="text-[16px] w-[125px] font-medium">
+                Details
+              </label>
+              <textarea
+              id="details"
+                name="details"
+                placeholder="Rejection Details"
+                className="bg-[#FAFAFA] text-[#808080] border border-gray-300 rounded-md px-4 py-2 mt-1 w-full h-[150px]"
+              />
+            </div>
+
+           
+          </div>
         </div>
+
+
+
       </>
+
     );
   }
+
+
   switch (stageId) {
     case 1:
       return (
@@ -169,7 +241,7 @@ const getFieldsByStage = (
                   d="m7 9 4-4-4-4M1 9l4-4-4-4"
                 />
               </svg>
-              <span>qualify</span>
+              <span>Qualify</span>
             </h2>
             <button
               onClick={() => setIsDrawerOpen(false)}
@@ -178,7 +250,7 @@ const getFieldsByStage = (
               ✕
             </button>
           </div>
-          <div className="flex flex-col gap-4">
+          {/* <div className="flex flex-col gap-4">
             <div>
               <label className="block text-sm font-medium mb-1">
                 Expected Amount
@@ -230,7 +302,8 @@ const getFieldsByStage = (
                 className="text-red-500 text-sm"
               />
             </div>
-          </div>
+          </div> */}
+          < ProspectMoveLeads />
         </>
       );
     case 3:
@@ -238,7 +311,7 @@ const getFieldsByStage = (
         <>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-semibold text-gray-800 flex items-center">
-              qualify
+              Qualify
               <svg
                 className="w-3 h-3 mx-2 rtl:rotate-180 text-gray-400"
                 xmlns="http://www.w3.org/2000/svg"
@@ -253,7 +326,7 @@ const getFieldsByStage = (
                   d="m7 9 4-4-4-4M1 9l4-4-4-4"
                 />
               </svg>
-              <span>demo</span>
+              <span>Demo</span>
             </h2>
             <button
               onClick={() => setIsDrawerOpen(false)}
@@ -262,52 +335,38 @@ const getFieldsByStage = (
               ✕
             </button>
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center !gap-3 ">
-              <Field name="appDemo">
-                {({ field }: any) => (
-                  <input
-                    type="checkbox"
-                    checked={field.value}
-                    onChange={() =>
-                      field.onChange({
-                        target: { name: field.name, value: !field.value },
-                      })
-                    }
-                    className="toggle"
-                  />
-                )}
-              </Field>
-              <label className="text-sm font-medium">Application Demo</label>
+          <div className="flex flex-col gap-8">
+            <span className="text-[#000000] text-[20px] font-poppins">
+              Details To Be Filled
+            </span>
+            <div className="flex items-center ">
+
+              <label className="text-lg font-medium w-[220px]">Application Demo</label>
+              <Space direction="vertical">
+                <Switch checkedChildren="1" unCheckedChildren="O" />
+              </Space>
             </div>
-            <div className="flex items-center !gap-3 ">
-              <Field name="featuresExplanation">
-                {({ field }: any) => (
-                  <input
-                    type="checkbox"
-                    checked={field.value}
-                    onChange={() =>
-                      field.onChange({
-                        target: { name: field.name, value: !field.value },
-                      })
-                    }
-                    className="toggle"
-                  />
-                )}
-              </Field>
-              <label className="text-sm font-medium">
-                Features Explanation
+            <div className="flex items-center pb-5 ">
+
+              <label className="text-lg font-medium w-[220px]"> Features Explanation
               </label>
+              <Space direction="vertical" >
+                <Switch checkedChildren="1" unCheckedChildren="O" />
+              </Space>
             </div>
           </div>
         </>
       );
     case 4:
+      function setFieldValue(arg0: string, value: string) {
+        throw new Error("Function not implemented.");
+      }
+
       return (
         <>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-semibold text-gray-800 flex items-center">
-              demo
+              Demo
               <svg
                 className="w-3 h-3 mx-2 rtl:rotate-180 text-gray-400"
                 xmlns="http://www.w3.org/2000/svg"
@@ -322,7 +381,7 @@ const getFieldsByStage = (
                   d="m7 9 4-4-4-4M1 9l4-4-4-4"
                 />
               </svg>
-              <span>proposal</span>
+              <span>Proposal</span>
             </h2>
             <button
               onClick={() => setIsDrawerOpen(false)}
@@ -331,33 +390,43 @@ const getFieldsByStage = (
               ✕
             </button>
           </div>
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-8">
+            <span className="text-[#000000] text-[20px] font-poppins">
+              Details To Be Filled
+            </span>
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Actual Amount
+              <label className="block text-md font-medium mb-1">
+                Finalized Amount
               </label>
-              <Field name="name" className="input w-full border p-2 rounded" />
+              <Field name="name"
+                type="string"
+                placeholder="Enter Finalized Amount"
+                onChange={(e) => setFieldValue("finalizeAmount", e.target.value)}
+                className="input w-full border p-2 rounded-lg placeholder:text-[#AEAEAE]" />
               <ErrorMessage
-                name="name"
+                name="finalizeAmount"
                 component="div"
                 className="text-red-500 text-sm"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">
-                Actual Date
+              <label className="block text-md font-medium mb-1">
+                Due Date
               </label>
-              <Field
-                name="email"
-                type="email"
-                className="input w-full border p-2 rounded"
+              <DatePicker
+                size="large"
+                name="dueDate"
+                placeholder="Select Due Date"
+                className="input w-full placeholder:text-[#AEAEAE]   border p-2 rounded-lg"
+                suffixIcon={<CalendarIcon className="text-[#AEAEAE]" />}
               />
               <ErrorMessage
-                name="email"
+                name="dueDate"
                 component="div"
                 className="text-red-500 text-sm"
               />
             </div>
+
           </div>
         </>
       );
@@ -366,7 +435,7 @@ const getFieldsByStage = (
         <>
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-xl font-semibold text-gray-800 flex items-center">
-              proposal
+              Proposal
               <svg
                 className="w-3 h-3 mx-2 rtl:rotate-180 text-gray-400"
                 xmlns="http://www.w3.org/2000/svg"
@@ -381,7 +450,7 @@ const getFieldsByStage = (
                   d="m7 9 4-4-4-4M1 9l4-4-4-4"
                 />
               </svg>
-              <span>onboard</span>
+              <span>Onboard</span>
             </h2>
             <button
               onClick={() => setIsDrawerOpen(false)}
@@ -391,8 +460,8 @@ const getFieldsByStage = (
             </button>
           </div>
           <div className="flex flex-col gap-2">
-            <label className="block text-sm font-medium mb-1">
-              Payment Mode
+            <label className="block text-lg font-medium mb-1">
+              Select Payment Mode
             </label>
             <div className="flex gap-4">
               <label className="flex items-center gap-2">
@@ -585,10 +654,18 @@ const AddedLead: React.FC<AssignleadProps> = ({
     timeline: "",
     industry: "",
     priority: "",
+    expectedAmount: "",   // for prospect
+    expectedDate: undefined,   // for prospect
+    typeofbusiness: "",   // for prospect
+    confidence: "",   // for prospect
     appDemo: false, // for toggle
     featuresExplanation: false, // for toggle
     paymentMethod: "", // for radio
+    finalizeAmount: "",
+    dueDate: undefined,
   };
+
+  
 
   return (
     <div className="relative z-40">
@@ -601,9 +678,8 @@ const AddedLead: React.FC<AssignleadProps> = ({
       )}
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 z-40 h-screen p-6 overflow-y-auto transition-transform transform bg-white shadow-lg ${
-          isDrawerOpen ? "translate-x-0" : "translate-x-full"
-        } w-[90%] sm:w-[60%] md:w-[40%] lg:w-[30%]`}
+        className={`fixed top-0 right-0 z-40 h-screen p-6 overflow-y-auto transition-transform transform bg-white shadow-lg ${isDrawerOpen ? "translate-x-0" : "translate-x-full"
+          } w-[90%] sm:w-[60%] md:w-[40%] lg:w-[30%]`}
       >
         <Formik
           initialValues={initialValues}

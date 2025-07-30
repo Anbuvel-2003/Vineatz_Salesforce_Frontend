@@ -74,7 +74,7 @@ function App(): JSX.Element {
                 <Route
                   path="/Rejectapplication"
                   element={
-                    <Rejectapplication children={undefined} appid={undefined} />
+                    <Rejectapplication />
                   }
                 />
                 <Route path="/Applicationlist" element={<Applicationslist />} />

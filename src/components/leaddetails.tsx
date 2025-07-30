@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import AddedLead from "./inputfield";
 import TabComponent from "./leaddetailstab";
+import { RejectApplication } from "./rejectapplication";
 
 function Leaddetails() {
+
+  
   const steper = [
     {
       id: 1,
@@ -34,7 +37,7 @@ function Leaddetails() {
       name: "account",
     },
   ];
-  const activeStep = 1;
+  const activeStep =4;
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [isRejected, setIsRejected] = useState<boolean>(false);
   return (
@@ -59,7 +62,9 @@ function Leaddetails() {
             }}
             className="border border-1 border-[#f98996] !p-2 rounded-[10px] cursor-pointer "
           >
-            <h2 className="text-[#f98996] font-medium  capitalize">reject</h2>
+          
+            <h2 className="text-[#f98996] font-medium  capitalize">reject </h2>
+        
           </div>
         </div>
       </div>
