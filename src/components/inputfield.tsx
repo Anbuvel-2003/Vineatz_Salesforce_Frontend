@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React, { useRef } from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, useFormikContext } from "formik";
 import * as Yup from "yup";
 import ProspectMoveLeads from "./prospect_move";
 import { Button, Calendar, DatePicker, Input, Popover, Space, Switch } from 'antd';
@@ -106,15 +106,14 @@ const getFieldsByStage = (
 
 
         <div className="text-gray-500">
-          This lead has been marked as <strong>rejected</strong>. No form data
-          is required.
+         
           <div className=" w-full rounded-xl shadow-md bg-white px-6 py-6">
-            <h2 className="text-[20px] text-center font-poppins font-semibold mb-4">
+            <h2 className="text-[20px] text-[#111111] text-center font-poppins font-semibold mb-4">
               Reject Application
             </h2>
             {/* Rejection Subject */}
             <div className="flex  mb-4">
-              <label className="text-[16px] font-medium">
+              <label className="text-[16px] text-[#111111] w-[125px] font-medium">
                 Rejection Subject
               </label>
               <Field
@@ -127,14 +126,14 @@ const getFieldsByStage = (
 
             {/* Rejection Details */}
             <div className="flex mb-4">
-              <label className="text-[16px] w-[125px] font-medium">
+              <label className="text-[16px] text-[#111111] w-[125px] font-medium">
                 Details
               </label>
               <textarea
               id="details"
                 name="details"
                 placeholder="Rejection Details"
-                className="bg-[#FAFAFA] text-[#808080] border border-gray-300 rounded-md px-4 py-2 mt-1 w-full h-[150px]"
+                className="bg-[#FAFAFA] row-span-3 text-[#808080] border border-gray-300 rounded-md px-4 py-2 mt-1 w-full h-[150px]"
               />
             </div>
 
@@ -182,10 +181,11 @@ const getFieldsByStage = (
           </div>
           <div className="flex flex-col gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label className="block text-lg font-medium mb-3">
                 Employee Name
               </label>
-              <Field name="name" className="input w-full border p-2 rounded" />
+              <Field name="name"
+              className="input w-full border p-2 rounded-xl" />
               <ErrorMessage
                 name="name"
                 component="div"
@@ -193,13 +193,13 @@ const getFieldsByStage = (
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label className="block text-lg font-medium mb-3">
                 Employee Email
               </label>
               <Field
                 name="email"
-                type="email"
-                className="input w-full border p-2 rounded"
+                type="Email"
+                className="input w-full border border-2 p-2 rounded-xl"
               />
               <ErrorMessage
                 name="email"
@@ -211,7 +211,7 @@ const getFieldsByStage = (
               <label className="block text-sm font-medium mb-1">
                 Employee Phone
               </label>
-              <Field name="phone" className="input w-full border p-2 rounded" />
+              <Field name="phone" className="input w-full border p-2  rounded-xl" />
               <ErrorMessage
                 name="phone"
                 component="div"
@@ -307,6 +307,7 @@ const getFieldsByStage = (
         </>
       );
     case 3:
+      
       return (
         <>
           <div className="flex items-center justify-between mb-6">
@@ -358,77 +359,91 @@ const getFieldsByStage = (
         </>
       );
     case 4:
-      function setFieldValue(arg0: string, value: string) {
-        throw new Error("Function not implemented.");
-      }
 
       return (
-        <>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-semibold text-gray-800 flex items-center">
-              Demo
-              <svg
-                className="w-3 h-3 mx-2 rtl:rotate-180 text-gray-400"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 12 10"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m7 9 4-4-4-4M1 9l4-4-4-4"
-                />
-              </svg>
-              <span>Proposal</span>
-            </h2>
-            <button
-              onClick={() => setIsDrawerOpen(false)}
-              className="text-gray-600 hover:text-white hover:bg-[#BF9FFF] rounded-full w-8 h-8 flex items-center justify-center"
-            >
-              ✕
-            </button>
-          </div>
-          <div className="flex flex-col gap-8">
-            <span className="text-[#000000] text-[20px] font-poppins">
-              Details To Be Filled
-            </span>
-            <div>
-              <label className="block text-md font-medium mb-1">
-                Finalized Amount
-              </label>
-              <Field name="name"
-                type="string"
-                placeholder="Enter Finalized Amount"
-                onChange={(e) => setFieldValue("finalizeAmount", e.target.value)}
-                className="input w-full border p-2 rounded-lg placeholder:text-[#AEAEAE]" />
-              <ErrorMessage
-                name="finalizeAmount"
-                component="div"
-                className="text-red-500 text-sm"
-              />
-            </div>
-            <div>
-              <label className="block text-md font-medium mb-1">
-                Due Date
-              </label>
-              <DatePicker
-                size="large"
-                name="dueDate"
-                placeholder="Select Due Date"
-                className="input w-full placeholder:text-[#AEAEAE]   border p-2 rounded-lg"
-                suffixIcon={<CalendarIcon className="text-[#AEAEAE]" />}
-              />
-              <ErrorMessage
-                name="dueDate"
-                component="div"
-                className="text-red-500 text-sm"
-              />
-            </div>
+         <>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-xl font-semibold text-gray-800 flex items-center">
+          Demo
+          <svg
+            className="w-3 h-3 mx-2 rtl:rotate-180 text-gray-400"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 12 10"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m7 9 4-4-4-4M1 9l4-4-4-4"
+            />
+          </svg>
+          <span>Proposal</span>
+        </h2>
+        <button
+          onClick={() => setIsDrawerOpen(false)}
+          className="text-gray-600 hover:text-white hover:bg-[#BF9FFF] rounded-full w-8 h-8 flex items-center justify-center"
+        >
+          ✕
+        </button>
+      </div>
 
-          </div>
-        </>
+      <div className="flex flex-col gap-8">
+        <span className="text-[#000000] text-[20px] font-poppins">
+          Details To Be Filled
+        </span>
+
+        {/* Finalized Amount Input */}
+        <div>
+          <label className="block text-md font-medium mb-1">Finalized Amount</label>
+          <Field name="finalizeAmount">
+            {({ field }: any) => (
+              <input
+                {...field}
+                type="text"
+                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (
+          !/[0-9]/.test(e.key) &&
+          e.key !== "Backspace" &&
+          e.key !== "Tab" &&
+          e.key !== "ArrowLeft" &&
+          e.key !== "ArrowRight"
+        ) {
+          e.preventDefault();
+        }
+      }}  
+                name="finalizeAmount"
+                placeholder="Enter Finalized Amount"
+                className="input w-full border p-2 rounded-lg placeholder:text-[#AEAEAE]"
+              />
+            )}
+          </Field>
+          <ErrorMessage
+            name="finalizeAmount"
+            component="div"
+            className="text-red-500 text-sm"
+          />
+        </div>
+
+        {/* Due Date Input */}
+        <div>
+          <label className="block text-md font-medium mb-1">Due Date</label>
+          <DatePicker
+            size="large"
+            name="dueDate"
+            placeholder="Select Due Date"
+            className="input w-full placeholder:text-[#AEAEAE] border p-2 rounded-lg"
+            suffixIcon={<CalendarIcon className="text-[#AEAEAE]" />}
+          />
+          <ErrorMessage
+            name="dueDate"
+            component="div"
+            className="text-red-500 text-sm"
+          />
+        </div>
+      </div>
+    </>
       );
     case 5:
       return (

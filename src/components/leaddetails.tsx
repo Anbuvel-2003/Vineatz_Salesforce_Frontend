@@ -37,7 +37,7 @@ function Leaddetails() {
       name: "account",
     },
   ];
-  const activeStep =4;
+  const activeStep =1;
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [isRejected, setIsRejected] = useState<boolean>(false);
   return (
