@@ -199,7 +199,7 @@ const getFieldsByStage = (
               <Field
                 name="email"
                 type="Email"
-                className="input w-full border border-2 p-2 rounded-xl"
+                className="input w-full border border-gray-300 hover:border-2 hover:border-[#111111] p-2 rounded-xl"
               />
               <ErrorMessage
                 name="email"
