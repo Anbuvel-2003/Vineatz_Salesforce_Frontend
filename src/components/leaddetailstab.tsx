@@ -1,207 +1,340 @@
 import React, { useState } from "react";
 import { GoPlus } from "react-icons/go";
-
 const tabs = [
-  { id: 1, label: "initial" },
-  { id: 2, label: "prospect" },
-  { id: 3, label: "qualify" },
-  { id: 4, label: "demo" },
-  { id: 5, label: "proposal" },
-  { id: 6, label: "onboard" },
+  { id: 1, label: "Initial" },
+  { id: 2, label: "Prospect" },
+  { id: 3, label: "Qualify" },
+  { id: 4, label: "Demo" },
+  { id: 5, label: "Proposal" },
+  { id: 6, label: "Onboard" },
   { id: 7, label: "Account" },
   { id: 8, label: "Notes" },
 ];
-
-const TabComponent: React.FC = () => {
-  const [activeTab, setActiveTab] = useState(1);
-
+interface TabComponentProps {
+  initialTabId?: number;
+}
+const TabComponent: React.FC<TabComponentProps> = ({ initialTabId = 1 }) => {
+  const [activeTab, setActiveTab] = useState<number>(8);
   const renderContent = () => {
-
     const [showTextarea, setShowTextarea] = useState(false);
     const [noteInput, setNoteInput] = useState("");
     const [noteTitle, setNoteTitle] = useState("");
     const [notes, setNotes] = useState<
       { title: string; message: string; timestamp: string }[]
     >([]);
-
     switch (activeTab) {
       case 1:
         return (
           <div className="grid grid-cols-2 ">
             <div className=" p-4">
-              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">Personal Details</h1>
+              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
+                Personal Details
+              </h1>
               <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Name</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">John</p>
-              </div>
-              <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Email id</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">John123@gmail.com</p>
-              </div>
-              <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">Contact Number</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">9874563210</p>
-              </div>
-              <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Message</h2>
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Name
+                </h2>
                 <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero aut asperiores incidunt facilis veritatis assumenda
-                  mollitia eveniet impedit consequatur enim quo architecto ut excepturi eaque, at vitae, quibusdam reiciendis minima!</p>
-              </div>
-            </div>
-            <div className=" p-4">
-              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">Organization Details</h1>
-              <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Company Name</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">John</p>
+                  John
+                </p>
               </div>
               <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Registered Certificate Number</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">6544654465132465</p>
-              </div>
-              <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">GST Number</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">9874563254510</p>
-              </div>
-              <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Financial</h2>
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Email id
+                </h2>
                 <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero aut asperiores incidunt facilis veritatis assumenda
-                  mollitia eveniet impedit consequatur enim quo architecto ut excepturi eaque, at vitae, quibusdam reiciendis minima!</p>
-              </div>
-            </div>
-
-
-          </div>
-        );
-      case 2:
-        return <div>
-          <div className="grid grid-cols-3 ">
-            <div className=" p-4 ">
-              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">Personal Details</h1>
-              <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Name</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">John</p>
+                  John123@gmail.com
+                </p>
               </div>
               <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Email id</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">John123@gmail.com</p>
-              </div>
-              <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">Contact Number</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">9874563210</p>
-              </div>
-              <div className=" w-3/4 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Message</h2>
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">
+                  Contact Number
+                </h2>
                 <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero aut asperiores incidunt facilis veritatis assumenda
-                  mollitia eveniet impedit consequatur enim quo architecto ut excepturi eaque, at vitae, quibusdam reiciendis minima!</p>
-              </div>
-            </div>
-            <div className=" p-4">
-              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">Organization Details</h1>
-              <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Company Name</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">John</p>
-              </div>
-              <div className=" items-center mb-3 w-full ">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Registered Certificate Number</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">6544654465132465</p>
+                  9874563210
+                </p>
               </div>
               <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">GST Number</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">9874563254510</p>
-              </div>
-              <div className=" w-3/4 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Financial</h2>
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Message
+                </h2>
                 <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero aut asperiores incidunt facilis veritatis assumenda
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+                  aut asperiores incidunt facilis veritatis assumenda mollitia
+                  eveniet impedit consequatur enim quo architecto ut excepturi
+                  eaque, at vitae, quibusdam reiciendis minima!
                 </p>
               </div>
             </div>
             <div className=" p-4">
-              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">Employee Details</h1>
+              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
+                Organization Details
+              </h1>
               <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Employee Name</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">John</p>
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Company Name
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  John
+                </p>
               </div>
               <div className=" w-1/2 items-center mb-3">
-                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Employee id</h2>
-                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">001</p>
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Registered Certificate Number
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  6544654465132465
+                </p>
+              </div>
+              <div className=" w-1/2 items-center mb-3">
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">
+                  GST Number
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  9874563254510
+                </p>
+              </div>
+              <div className=" w-1/2 items-center mb-3">
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Financial
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero
+                  aut asperiores incidunt facilis veritatis assumenda mollitia
+                  eveniet impedit consequatur enim quo architecto ut excepturi
+                  eaque, at vitae, quibusdam reiciendis minima!
+                </p>
               </div>
             </div>
-
           </div>
-        </div>;
+        );
+      case 2:
+        return (
+          <div>
+            <div className="grid grid-cols-3 ">
+              <div className=" p-4 ">
+                <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
+                  Personal Details
+                </h1>
+                <div className=" w-1/2 items-center mb-3">
+                  <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                    Name
+                  </h2>
+                  <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                    John
+                  </p>
+                </div>
+                <div className=" w-1/2 items-center mb-3">
+                  <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                    Email id
+                  </h2>
+                  <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                    John123@gmail.com
+                  </p>
+                </div>
+                <div className=" w-1/2 items-center mb-3">
+                  <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">
+                    Contact Number
+                  </h2>
+                  <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                    9874563210
+                  </p>
+                </div>
+                <div className=" w-3/4 items-center mb-3">
+                  <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                    Message
+                  </h2>
+                  <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Vero aut asperiores incidunt facilis veritatis assumenda
+                    mollitia eveniet impedit consequatur enim quo architecto ut
+                    excepturi eaque, at vitae, quibusdam reiciendis minima!
+                  </p>
+                </div>
+              </div>
+              <div className=" p-4">
+                <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
+                  Organization Details
+                </h1>
+                <div className=" w-1/2 items-center mb-3">
+                  <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                    Company Name
+                  </h2>
+                  <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                    John
+                  </p>
+                </div>
+                <div className=" items-center mb-3 w-full ">
+                  <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                    Registered Certificate Number
+                  </h2>
+                  <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                    6544654465132465
+                  </p>
+                </div>
+                <div className=" w-1/2 items-center mb-3">
+                  <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">
+                    GST Number
+                  </h2>
+                  <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                    9874563254510
+                  </p>
+                </div>
+                <div className=" w-3/4 items-center mb-3">
+                  <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                    Financial
+                  </h2>
+                  <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Vero aut asperiores incidunt facilis veritatis assumenda
+                  </p>
+                </div>
+              </div>
+              <div className=" p-4">
+                <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
+                  Employee Details
+                </h1>
+                <div className=" w-1/2 items-center mb-3">
+                  <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                    Employee Name
+                  </h2>
+                  <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                    John
+                  </p>
+                </div>
+                <div className=" w-1/2 items-center mb-3">
+                  <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                    Employee id
+                  </h2>
+                  <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                    001
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
       case 3:
-        return <div>
-          <div className=" p-4">
-            <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">Prospect Details</h1>
-            <div className=" w-1/2 items-center mb-3">
-              <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Expected Amount</h2>
-              <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">&#8377;1,00,000</p>
-            </div>
-            <div className=" w-1/2 items-center mb-3">
-              <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Type of Business</h2>
-              <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">Marketing</p>
-            </div>
-            <div className=" w-1/2 items-center mb-3">
-              <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">Expected Date</h2>
-              <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">12/12/2023</p>
-            </div>
-            <div className=" w-1/2 items-center mb-3">
-              <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Confidence Level </h2>
-              <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
-                90%
-              </p>
+        return (
+          <div>
+            <div className=" p-4">
+              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
+                Prospect Details
+              </h1>
+              <div className=" w-1/2 items-center mb-3">
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Expected Amount
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  &#8377;1,00,000
+                </p>
+              </div>
+              <div className=" w-1/2 items-center mb-3">
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Type of Business
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  Marketing
+                </p>
+              </div>
+              <div className=" w-1/2 items-center mb-3">
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">
+                  Expected Date
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  12/12/2023
+                </p>
+              </div>
+              <div className=" w-1/2 items-center mb-3">
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Confidence Level{" "}
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  90%
+                </p>
+              </div>
             </div>
           </div>
-        </div>;
+        );
       case 4:
-        return <div>
-          <div className=" p-4">
-            <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">Demo Details</h1>
-            <div className=" w-1/2 items-center mb-3">
-              <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Application Demo</h2>
-              <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">Done</p>
-            </div>
-            <div className=" w-1/2 items-center mb-3">
-              <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Feature Explanation</h2>
-              <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">In Progress</p>
+        return (
+          <div>
+            <div className=" p-4">
+              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
+                Demo Details
+              </h1>
+              <div className=" w-1/2 items-center mb-3">
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Application Demo
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  Done
+                </p>
+              </div>
+              <div className=" w-1/2 items-center mb-3">
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Feature Explanation
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  In Progress
+                </p>
+              </div>
             </div>
           </div>
-        </div>;
+        );
       case 5:
-        return <div>
-          <div className=" p-4">
-            <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">Proposal Details</h1>
-            <div className=" w-1/2 items-center mb-3">
-              <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Finalized Amount</h2>
-              <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">&#8377;1,00,000</p>
-            </div>
-            <div className=" w-1/2 items-center mb-3">
-              <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">Due Date</h2>
-              <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">12/12/2023</p>
+        return (
+          <div>
+            <div className=" p-4">
+              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
+                Proposal Details
+              </h1>
+              <div className=" w-1/2 items-center mb-3">
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Finalized Amount
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  &#8377;1,00,000
+                </p>
+              </div>
+              <div className=" w-1/2 items-center mb-3">
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2">
+                  Due Date
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  12/12/2023
+                </p>
+              </div>
             </div>
           </div>
-        </div>;
+        );
       case 6:
-        return <div>
-          <div className=" p-4">
-            <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">Onboard Details</h1>
-            <div className=" w-1/2 items-center mb-3">
-              <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">Mode of Payment</h2>
-              <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">Net Banking</p>
+        return (
+          <div>
+            <div className=" p-4">
+              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
+                Onboard Details
+              </h1>
+              <div className=" w-1/2 items-center mb-3">
+                <h2 className="text-[20px] font-semibold font-poppins text-[#BF9FFF] mb-2 ">
+                  Mode of Payment
+                </h2>
+                <p className="text-[17px] font-semibold font-poppins text-[#BDBDBD]">
+                  Net Banking
+                </p>
+              </div>
             </div>
           </div>
-        </div>;
+        );
       case 7:
         return <div>🕒 Activity content goes here</div>;
       case 8:
         return (
           <div className="p-4">
             <div className="flex justify-between items-center mb-3">
-              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">Notes</h1>
+              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
+                Notes
+              </h1>
               <div
                 className="flex items-center gap-2 bg-[#BF9FFF] px-4 py-2 rounded-md cursor-pointer"
                 onClick={() => setShowTextarea(true)}
@@ -225,7 +358,9 @@ const TabComponent: React.FC = () => {
                         {note.title}
                       </div>
                       <div className="text-[18px] mb-2">{note.message}</div>
-                      <div className="text-sm text-gray-500">{note.timestamp}</div>
+                      <div className="text-sm text-gray-500">
+                        {note.timestamp}
+                      </div>
                     </div>
                     <div className="place-self-center ">
                       <button
@@ -287,23 +422,29 @@ const TabComponent: React.FC = () => {
         return null;
     }
   };
-
   return (
     <div className="w-full mt-10 ">
       {/* Top Tabs */}
       <div className="flex border-b border-gray-200">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 text-sm font-medium border-b-2 transition-all duration-200 ${activeTab === tab.id
-              ? "border-purple-600 text-purple-600"
-              : "border-transparent text-gray-500 hover:text-purple-600"
+        {tabs
+        .filter((tab) => tab.id < initialTabId || tab.label === "Notes" )
+        .map((tab) => {
+          console.log(tab.id);
+          
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 text-sm font-medium border-b-2 transition-all duration-200 ${
+                activeTab === tab.id
+                  ? "border-purple-600 text-purple-600"
+                  : "border-transparent text-gray-500 hover:text-purple-600"
               }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
       {/* Tab Content */}
       <div className="p-4 bg-white border border-t-0 rounded-b-lg shadow-sm">

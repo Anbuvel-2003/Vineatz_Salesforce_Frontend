@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import React from "react";
 
-interface LoginPageProps {
+interface FilterDrawerProps {
   isDrawerOpen: boolean;
   setIsDrawerOpen: (isOpen: boolean) => void;
-  onFilterApply: (filters: { leadStages: string[] }) => void;
+  onFilterApply: (filters: { leadStages: number[] }) => void;
 }
 
 const stages = [
@@ -18,7 +17,17 @@ const stages = [
   "accounts",
 ];
 
-const FilterSection: React.FC<LoginPageProps> = ({
+const stageToStatusMap: Record<string, number> = {
+  initial: 0,
+  prospect: 1,
+  qualify: 2,
+  demo: 3,
+  proposal: 4,
+  onboard: 5,
+  accounts: 6,
+};
+
+const FilterSection: React.FC<FilterDrawerProps> = ({
   isDrawerOpen,
   setIsDrawerOpen,
   onFilterApply,
@@ -32,7 +41,6 @@ const FilterSection: React.FC<LoginPageProps> = ({
           onClick={() => setIsDrawerOpen(false)}
         />
       )}
-
       {/* Drawer */}
       <div
         className={`fixed top-0 right-0 z-40 h-screen p-6 overflow-y-auto transition-transform transform bg-white shadow-lg ${
@@ -50,12 +58,15 @@ const FilterSection: React.FC<LoginPageProps> = ({
             ✕
           </button>
         </div>
-
         {/* Formik Form */}
         <Formik
-          initialValues={{ leadStages: [] }}
+          initialValues={{ leadStages: [] as string[] }}
           onSubmit={(values, { resetForm }) => {
-            onFilterApply(values);
+            const statusArray = values.leadStages.map(
+              (stage) => stageToStatusMap[stage]
+            );
+            console.log("Selected status codes:", statusArray);
+            onFilterApply({ leadStages: statusArray });
             setIsDrawerOpen(false);
           }}
         >
@@ -67,8 +78,6 @@ const FilterSection: React.FC<LoginPageProps> = ({
                   <h3 className="text-md font-medium text-gray-700">
                     Lead Status
                   </h3>
-
-                  {/* Select All Button */}
                   <button
                     type="button"
                     className="text-xs text-purple-600 hover:underline"
@@ -77,7 +86,6 @@ const FilterSection: React.FC<LoginPageProps> = ({
                     Select All
                   </button>
                 </div>
-
                 <div className="flex flex-col gap-2">
                   {stages.map((stage) => (
                     <label
@@ -88,20 +96,18 @@ const FilterSection: React.FC<LoginPageProps> = ({
                         type="checkbox"
                         name="leadStages"
                         value={stage}
-                        className="accent-[#BF9FFF]"
+                        className="form-checkbox h-5 w-5   text-[#BF9FFF] rounded-[2px]"
                       />
                       {stage.charAt(0).toUpperCase() + stage.slice(1)}
                     </label>
                   ))}
                 </div>
-
                 <ErrorMessage
                   name="leadStages"
                   component="div"
                   className="text-sm text-red-500 mt-1"
                 />
               </div>
-
               {/* Buttons */}
               <div className="flex gap-2 pt-4">
                 <button

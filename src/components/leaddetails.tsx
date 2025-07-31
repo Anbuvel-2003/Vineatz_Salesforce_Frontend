@@ -3,48 +3,53 @@ import { IoIosCheckmarkCircle } from "react-icons/io";
 import AddedLead from "./inputfield";
 import TabComponent from "./leaddetailstab";
 import { RejectApplication } from "./rejectapplication";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 function Leaddetails() {
+  const params = useParams<{ id: string }>();
+  console.log("params", params);
+  const navigate = useNavigate();
+  let { state } = useLocation();
+  console.log("state", state);
 
-  
   const steper = [
     {
-      id: 1,
+      id: 0,
       name: "initial",
     },
     {
-      id: 2,
+      id: 1,
       name: "prospect",
     },
     {
-      id: 3,
+      id: 2,
       name: "qualify",
     },
     {
-      id: 4,
+      id: 3,
       name: "demo",
     },
     {
-      id: 5,
+      id: 4,
       name: "proposal",
     },
     {
-      id: 6,
+      id: 5,
       name: "onboard",
     },
     {
-      id: 7,
+      id: 6,
       name: "account",
     },
   ];
-  const activeStep =1;
+  const activeStep = state?.value?.Status
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [isRejected, setIsRejected] = useState<boolean>(false);
   return (
     <div>
       <div className="!m-10 flex items-center justify-between">
         <div>
-          <h2>LEAD ID : LEAD00001</h2>
+          <h2>LEAD ID : {state?.value?.Id}</h2>
         </div>
         <div className="flex items-center !gap-5">
           <div
@@ -62,9 +67,7 @@ function Leaddetails() {
             }}
             className="border border-1 border-[#f98996] !p-2 rounded-[10px] cursor-pointer "
           >
-          
             <h2 className="text-[#f98996] font-medium  capitalize">reject </h2>
-        
           </div>
         </div>
       </div>
@@ -125,7 +128,7 @@ function Leaddetails() {
       <div className="flex items-center justify-between !m-10">
         <div className="w-full">
           <h1>Lead Details</h1>
-          <TabComponent />
+          <TabComponent initialTabId={Number(state?.value?.Status + 1)} />
         </div>
       </div>
 

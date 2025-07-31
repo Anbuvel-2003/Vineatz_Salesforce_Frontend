@@ -3,8 +3,16 @@ import React, { useRef } from "react";
 import { Formik, Form, Field, ErrorMessage, useFormikContext } from "formik";
 import * as Yup from "yup";
 import ProspectMoveLeads from "./prospect_move";
-import { Button, Calendar, DatePicker, Input, Popover, Space, Switch } from 'antd';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import {
+  Button,
+  Calendar,
+  DatePicker,
+  Input,
+  Popover,
+  Space,
+  Switch,
+} from "antd";
+import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { PopoverTrigger, PopoverContent } from "@radix-ui/react-popover";
 import { CalendarIcon } from "lucide-react";
 import { format } from "path";
@@ -12,8 +20,6 @@ import RejectApplication from "./rejectapplication";
 import Rejectapplication from "./rejectapplication";
 import { Textarea } from "flowbite-react";
 import { Label } from "recharts";
-
-
 
 interface AssignleadProps {
   isDrawerOpen: boolean;
@@ -24,13 +30,13 @@ interface AssignleadProps {
 }
 
 const stages = [
-  "initial",
-  "prospect",
-  "qualify",
-  "demo",
-  "proposal",
-  "onboard",
-  "accounts",
+  "Initial",
+  "Prospect",
+  "Qualify",
+  "Demo",
+  "Proposal",
+  "Onboard",
+  "Accounts",
 ];
 
 // Dynamic validation schema based on stage
@@ -85,7 +91,7 @@ const getFieldsByStage = (
   stageId: number,
   setIsDrawerOpen: (isOpen: boolean) => void,
   reject: boolean,
-  setReject: (value: boolean) => void
+  setreject: (value: boolean) => void
 ) => {
   if (reject) {
     return (
@@ -96,7 +102,7 @@ const getFieldsByStage = (
           </h2>
           <button
             onClick={() => {
-              setIsDrawerOpen(false), setreject(false)
+              setIsDrawerOpen(false), setreject(false);
             }}
             className="text-gray-600 hover:text-white hover:bg-[#BF9FFF] rounded-full w-8 h-8 flex items-center justify-center"
           >
@@ -104,9 +110,7 @@ const getFieldsByStage = (
           </button>
         </div>
 
-
         <div className="text-gray-500">
-         
           <div className=" w-full rounded-xl shadow-md bg-white px-6 py-6">
             <h2 className="text-[20px] text-[#111111] text-center font-poppins font-semibold mb-4">
               Reject Application
@@ -130,25 +134,17 @@ const getFieldsByStage = (
                 Details
               </label>
               <textarea
-              id="details"
+                id="details"
                 name="details"
                 placeholder="Rejection Details"
                 className="bg-[#FAFAFA] row-span-3 text-[#808080] border border-gray-300 rounded-md px-4 py-2 mt-1 w-full h-[150px]"
               />
             </div>
-
-           
           </div>
         </div>
-
-
-
       </>
-
     );
   }
-
-
   switch (stageId) {
     case 1:
       return (
@@ -184,8 +180,10 @@ const getFieldsByStage = (
               <label className="block text-lg font-medium mb-3">
                 Employee Name
               </label>
-              <Field name="name"
-              className="input w-full border p-2 rounded-xl" />
+              <Field
+                name="name"
+                className="input w-full border p-2 rounded-xl"
+              />
               <ErrorMessage
                 name="name"
                 component="div"
@@ -211,7 +209,10 @@ const getFieldsByStage = (
               <label className="block text-sm font-medium mb-1">
                 Employee Phone
               </label>
-              <Field name="phone" className="input w-full border p-2  rounded-xl" />
+              <Field
+                name="phone"
+                className="input w-full border p-2  rounded-xl"
+              />
               <ErrorMessage
                 name="phone"
                 component="div"
@@ -303,11 +304,10 @@ const getFieldsByStage = (
               />
             </div>
           </div> */}
-          < ProspectMoveLeads />
+          <ProspectMoveLeads />
         </>
       );
     case 3:
-      
       return (
         <>
           <div className="flex items-center justify-between mb-6">
@@ -341,17 +341,19 @@ const getFieldsByStage = (
               Details To Be Filled
             </span>
             <div className="flex items-center ">
-
-              <label className="text-lg font-medium w-[220px]">Application Demo</label>
+              <label className="text-lg font-medium w-[220px]">
+                Application Demo
+              </label>
               <Space direction="vertical">
                 <Switch checkedChildren="1" unCheckedChildren="O" />
               </Space>
             </div>
             <div className="flex items-center pb-5 ">
-
-              <label className="text-lg font-medium w-[220px]"> Features Explanation
+              <label className="text-lg font-medium w-[220px]">
+                {" "}
+                Features Explanation
               </label>
-              <Space direction="vertical" >
+              <Space direction="vertical">
                 <Switch checkedChildren="1" unCheckedChildren="O" />
               </Space>
             </div>
@@ -359,91 +361,92 @@ const getFieldsByStage = (
         </>
       );
     case 4:
-
       return (
-         <>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-gray-800 flex items-center">
-          Demo
-          <svg
-            className="w-3 h-3 mx-2 rtl:rotate-180 text-gray-400"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 12 10"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="m7 9 4-4-4-4M1 9l4-4-4-4"
-            />
-          </svg>
-          <span>Proposal</span>
-        </h2>
-        <button
-          onClick={() => setIsDrawerOpen(false)}
-          className="text-gray-600 hover:text-white hover:bg-[#BF9FFF] rounded-full w-8 h-8 flex items-center justify-center"
-        >
-          ✕
-        </button>
-      </div>
+        <>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-semibold text-gray-800 flex items-center">
+              Demo
+              <svg
+                className="w-3 h-3 mx-2 rtl:rotate-180 text-gray-400"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 12 10"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m7 9 4-4-4-4M1 9l4-4-4-4"
+                />
+              </svg>
+              <span>Proposal</span>
+            </h2>
+            <button
+              onClick={() => setIsDrawerOpen(false)}
+              className="text-gray-600 hover:text-white hover:bg-[#BF9FFF] rounded-full w-8 h-8 flex items-center justify-center"
+            >
+              ✕
+            </button>
+          </div>
 
-      <div className="flex flex-col gap-8">
-        <span className="text-[#000000] text-[20px] font-poppins">
-          Details To Be Filled
-        </span>
+          <div className="flex flex-col gap-8">
+            <span className="text-[#000000] text-[20px] font-poppins">
+              Details To Be Filled
+            </span>
 
-        {/* Finalized Amount Input */}
-        <div>
-          <label className="block text-md font-medium mb-1">Finalized Amount</label>
-          <Field name="finalizeAmount">
-            {({ field }: any) => (
-              <input
-                {...field}
-                type="text"
-                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (
-          !/[0-9]/.test(e.key) &&
-          e.key !== "Backspace" &&
-          e.key !== "Tab" &&
-          e.key !== "ArrowLeft" &&
-          e.key !== "ArrowRight"
-        ) {
-          e.preventDefault();
-        }
-      }}  
+            {/* Finalized Amount Input */}
+            <div>
+              <label className="block text-md font-medium mb-1">
+                Finalized Amount
+              </label>
+              <Field name="finalizeAmount">
+                {({ field }: any) => (
+                  <input
+                    {...field}
+                    type="text"
+                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                      if (
+                        !/[0-9]/.test(e.key) &&
+                        e.key !== "Backspace" &&
+                        e.key !== "Tab" &&
+                        e.key !== "ArrowLeft" &&
+                        e.key !== "ArrowRight"
+                      ) {
+                        e.preventDefault();
+                      }
+                    }}
+                    name="finalizeAmount"
+                    placeholder="Enter Finalized Amount"
+                    className="input w-full border p-2 rounded-lg placeholder:text-[#AEAEAE]"
+                  />
+                )}
+              </Field>
+              <ErrorMessage
                 name="finalizeAmount"
-                placeholder="Enter Finalized Amount"
-                className="input w-full border p-2 rounded-lg placeholder:text-[#AEAEAE]"
+                component="div"
+                className="text-red-500 text-sm"
               />
-            )}
-          </Field>
-          <ErrorMessage
-            name="finalizeAmount"
-            component="div"
-            className="text-red-500 text-sm"
-          />
-        </div>
+            </div>
 
-        {/* Due Date Input */}
-        <div>
-          <label className="block text-md font-medium mb-1">Due Date</label>
-          <DatePicker
-            size="large"
-            name="dueDate"
-            placeholder="Select Due Date"
-            className="input w-full placeholder:text-[#AEAEAE] border p-2 rounded-lg"
-            suffixIcon={<CalendarIcon className="text-[#AEAEAE]" />}
-          />
-          <ErrorMessage
-            name="dueDate"
-            component="div"
-            className="text-red-500 text-sm"
-          />
-        </div>
-      </div>
-    </>
+            {/* Due Date Input */}
+            <div>
+              <label className="block text-md font-medium mb-1">Due Date</label>
+              <DatePicker
+                size="large"
+                name="dueDate"
+                placeholder="Select Due Date"
+                className="input w-full placeholder:text-[#AEAEAE] border p-2 rounded-lg"
+                suffixIcon={<CalendarIcon className="text-[#AEAEAE]" />}
+              />
+              <ErrorMessage
+                name="dueDate"
+                component="div"
+                className="text-red-500 text-sm"
+              />
+            </div>
+          </div>
+        </>
       );
     case 5:
       return (
@@ -669,19 +672,16 @@ const AddedLead: React.FC<AssignleadProps> = ({
     timeline: "",
     industry: "",
     priority: "",
-    expectedAmount: "",   // for prospect
-    expectedDate: undefined,   // for prospect
-    typeofbusiness: "",   // for prospect
-    confidence: "",   // for prospect
+    expectedAmount: "", // for prospect
+    expectedDate: undefined, // for prospect
+    typeofbusiness: "", // for prospect
+    confidence: "", // for prospect
     appDemo: false, // for toggle
     featuresExplanation: false, // for toggle
     paymentMethod: "", // for radio
     finalizeAmount: "",
     dueDate: undefined,
   };
-
-  
-
   return (
     <div className="relative z-40">
       {/* Backdrop */}
@@ -693,8 +693,9 @@ const AddedLead: React.FC<AssignleadProps> = ({
       )}
       {/* Drawer */}
       <div
-        className={`fixed top-0 right-0 z-40 h-screen p-6 overflow-y-auto transition-transform transform bg-white shadow-lg ${isDrawerOpen ? "translate-x-0" : "translate-x-full"
-          } w-[90%] sm:w-[60%] md:w-[40%] lg:w-[30%]`}
+        className={`fixed top-0 right-0 z-40 h-screen p-6 overflow-y-auto transition-transform transform bg-white shadow-lg ${
+          isDrawerOpen ? "translate-x-0" : "translate-x-full"
+        } w-[90%] sm:w-[60%] md:w-[40%] lg:w-[30%]`}
       >
         <Formik
           initialValues={initialValues}
