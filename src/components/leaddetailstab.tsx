@@ -362,19 +362,42 @@ const TabComponent: React.FC<TabComponentProps> = ({ initialTabId = 1 }) => {
         </div>
       </div>
 
-      {/* Display notes */}
+      {/* Display existing notes */}
       <div className="space-y-4 mb-4">
         {notes
           .slice()
           .reverse()
           .map((note, index) => (
-            <div key={index} className="...">
-              {/* Note display content */}
+            <div
+              key={index}
+              className="flex justify-between w-full bg-[#F1F1F1] text-[#404040] border border-gray-300 rounded-md px-4 py-3 relative"
+            >
+              <div>
+                <div className="font-semibold text-lg text-[#333] mb-1">
+                  {note.title}
+                </div>
+                <div className="text-[18px] mb-2">{note.message}</div>
+                <div className="text-sm text-gray-500">
+                  {note.timestamp}
+                </div>
+              </div>
+              <div className="place-self-center">
+                <button
+                  className="bg-white border rounded-lg text-red-500 font-bold hover:bg-red-500 hover:text-white p-3 text-sm"
+                  onClick={() => {
+                    const newNotes = [...notes];
+                    newNotes.splice(notes.length - 1 - index, 1);
+                    setNotes(newNotes);
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
       </div>
-      
-      {/* Add new note - fully integrated with Formik */}
+
+      {/* Add new note form */}
       {showTextarea && (
         <Formik
           initialValues={initialValues}
@@ -393,13 +416,16 @@ const TabComponent: React.FC<TabComponentProps> = ({ initialTabId = 1 }) => {
             setShowTextarea(false);
           }}
         >
-          {({ isSubmitting }) => (
+          {({ values, handleChange, handleBlur, isSubmitting }) => (
             <Form>
               <div className="w-full mb-3 space-y-2">
                 <Field
                   name="title"
                   className="w-full p-2 border border-gray-300 rounded-md text-[18px] bg-[#FAFAFA] text-[#404040]"
                   placeholder="Enter note title..."
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.title}
                 />
                 <ErrorMessage
                   name="title"
@@ -411,19 +437,31 @@ const TabComponent: React.FC<TabComponentProps> = ({ initialTabId = 1 }) => {
                   name="message"
                   className="w-full h-[150px] p-2 border border-gray-300 rounded-md text-[18px] bg-[#FAFAFA] text-[#404040]"
                   placeholder="Enter note message..."
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.message}
                 />
                 <ErrorMessage
                   name="message"
                   component="div"
                   className="text-red-500 text-sm"
                 />
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="px-4 py-2 bg-[#BF9FFF] text-white rounded-md"
-                >
-                  Save Note
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="px-4 py-2 bg-[#BF9FFF] text-white rounded-md"
+                  >
+                    Save Note
+                  </button>
+                  <button
+                    type="button"
+                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md"
+                    onClick={() => setShowTextarea(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             </Form>
           )}
