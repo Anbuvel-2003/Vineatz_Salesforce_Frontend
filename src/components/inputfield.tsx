@@ -474,7 +474,7 @@ const getFieldsByStage = (
 
         </>
       );
-      case 4:
+    case 4:
         return (
           <>
             <div className="flex items-center justify-between mb-6">
@@ -814,7 +814,12 @@ const AddedLead: React.FC<AssignleadProps> = ({
     subject: "",
     details: "",
   };
-  return (
+
+  const validationSchema = reject 
+    ? rejectValidationSchema 
+    : getValidationSchema(stageId);
+
+    return (
     <div className="relative z-40">
       {/* Backdrop */}
       {isDrawerOpen && (
@@ -830,24 +835,36 @@ const AddedLead: React.FC<AssignleadProps> = ({
       >
         <Formik
           initialValues={initialValues}
-          validationSchema={getValidationSchema(stageId) || rejectValidationSchema}
+          validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
             console.log("Submitted Data:", values);
-            resetForm();
+            if (!reject){
+              resetForm();
+            }
           }}
         >
-
-          <Form>
+          {({ handleSubmit }) => (
+            <Form 
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !reject) {
+                  e.preventDefault();
+                  handleSubmit();
+                }
+              }}
+            >
             {getFieldsByStage(stageId, setIsDrawerOpen, reject, setreject)}
-
-            <button
+            
+            {!reject && (  
+              <button
               type="submit"
               className="bg-[#BF9FFF] text-white px-4 py-2 rounded hover:bg-[#a57fff] mt-4"
-            >
+              >
               Submit
             </button>
+            )}
 
           </Form>
+          )}
         </Formik>
       </div>
     </div>

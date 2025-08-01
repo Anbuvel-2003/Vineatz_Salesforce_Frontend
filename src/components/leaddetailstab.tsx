@@ -1,7 +1,7 @@
-import { Formik, FormikHelpers } from "formik";
+import { ErrorMessage, Field, Formik, FormikHelpers } from "formik";
 import React, { useState } from "react";
 import { GoPlus } from "react-icons/go";
-import { Form } from "react-router-dom";
+import { Form } from "formik";
 import * as yup from "yup";
 
 const tabs = [
@@ -347,110 +347,90 @@ const TabComponent: React.FC<TabComponentProps> = ({ initialTabId = 1 }) => {
         );
       case 7:
         return <div>🕒 Activity content goes here</div>;
-      case 8:
-        function handleSubmit(values: FormValues, formikHelpers: FormikHelpers<FormValues>): void | Promise<any> {
-          throw new Error("Function not implemented.");
-        }
+     case 8:
+  return (
+    <div className="p-4">
+      <div className="flex justify-between items-center mb-3">
+        <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
+          Notes
+        </h1>
+        <div
+          className="flex items-center gap-2 bg-[#BF9FFF] px-4 py-2 rounded-md cursor-pointer"
+          onClick={() => setShowTextarea(true)}
+        >
+          <GoPlus size={24} className="text-white" />
+        </div>
+      </div>
 
-        return (
-          <div className="p-4">
-            <div className="flex justify-between items-center mb-3">
-              <h1 className="text-[32px] font-semibold font-poppins text-[#BF9FFF] mb-4">
-                Notes
-              </h1>
-              <div
-                className="flex items-center gap-2 bg-[#BF9FFF] px-4 py-2 rounded-md cursor-pointer"
-                onClick={() => setShowTextarea(true)}
-              >
-                <GoPlus size={24} className="text-white" />
-              </div>
+      {/* Display notes */}
+      <div className="space-y-4 mb-4">
+        {notes
+          .slice()
+          .reverse()
+          .map((note, index) => (
+            <div key={index} className="...">
+              {/* Note display content */}
             </div>
-
-            {/* Display notes - latest first */}
-            <div className="space-y-4 mb-4">
-              {notes
-                .slice()
-                .reverse()
-                .map((note, index) => (
-                  <div
-                    key={index}
-                    className="flex justify-between w-full bg-[#F1F1F1] text-[#404040] border border-gray-300 rounded-md px-4 py-3 relative"
-                  >
-                    <div>
-                      <div className="font-semibold text-lg text-[#333] mb-1">
-                        {note.title}
-                      </div>
-                      <div className="text-[18px] mb-2">{note.message}</div>
-                      <div className="text-sm text-gray-500">
-                        {note.timestamp}
-                      </div>
-                    </div>
-                    <div className="place-self-center ">
-                      <button
-                        className=" bg-white  text-center  border rounded-lg text-red-500 font-bold hover:bg-red-500 hover:text-white p-3 text-sm"
-                        onClick={() => {
-                          const newNotes = [...notes];
-                          newNotes.splice(notes.length - 1 - index, 1); // reverse index
-                          setNotes(newNotes);
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </div>
-                ))}
-            </div>
-                  
-            {/* Add new note */}
-            {showTextarea && (
-                <Formik
-                      initialValues={initialValues}
-                      onSubmit={handleSubmit}
-                      validationSchema={validationSchema}
-                    >
-                      {({ values, setFieldValue }) => (
-                        <Form>
+          ))}
+      </div>
+      
+      {/* Add new note - fully integrated with Formik */}
+      {showTextarea && (
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={(values, { resetForm }) => {
+            const newNote = {
+              title: values.title.trim(),
+              message: values.message.trim(),
+              timestamp: new Date().toLocaleString("en-IN", {
+                dateStyle: "medium",
+                timeStyle: "short",
+              }),
+            };
+            setNotes((prev) => [...prev, newNote]);
+            resetForm();
+            setShowTextarea(false);
+          }}
+        >
+          {({ isSubmitting }) => (
+            <Form>
               <div className="w-full mb-3 space-y-2">
-                <input
+                <Field
+                  name="title"
                   className="w-full p-2 border border-gray-300 rounded-md text-[18px] bg-[#FAFAFA] text-[#404040]"
                   placeholder="Enter note title..."
-                  value={noteTitle}
-                  onChange={(e) => setNoteTitle(e.target.value)}
                 />
-                <textarea
+                <ErrorMessage
+                  name="title"
+                  component="div"
+                  className="text-red-500 text-sm"
+                />
+                <Field
+                  as="textarea"
+                  name="message"
                   className="w-full h-[150px] p-2 border border-gray-300 rounded-md text-[18px] bg-[#FAFAFA] text-[#404040]"
                   placeholder="Enter note message..."
-                  value={noteInput}
-                  onChange={(e) => setNoteInput(e.target.value)}
+                />
+                <ErrorMessage
+                  name="message"
+                  component="div"
+                  className="text-red-500 text-sm"
                 />
                 <button
+                  type="submit"
+                  disabled={isSubmitting}
                   className="px-4 py-2 bg-[#BF9FFF] text-white rounded-md"
-                  onClick={() => {
-                    if (noteTitle.trim() && noteInput.trim()) {
-                      const newNote = {
-                        title: noteTitle.trim(),
-                        message: noteInput.trim(),
-                        timestamp: new Date().toLocaleString("en-IN", {
-                          dateStyle: "medium",
-                          timeStyle: "short",
-                        }),
-                      };
-                      setNotes((prev) => [...prev, newNote]);
-                      setNoteTitle("");
-                      setNoteInput("");
-                      setShowTextarea(false);
-                    }
-                  }}
                 >
                   Save Note
                 </button>
               </div>
-              </Form>
-                      )}
-                    </Formik>
-            )}
-          </div>
-        );
+            </Form>
+          )}
+        </Formik>
+      )}
+    </div>
+  );
       default:
         return null;
     }
