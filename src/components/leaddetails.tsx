@@ -139,6 +139,7 @@ function Leaddetails() {
         setreject={setIsRejected}
         stageId={activeStep}
       />
+
     </div>
   );
 }

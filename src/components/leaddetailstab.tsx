@@ -1,5 +1,9 @@
+import { Formik, FormikHelpers } from "formik";
 import React, { useState } from "react";
 import { GoPlus } from "react-icons/go";
+import { Form } from "react-router-dom";
+import * as yup from "yup";
+
 const tabs = [
   { id: 1, label: "Initial" },
   { id: 2, label: "Prospect" },
@@ -15,6 +19,21 @@ interface TabComponentProps {
 }
 const TabComponent: React.FC<TabComponentProps> = ({ initialTabId = 1 }) => {
   const [activeTab, setActiveTab] = useState<number>(8);
+
+  interface FormValues {
+    title: string;
+    message: string;
+  }
+  
+  const initialValues: FormValues = {
+    title: "",
+    message: "",
+  };
+  const validationSchema = yup.object().shape({
+    title: yup.string().required("Title is required"),
+    message: yup.string().required("Message is required"),
+  })
+  
   const renderContent = () => {
     const [showTextarea, setShowTextarea] = useState(false);
     const [noteInput, setNoteInput] = useState("");
@@ -329,6 +348,10 @@ const TabComponent: React.FC<TabComponentProps> = ({ initialTabId = 1 }) => {
       case 7:
         return <div>🕒 Activity content goes here</div>;
       case 8:
+        function handleSubmit(values: FormValues, formikHelpers: FormikHelpers<FormValues>): void | Promise<any> {
+          throw new Error("Function not implemented.");
+        }
+
         return (
           <div className="p-4">
             <div className="flex justify-between items-center mb-3">
@@ -377,9 +400,16 @@ const TabComponent: React.FC<TabComponentProps> = ({ initialTabId = 1 }) => {
                   </div>
                 ))}
             </div>
-
+                  
             {/* Add new note */}
             {showTextarea && (
+                <Formik
+                      initialValues={initialValues}
+                      onSubmit={handleSubmit}
+                      validationSchema={validationSchema}
+                    >
+                      {({ values, setFieldValue }) => (
+                        <Form>
               <div className="w-full mb-3 space-y-2">
                 <input
                   className="w-full p-2 border border-gray-300 rounded-md text-[18px] bg-[#FAFAFA] text-[#404040]"
@@ -415,6 +445,9 @@ const TabComponent: React.FC<TabComponentProps> = ({ initialTabId = 1 }) => {
                   Save Note
                 </button>
               </div>
+              </Form>
+                      )}
+                    </Formik>
             )}
           </div>
         );
