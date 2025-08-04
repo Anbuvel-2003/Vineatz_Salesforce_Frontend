@@ -1,9 +1,20 @@
-import React, { useState, useRef } from "react";
-import { Formik, Form, Field, ErrorMessage, useFormikContext } from "formik";
+import { useState } from "react";
+import React, { useRef } from "react";
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  useFormikContext,
+  useField,
+} from "formik";
 import * as Yup from "yup";
 import { DatePicker, Space, Switch } from "antd";
 import { CalendarIcon } from "lucide-react";
 import dayjs from "dayjs";
+import { authApi } from "@/config/fetchData";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 interface AssignleadProps {
   isDrawerOpen: boolean;
@@ -11,8 +22,8 @@ interface AssignleadProps {
   setreject: (isOpen: boolean) => void;
   stageId: number;
   reject: boolean;
+  leadvalue: any;
 }
-
 const stages = [
   "Initial",
   "Prospect",
@@ -22,7 +33,6 @@ const stages = [
   "Onboard",
   "Accounts",
 ];
-
 const rejectValidationSchema = Yup.object().shape({
   subject: Yup.string().required("Subject is required"),
   details: Yup.string()
@@ -30,7 +40,7 @@ const rejectValidationSchema = Yup.object().shape({
     .max(100, "Reason should be at most 100 characters")
     .required("Details is required"),
 });
-
+// Dynamic validation schema based on stage
 const getValidationSchema = (stageId: number) => {
   switch (stageId + 1) {
     case 1:
@@ -63,12 +73,12 @@ const getValidationSchema = (stageId: number) => {
           .required("Application demo is required"),
         featureExplanation: Yup.boolean()
           .oneOf([true], "Please confirm feature explanation")
-          .required("Feature explanation is required")
+          .required("Feature explanation is required"),
       });
     case 4:
       return Yup.object({
         finalizeAmount: Yup.number().required("Finalize amount is required"),
-        dueDate: Yup.string().required('Due date is required')
+        dueDate: Yup.string().required("Due date is required"),
       });
     case 5:
       return Yup.object({
@@ -114,8 +124,9 @@ const getFieldsByStage = (
         </div>
 
         <div className="text-gray-500">
-          <div className="w-full pt-6">
-            <div className="mb-5">
+          <div className=" w-full pt-6">
+            {/* Rejection Subject */}
+            <div className=" mb-5">
               <div className="mb-2">
                 <label className="text-[16px] text-[#111111] w-[125px] font-medium">
                   Subject
@@ -194,9 +205,9 @@ const getFieldsByStage = (
               <label className="block text-lg font-medium mb-3">
                 Employee Name
               </label>
-              <Field 
+              <Field
                 name="name"
-                className="input w-full border-2 p-2 rounded-xl" 
+                className="input w-full border-2 p-2 rounded-xl"
               />
               <ErrorMessage
                 name="name"
@@ -223,7 +234,10 @@ const getFieldsByStage = (
               <label className="block text-sm font-medium mb-1">
                 Employee Phone
               </label>
-              <Field name="phone">
+              <Field
+                name="phone"
+                className=" input w-full border  border-gray-300 p-2 rounded-xl"
+              >
                 {({ field }: any) => (
                   <input
                     {...field}
@@ -282,7 +296,7 @@ const getFieldsByStage = (
               ✕
             </button>
           </div>
-        
+
           <div className="pt-5">
             <span className="text-[#000000] text-[20px] font-poppins">
               Details To Be Filled
@@ -300,7 +314,11 @@ const getFieldsByStage = (
                     setFieldValue("expectedAmount", e.target.value)
                   }
                   onKeyDown={(e) => {
-                    if (!/[0-9]/.test(e.key) && e.key !== 'Backspace' && e.key !== 'Tab') {
+                    if (
+                      !/[0-9]/.test(e.key) &&
+                      e.key !== "Backspace" &&
+                      e.key !== "Tab"
+                    ) {
                       e.preventDefault();
                     }
                   }}
@@ -315,31 +333,32 @@ const getFieldsByStage = (
               </div>
 
               <div className="grid grid-cols-1 w-full pb-5 gap-3 pr-5">
-
-                 <label className="block text-md font-medium mb-1">Due Date</label>
-              <Field name="expectedDate">
-                {({ field, form }: any) => (
-                  <DatePicker
-                    size="large"
-                    value={field.value ? dayjs(field.value) : null}
-                    onChange={(date) => {
-                      const dateValue = date ? date.format('YYYY-MM-DD') : '';
-                      form.setFieldValue(field.name, dateValue);
-                      form.setFieldTouched(field.name, true);
-                    }}
-                    onBlur={() => form.setFieldTouched(field.name, true)}
-                    placeholder="Select Due Date"
-                    className="input w-full md:w-[500px] h-[50px] placeholder:text-[#AEAEAE] border p-3 rounded-lg"
-                    suffixIcon={<CalendarIcon className="text-[#AEAEAE]" />}
-                  />
-                )}
-              </Field>
-              <ErrorMessage
-                name="expectedDate"
-                component="div"
-                className="text-red-500 text-sm"
-              />
-    </div>
+                <label className="block text-md font-medium mb-1">
+                  Due Date
+                </label>
+                <Field name="expectedDate">
+                  {({ field, form }: any) => (
+                    <DatePicker
+                      size="large"
+                      value={field.value ? dayjs(field.value) : null}
+                      onChange={(date) => {
+                        const dateValue = date ? date.format("YYYY-MM-DD") : "";
+                        form.setFieldValue(field.name, dateValue);
+                        form.setFieldTouched(field.name, true);
+                      }}
+                      onBlur={() => form.setFieldTouched(field.name, true)}
+                      placeholder="Select Due Date"
+                      className="input w-full md:w-[500px] h-[50px] placeholder:text-[#AEAEAE] border p-3 rounded-lg"
+                      suffixIcon={<CalendarIcon className="text-[#AEAEAE]" />}
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name="expectedDate"
+                  component="div"
+                  className="text-red-500 text-sm"
+                />
+              </div>
 
               <div className="grid grid-cols-1 w-full pb-5 gap-3">
                 <span className="text-[#111111] text-lg font-poppins font-medium">
@@ -430,7 +449,7 @@ const getFieldsByStage = (
             <span className="text-[#000000] text-[20px] font-poppins">
               Details To Be Filled
             </span>
-
+            {/* Application Demo */}
             <div className="flex flex-col gap-5">
               <div className="flex flex-row">
                 <label className="text-lg font-medium w-[220px]">
@@ -462,7 +481,7 @@ const getFieldsByStage = (
                 className="text-red-500 text-sm"
               />
             </div>
-
+            {/* Features Explanation */}
             <div className="flex flex-col gap-5 pb-5">
               <div className="flex flex-row">
                 <label className="text-lg font-medium w-[220px]">
@@ -532,6 +551,7 @@ const getFieldsByStage = (
               Details To Be Filled
             </span>
 
+            {/* Finalized Amount Input */}
             <div>
               <label className="block text-md font-medium mb-1">
                 Finalized Amount
@@ -561,10 +581,11 @@ const getFieldsByStage = (
               <ErrorMessage
                 name="finalizeAmount"
                 component="div"
-                className="text-red-500 text-sm pt-3"
+                className="text-red-500 text-sm"
               />
             </div>
 
+            {/* Due Date Input */}
             <div>
               <label className="block text-md font-medium mb-1">Due Date</label>
               <Field name="dueDate">
@@ -573,7 +594,7 @@ const getFieldsByStage = (
                     size="large"
                     value={field.value ? dayjs(field.value) : null}
                     onChange={(date) => {
-                      const dateValue = date ? date.format('YYYY-MM-DD') : '';
+                      const dateValue = date ? date.format("YYYY-MM-DD") : "";
                       form.setFieldValue(field.name, dateValue);
                       form.setFieldTouched(field.name, true);
                     }}
@@ -587,7 +608,7 @@ const getFieldsByStage = (
               <ErrorMessage
                 name="dueDate"
                 component="div"
-                className="text-red-500 text-sm pt-3 "
+                className="text-red-500 text-sm"
               />
             </div>
           </div>
@@ -628,14 +649,24 @@ const getFieldsByStage = (
             </label>
             <div className="flex flex-col py-8 gap-5">
               <label className="flex items-center gap-2">
-                <Field type="radio" name="paymentMethod" value="cash" className="hidden peer" />
+                <Field
+                  type="radio"
+                  name="paymentMethod"
+                  value="cash"
+                  className="hidden peer"
+                />
                 <div className="w-5 h-5 rounded-full border-2 border-[#BF9FFF] flex items-center justify-center peer-checked:bg-blue-600">
                   <div className="w-2 h-2 bg-white rounded-full" />
                 </div>
                 Cash
               </label>
-              <label className="flex items-center gap-2">
-                <Field type="radio" name="paymentMethod" value="netbanking" className="hidden peer" />
+              <label className="flex  items-center gap-2">
+                <Field
+                  type="radio"
+                  name="paymentMethod"
+                  value="netbanking"
+                  className="hidden peer"
+                />
                 <div className="w-5 h-5 rounded-3xl border-2 border-[#BF9FFF] flex items-center justify-center peer-checked:bg-blue-600">
                   <div className="w-2 h-2 bg-white rounded-full" />
                 </div>
@@ -650,8 +681,161 @@ const getFieldsByStage = (
           </div>
         </>
       );
-    case 6:
-    case 7:
+
+    // case 6:
+    // return (
+    //   <>
+    //     <div className="flex items-center justify-between mb-6">
+    //       <h2 className="text-xl font-semibold text-gray-800 flex items-center">
+    //         onboard
+    //         <svg
+    //           className="w-3 h-3 mx-2 rtl:rotate-180 text-gray-400"
+    //           xmlns="http://www.w3.org/2000/svg"
+    //           fill="none"
+    //           viewBox="0 0 12 10"
+    //         >
+    //           <path
+    //             stroke="currentColor"
+    //             strokeLinecap="round"
+    //             strokeLinejoin="round"
+    //             strokeWidth="2"
+    //             d="m7 9 4-4-4-4M1 9l4-4-4-4"
+    //           />
+    //         </svg>
+    //         <span>account</span>
+    //       </h2>
+    //       <button
+    //         onClick={() => setIsDrawerOpen(false)}
+    //         className="text-gray-600 hover:text-white hover:bg-[#BF9FFF] rounded-full w-8 h-8 flex items-center justify-center"
+    //       >
+    //         ✕
+    //       </button>
+    //     </div>
+    //     <div className="flex flex-col gap-4">
+    //       <div>
+    //         <label className="block text-sm font-medium mb-1">Name</label>
+    //         <Field name="name" className="input w-full border p-2 rounded" />
+    //         <ErrorMessage
+    //           name="name"
+    //           component="div"
+    //           className="text-red-500 text-sm"
+    //         />
+    //       </div>
+    //       <div>
+    //         <label className="block text-sm font-medium mb-1">Email</label>
+    //         <Field
+    //           name="email"
+    //           type="email"
+    //           className="input w-full border p-2 rounded"
+    //         />
+    //         <ErrorMessage
+    //           name="email"
+    //           component="div"
+    //           className="text-red-500 text-sm"
+    //         />
+    //       </div>
+    //       <div>
+    //         <label className="block text-sm font-medium mb-1">Phone</label>
+    //         <Field name="phone" className="input w-full border p-2 rounded" />
+    //         <ErrorMessage
+    //           name="phone"
+    //           component="div"
+    //           className="text-red-500 text-sm"
+    //         />
+    //       </div>
+    //       <div>
+    //         <label className="block text-sm font-medium mb-1">Company</label>
+    //         <Field
+    //           name="company"
+    //           className="input w-full border p-2 rounded"
+    //         />
+    //         <ErrorMessage
+    //           name="company"
+    //           component="div"
+    //           className="text-red-500 text-sm"
+    //         />
+    //       </div>
+    //     </div>
+    //   </>
+    // );
+
+    // case 7:
+    // return (
+    //   <>
+    //     <div className="flex items-center justify-between mb-6">
+    //       <h2 className="text-xl font-semibold text-gray-800 flex items-center">
+    //         Initial
+    //         <svg
+    //           className="w-3 h-3 mx-2 rtl:rotate-180 text-gray-400"
+    //           xmlns="http://www.w3.org/2000/svg"
+    //           fill="none"
+    //           viewBox="0 0 12 10"
+    //         >
+    //           <path
+    //             stroke="currentColor"
+    //             strokeLinecap="round"
+    //             strokeLinejoin="round"
+    //             strokeWidth="2"
+    //             d="m7 9 4-4-4-4M1 9l4-4-4-4"
+    //           />
+    //         </svg>
+    //         <span>Prospect</span>
+    //       </h2>
+    //       <button
+    //         onClick={() => setIsDrawerOpen(false)}
+    //         className="text-gray-600 hover:text-white hover:bg-[#BF9FFF] rounded-full w-8 h-8 flex items-center justify-center"
+    //       >
+    //         ✕
+    //       </button>
+    //     </div>
+    //     <div className="flex flex-col gap-4">
+    //       <div>
+    //         <label className="block text-sm font-medium mb-1">Name</label>
+    //         <Field name="name" className="input w-full border p-2 rounded" />
+    //         <ErrorMessage
+    //           name="name"
+    //           component="div"
+    //           className="text-red-500 text-sm"
+    //         />
+    //       </div>
+    //       <div>
+    //         <label className="block text-sm font-medium mb-1">Email</label>
+    //         <Field
+    //           name="email"
+    //           type="email"
+    //           className="input w-full border p-2 rounded"
+    //         />
+    //         <ErrorMessage
+    //           name="email"
+    //           component="div"
+    //           className="text-red-500 text-sm"
+    //         />
+    //       </div>
+    //       <div>
+    //         <label className="block text-sm font-medium mb-1">Phone</label>
+    //         <Field name="phone" className="input w-full border p-2 rounded" />
+    //         <ErrorMessage
+    //           name="phone"
+    //           component="div"
+    //           className="text-red-500 text-sm"
+    //         />
+    //       </div>
+    //       <div>
+    //         <label className="block text-sm font-medium mb-1">Company</label>
+    //         <Field
+    //           name="company"
+    //           className="input w-full border p-2 rounded"
+    //         />
+    //         <ErrorMessage
+    //           name="company"
+    //           component="div"
+    //           className="text-red-500 text-sm"
+    //         />
+    //       </div>
+    //     </div>
+    //   </>
+    // );
+
     default:
       return <div>No fields for this stage.</div>;
   }
@@ -663,6 +847,7 @@ const AddedLead: React.FC<AssignleadProps> = ({
   stageId,
   reject = false,
   setreject,
+  leadvalue,
 }) => {
   const initialValues = {
     name: "",
@@ -685,11 +870,10 @@ const AddedLead: React.FC<AssignleadProps> = ({
     subject: "",
     details: "",
   };
-
   const validationSchema = reject
     ? rejectValidationSchema
     : getValidationSchema(stageId);
-
+  const navigate = useNavigate();
   return (
     <div className="relative z-40">
       {isDrawerOpen && (
@@ -706,37 +890,154 @@ const AddedLead: React.FC<AssignleadProps> = ({
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { resetForm }) => {
+          onSubmit={async (values, { resetForm }) => {
             console.log("Submitted Data:", values);
             if (reject) {
-              console.log("Rejecting with:", values);
+              console.log("leadvalue", stageId, values);
+              const updateapi = await authApi?.Updatereject(leadvalue?._id, {
+                subject: values?.subject,
+                reason: values?.details,
+              });
+              console.log("updateapi", updateapi);
+              if (updateapi?.success) {
+                toast?.success(updateapi?.message);
+                setTimeout(() => {
+                  navigate("/Applicationlist");
+                }, 1000);
+              } else {
+                toast?.error(updateapi?.message);
+              }
             } else {
-              console.log("Submitting with:", values);
               resetForm();
+              if (stageId == 0) {
+                console.log("leadvalue", stageId, values);
+                const updateapi = await authApi?.UpdateLead(leadvalue?._id, {
+                  status: stageId + 1,
+                  employeeid: values?.name,
+                  employeename: values?.email,
+                  employeeaddress: values?.phone,
+                });
+                console.log("updateapi", updateapi);
+                if (updateapi?.success) {
+                  toast?.success(updateapi?.message);
+                  setTimeout(() => {
+                    navigate("/Applicationlist");
+                  }, 1000);
+                } else {
+                  toast?.error(updateapi?.message);
+                }
+              } else {
+                if (stageId == 1) {
+                  console.log("leadvalue", stageId, values);
+                  const updateapi = await authApi?.UpdateLead(leadvalue?._id, {
+                    status: stageId + 1,
+                    expectedAmt: values?.expectedAmount,
+                    expectedDate: values?.expectedDate,
+                    typeOfBusiness: values?.typeofbusiness,
+                    confidenceLevel: values?.confidence,
+                  });
+                  console.log("updateapi", updateapi);
+                  if (updateapi?.success) {
+                    toast?.success(updateapi?.message);
+                    setTimeout(() => {
+                      navigate("/Applicationlist");
+                    }, 1000);
+                  } else {
+                    toast?.error(updateapi?.message);
+                  }
+                } else {
+                  if (stageId == 2) {
+                    console.log("leadvalue", stageId, values);
+                    const updateapi = await authApi?.UpdateLead(
+                      leadvalue?._id,
+                      {
+                        status: stageId + 1,
+                        applicationDemo: values?.applicationDemo,
+                        featureExplanation: values?.featureExplanation,
+                      }
+                    );
+                    console.log("updateapi", updateapi);
+                    if (updateapi?.success) {
+                      toast?.success(updateapi?.message);
+                      setTimeout(() => {
+                        navigate("/Applicationlist");
+                      }, 1000);
+                    } else {
+                      toast?.error(updateapi?.message);
+                    }
+                  } else {
+                    if (stageId == 3) {
+                      console.log("leadvalue", stageId, values);
+                      const updateapi = await authApi?.UpdateLead(
+                        leadvalue?._id,
+                        {
+                          status: stageId + 1,
+                          finalAmount: values?.finalizeAmount,
+                          finalDate: values?.dueDate,
+                        }
+                      );
+                      console.log("updateapi", updateapi);
+                      if (updateapi?.success) {
+                        toast?.success(updateapi?.message);
+                        setTimeout(() => {
+                          navigate("/Applicationlist");
+                        }, 1000);
+                      } else {
+                        toast?.error(updateapi?.message);
+                      }
+                    } else {
+                      if (stageId == 4) {
+                        const check =
+                          values?.paymentMethod == "cash" ? true : false;
+                        console.log("ddddddd", check);
+                        const updateapi = await authApi?.UpdateLead(
+                          leadvalue?._id,
+                          {
+                            status: stageId + 1,
+                            paymentType: check,
+                          }
+                        );
+                        console.log("updateapi", updateapi);
+                        if (updateapi?.success) {
+                          toast?.success(updateapi?.message);
+                          setTimeout(() => {
+                            navigate("/Applicationlist");
+                          }, 1000);
+                        } else {
+                          toast?.error(updateapi?.message);
+                        }
+                      } else {
+                      }
+                    }
+                  }
+                }
+              }
+              console.log("leadvalue", stageId, values);
             }
           }}
         >
-          {({ 
-            handleSubmit, 
-            isSubmitting, 
-            setErrors, 
+          {({
+            handleSubmit,
+            isSubmitting,
+            setErrors,
             setTouched,
             values,
             errors,
             touched,
             submitCount,
-            setFieldValue
+            setFieldValue,
           }) => {
             React.useEffect(() => {
               if (!isDrawerOpen) {
                 setErrors({});
                 setTouched({});
-                if (reject) {
-                  setreject(false);
-                }
+                if (reject) setreject(false);
               }
-            }, [isDrawerOpen, setErrors, setTouched, reject, setreject]);
-
+            }, [isDrawerOpen, reject, setErrors, setTouched, setreject]);
+            React.useEffect(() => {
+              setErrors({});
+              setTouched({});
+            }, [stageId]);
             return (
               <Form
                 onKeyDown={(e) => {
@@ -747,9 +1048,9 @@ const AddedLead: React.FC<AssignleadProps> = ({
                 }}
               >
                 {getFieldsByStage(
-                  stageId, 
-                  setIsDrawerOpen, 
-                  reject, 
+                  stageId,
+                  setIsDrawerOpen,
+                  reject,
                   setreject,
                   values,
                   errors,
@@ -761,15 +1062,15 @@ const AddedLead: React.FC<AssignleadProps> = ({
                   disabled={isSubmitting}
                   className={`${
                     reject
-                      ? 'bg-red-500 hover:bg-red-600'
-                      : 'bg-[#BF9FFF] hover:bg-[#a57fff]'
+                      ? "bg-red-500 hover:bg-red-600"
+                      : "bg-[#BF9FFF] hover:bg-[#a57fff]"
                   } text-white px-4 py-2 rounded mt-4 disabled:opacity-50`}
                 >
                   {isSubmitting
-                    ? 'Submitting...'
+                    ? "Submitting..."
                     : reject
-                      ? 'Reject Lead'
-                      : 'Submit'}
+                    ? "Reject Lead"
+                    : "Submit"}
                 </button>
               </Form>
             );

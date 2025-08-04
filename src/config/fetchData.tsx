@@ -133,11 +133,63 @@ export const authApi = {
     if (search) query += `&search=${search}`;
     if (sortBy)
       query += `&sortBy=${
-        sortBy == "ProductID" ? "Application_Id" : sortBy == "ProductName" ? "Application_Name": sortBy
+        sortBy == "ProductID"
+          ? "Application_Id"
+          : sortBy == "ProductName"
+          ? "Application_Name"
+          : sortBy
       }&order=${sortOrder}`;
     if (status.length > 0) query += `&status=${status.join(",")}`;
     console.log(sortBy, "sortBy");
     console.log(query, "query");
     return api.getMethod(query);
+  },
+    GetReject: async (
+    page = 1,
+    limit = 10,
+    search = "",
+    sortBy = "",
+    sortOrder = "asc",
+    status: string[] = []
+  ): Promise<LeadResponse> => {
+    let query = `/lead/reject?page=${page}&limit=${limit}`;
+    if (search) query += `&search=${search}`;
+    if (sortBy)
+      query += `&sortBy=${
+        sortBy == "ProductID"
+          ? "Application_Id"
+          : sortBy == "ProductName"
+          ? "Application_Name"
+          : sortBy
+      }&order=${sortOrder}`;
+    if (status.length > 0) query += `&status=${status.join(",")}`;
+    console.log(sortBy, "sortBy");
+    console.log(query, "query");
+    return api.getMethod(query);
+  },
+  AddNotes: async (id: string, payload: any): Promise<any> => {
+    const url = `/lead/${id}/Notes`;
+    return api.postMethod(url, payload);
+  },
+  Deletenotes: async (id: string, noteid: string): Promise<any> => {
+    const url = `/lead/${id}/Notes/${noteid}`;
+    return api.deleteMethod(url);
+  },
+  GetNotes: async (id: string): Promise<any> => {
+    const url = `/lead/${id}`;
+    console.log("sssssssssss", url);
+    return api.getMethod(url);
+  },
+  UpdateLead: async (id: string, payload: any): Promise<any> => {
+    const url = `/lead/${id}`;
+    return api.putMethod(url, payload);
+  },
+  Updatereject: async (id: string, payload: any): Promise<any> => {
+    const url = `/lead/reject/${id}`;
+    return api.putMethod(url, payload);
+  },
+  Getallreject: async (): Promise<any> => {
+    const url = `/lead/reject`;
+    return api.getMethod(url);
   },
 };

@@ -9,7 +9,6 @@ import { toast } from "react-toastify";
 function SidebarNavigation() {
   const navigate = useNavigate();
   const [activeItem, setActiveItem] = useState("dashboard");
-
   const menuItems = [
     {
       name: "dashboard",
@@ -19,22 +18,28 @@ function SidebarNavigation() {
     },
     {
       name: "application",
-      label: "Application",
+      label: "Leads",
       icon: <MdBarChart size={24} />,
       to: "/Applicationlist",
     },
     {
-      name: "employees",
-      label: "Employees",
-      icon: <GrUserWorker size={24} />,
-      to: "/Employeelist",
+      name: "reject ",
+      label: "Reject Leads",
+      icon: <MdBarChart size={24} />,
+      to: "/RejectTable",
     },
-    {
-      name: "admins",
-      label: "Admins",
-      icon: <GrUserWorker size={24} />,
-      to: "/adminlist",
-    },
+    // {
+    //   name: "employees",
+    //   label: "Employees",
+    //   icon: <GrUserWorker size={24} />,
+    //   to: "/Employeelist",
+    // },
+    // {
+    //   name: "admins",
+    //   label: "Admins",
+    //   icon: <GrUserWorker size={24} />,
+    //   to: "/adminlist",
+    // },
     {
       name: "logout",
       label: "Log Out",
@@ -80,7 +85,7 @@ function SidebarNavigation() {
                       setActiveItem("dashboard");
                       console.log(error, "Error Message");
                     }
-                  }else{
+                  } else {
                     setActiveItem("dashboard");
                   }
                 } else {

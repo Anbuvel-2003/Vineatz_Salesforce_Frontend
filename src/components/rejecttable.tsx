@@ -18,7 +18,7 @@ interface LeadData {
   Is_rejected: boolean;
 }
 
-const LeadTableSimple: React.FC = () => {
+const RejectTable: React.FC = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [sortField, setSortField] = useState<keyof LeadData | "">("");
@@ -35,7 +35,7 @@ const LeadTableSimple: React.FC = () => {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-      const res = await authApi.GetLeads(
+      const res = await authApi.GetReject(
         currentPage + 1,
         itemsPerPage,
         searchTerm,
@@ -43,9 +43,8 @@ const LeadTableSimple: React.FC = () => {
         sortOrder,
         activeFilters.leadStages
       );
-      setLeads(res.data);
+      setLeads(res?.data);
       console.log("res", res?.data);
-
       setTotalPages(res?.totalPages);
     } catch (err) {
       console.error("Failed to fetch leads:", err);
@@ -84,6 +83,7 @@ const LeadTableSimple: React.FC = () => {
     5: "Onboard",
     6: "Account",
   };
+
   const statusColorMap: Record<string, string> = {
     Initial: "text-blue-500 border-blue-500",
     Prospect: "text-purple-500 border-purple-500",
@@ -94,6 +94,7 @@ const LeadTableSimple: React.FC = () => {
     Account: "text-gray-500 border-gray-500",
     Unknown: "text-gray-400 border-gray-400",
   };
+
   return (
     <div className="p-6">
       {/* <h2 className="text-xl font-semibold mb-4"> Leads Table</h2> */}
@@ -110,20 +111,7 @@ const LeadTableSimple: React.FC = () => {
             }}
             className="p-2 border border-[#BF9FFF] rounded w-full sm:w-1/2 placeholder-[#989898] text-sm focus:outline-none focus:border-[#BF9FFF] focus:ring-1 focus:ring-[#BF9FFF]"
           />
-          <div
-            className="group flex items-center gap-1 border border-[#BF9FFF] rounded p-2 hover:bg-[#BF9FFF] cursor-pointer"
-            onClick={() => setIsDrawerOpen(true)}
-          >
-            <MdOutlineFilterAlt
-              size={20}
-              className="text-[#BF9FFF] group-hover:text-white transition-colors duration-200"
-            />
-            <h2 className="text-sm text-[#BF9FFF] group-hover:text-white">
-              Filter
-            </h2>
-          </div>
         </div>
-
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 text-sm">
             <label htmlFor="itemsPerPage">Rows :</label>
@@ -169,22 +157,16 @@ const LeadTableSimple: React.FC = () => {
           <tbody>
             {leads.map((lead, index) => {
               console.log("lead", lead?.Is_rejected == true);
-              // if (lead?.Is_rejected == true) {
-              //   return null;
-              // }
-              const statusLabel = statusMap[lead.Status] || "Unknown";
-              const colorClass =
-                statusColorMap[statusLabel] || "text-gray-400 border-gray-400";
               return (
                 <tr
                   key={index}
                   className="text-sm hover:bg-[#f1ebfb] cursor-pointer"
-                  onClick={() => {
-                    // navigate(`/leaddetails/${lead.leadID}`);
-                    navigate(`/leaddetails/${lead._id}`, {
-                      state: { value: lead },
-                    });
-                  }}
+                //   onClick={() => {
+                //     // navigate(`/leaddetails/${lead.leadID}`);
+                //     navigate(`/leaddetails/${lead._id}`, {
+                //       state: { value: lead },
+                //     });
+                //   }}
                 >
                   {/* <td className="p-3 border text-center text-[#707070]">
                   {lead.Id}
@@ -205,11 +187,10 @@ const LeadTableSimple: React.FC = () => {
                     className={`p-3 border text-center text-[#707070] place-items-center `}
                   >
                     <div
-                      className={`flex items-center justify-center border py-1 w-[70%] rounded-[10px] ${colorClass}`}
+                      className={`flex items-center justify-center border py-1 w-[70%] rounded-[10px] text-red-400 border-red-400`}
                     >
                       <h2 className="">
-                        {" "}
-                        {statusMap[lead.Status] || "Unknown"}
+                      Rejected
                       </h2>
                     </div>
                   </td>
@@ -274,4 +255,4 @@ const LeadTableSimple: React.FC = () => {
   );
 };
 
-export default LeadTableSimple;
+export default RejectTable;

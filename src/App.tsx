@@ -34,6 +34,7 @@ import Otpscreen from "./components/otpscreen";
 import { InputOTPDemo } from "./components/otp";
 import NewPassword from "./components/newpassword";
 import Leaddetails from "./components/leaddetails";
+import RejectTable from "./components/rejecttable";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -63,6 +64,7 @@ function App(): JSX.Element {
                 />
                 <Route path="/Admincreation" element={<Admincreation />} />
                 <Route path="/Adminupdation" element={<Adminupdation />} />
+                <Route path="/RejectTable" element={<RejectTable />} />
                 <Route
                   path="/Clientmanagement"
                   element={<Clientmanagement />}
@@ -73,9 +75,7 @@ function App(): JSX.Element {
                 />
                 <Route
                   path="/Rejectapplication"
-                  element={
-                    <Rejectapplication />
-                  }
+                  element={<Rejectapplication />}
                 />
                 <Route path="/Applicationlist" element={<Applicationslist />} />
                 <Route

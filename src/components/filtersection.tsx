@@ -6,7 +6,6 @@ interface FilterDrawerProps {
   setIsDrawerOpen: (isOpen: boolean) => void;
   onFilterApply: (filters: { leadStages: number[] }) => void;
 }
-
 const stages = [
   "initial",
   "prospect",
@@ -16,7 +15,6 @@ const stages = [
   "onboard",
   "accounts",
 ];
-
 const stageToStatusMap: Record<string, number> = {
   initial: 0,
   prospect: 1,
@@ -26,7 +24,6 @@ const stageToStatusMap: Record<string, number> = {
   onboard: 5,
   accounts: 6,
 };
-
 const FilterSection: React.FC<FilterDrawerProps> = ({
   isDrawerOpen,
   setIsDrawerOpen,
@@ -133,3 +130,6 @@ const FilterSection: React.FC<FilterDrawerProps> = ({
 };
 
 export default FilterSection;
+
+
+

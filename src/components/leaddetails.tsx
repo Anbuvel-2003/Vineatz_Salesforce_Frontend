@@ -11,7 +11,6 @@ function Leaddetails() {
   const navigate = useNavigate();
   let { state } = useLocation();
   console.log("state", state);
-
   const steper = [
     {
       id: 0,
@@ -37,12 +36,12 @@ function Leaddetails() {
       id: 5,
       name: "onboard",
     },
-    {
-      id: 6,
-      name: "account",
-    },
+    // {
+    //   id: 6,
+    //   name: "account",
+    // },
   ];
-  const activeStep = state?.value?.Status
+  const activeStep = state?.value?.Status;
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [isRejected, setIsRejected] = useState<boolean>(false);
   return (
@@ -51,25 +50,29 @@ function Leaddetails() {
         <div>
           <h2>LEAD ID : {state?.value?.Id}</h2>
         </div>
-        <div className="flex items-center !gap-5">
-          <div
-            className="border border-1 border-[#BF9FFF] !p-2 rounded-[10px] cursor-pointer "
-            onClick={() => {
-              setIsRejected(false);
-              setIsDrawerOpen(true);
-            }}
-          >
-            <h2 className="text-[#BF9FFF] font-medium capitalize ">Move</h2>
+        {state?.value?.Status !== 5 ? (
+          <div className="flex items-center !gap-5">
+            <div
+              className="border border-1 border-[#BF9FFF] !p-2 rounded-[10px] cursor-pointer "
+              onClick={() => {
+                setIsRejected(false);
+                setIsDrawerOpen(true);
+              }}
+            >
+              <h2 className="text-[#BF9FFF] font-medium capitalize ">Move</h2>
+            </div>
+            <div
+              onClick={() => {
+                setIsRejected(true), setIsDrawerOpen(true);
+              }}
+              className="border border-1 border-[#f98996] !p-2 rounded-[10px] cursor-pointer "
+            >
+              <h2 className="text-[#f98996] font-medium  capitalize">
+                reject{" "}
+              </h2>
+            </div>
           </div>
-          <div
-            onClick={() => {
-              setIsRejected(true), setIsDrawerOpen(true);
-            }}
-            className="border border-1 border-[#f98996] !p-2 rounded-[10px] cursor-pointer "
-          >
-            <h2 className="text-[#f98996] font-medium  capitalize">reject </h2>
-          </div>
-        </div>
+        ) : null}
       </div>
       <div className="!m-10">
         <ol className="flex items-center w-full p-3 space-x-2 text-sm place-content-center font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-xs dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4 rtl:space-x-reverse">
@@ -128,7 +131,11 @@ function Leaddetails() {
       <div className="flex items-center justify-between !m-10">
         <div className="w-full">
           <h1>Lead Details</h1>
-          <TabComponent initialTabId={Number(state?.value?.Status + 1)} />
+          <TabComponent
+            initialTabId={Number(state?.value?.Status + 1)}
+            leadid={state?.value?._id + 1}
+            state={state?.value}
+          />
         </div>
       </div>
 
@@ -136,10 +143,10 @@ function Leaddetails() {
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}
         reject={isRejected}
+        leadvalue={state?.value}
         setreject={setIsRejected}
         stageId={activeStep}
       />
-
     </div>
   );
 }
