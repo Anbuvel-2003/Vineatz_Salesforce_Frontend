@@ -9,9 +9,10 @@ import {
 interface InputOTPDemoProps {
   value: string;
   onChange: (val: string) => void;
+  onBlur: () => void;
 }
 
-export const InputOTPDemo: React.FC<InputOTPDemoProps> = ({ value, onChange }) => {
+export const InputOTPDemo: React.FC<InputOTPDemoProps> = ({ value, onChange ,onBlur}) => {
   return (
     <InputOTP
       value={value}

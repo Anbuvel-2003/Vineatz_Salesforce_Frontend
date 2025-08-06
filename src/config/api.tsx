@@ -1,10 +1,10 @@
-import { baseUrl } from './base_url';
+import { baseUrl } from "./base_url";
 
 export const api = {
   header: (): Record<string, string> => {
     return {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: "application/json",
+      "Content-Type": "application/json",
     };
   },
 
@@ -12,23 +12,26 @@ export const api = {
   getMethod: (url: string): Promise<any> => {
     const headers = { ...api.header() };
     return fetch(baseUrl + url, {
-      method: 'GET',
+      method: "GET",
       headers,
     })
-      .then(res => res.json())
-      .catch(err => Promise.reject(err));
+      .then((res) => res.json())
+      .catch((err) => Promise.reject(err));
   },
 
   // ✅ POST Method
-  postMethod: (url: string, data: any): Promise<any> => {
+  postMethod: (url: string, data: any, accesstoken?: string): Promise<any> => {
     const headers = { ...api.header() };
+    if (accesstoken) {
+      headers["Authorization"] = `Bearer ${accesstoken}`;
+    }
     return fetch(baseUrl + url, {
-      method: 'POST',
+      method: "POST",
       headers,
       body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .catch(err => Promise.reject(err));
+      .then((res) => res.json())
+      .catch((err) => Promise.reject(err));
   },
 
   // ✅ PUT Method (handles FormData correctly)
@@ -37,37 +40,37 @@ export const api = {
 
     if (data instanceof FormData) {
       // Content-Type must NOT be set manually for FormData
-      delete headers['Content-Type'];
+      delete headers["Content-Type"];
     }
 
     return fetch(baseUrl + url, {
-      method: 'PUT',
+      method: "PUT",
       headers,
       body: data instanceof FormData ? data : JSON.stringify(data),
     })
-      .then(res => res.json())
-      .catch(err => Promise.reject(err));
+      .then((res) => res.json())
+      .catch((err) => Promise.reject(err));
   },
 
   // ✅ PUT Method for Notifications
   putMethodNotification: (url: string): Promise<any> => {
     const headers = { ...api.header() };
     return fetch(baseUrl + url, {
-      method: 'PUT',
+      method: "PUT",
       headers,
     })
-      .then(res => res.json())
-      .catch(err => Promise.reject(err));
+      .then((res) => res.json())
+      .catch((err) => Promise.reject(err));
   },
 
   // ✅ DELETE Method
   deleteMethod: (url: string): Promise<any> => {
     const headers = { ...api.header() };
     return fetch(baseUrl + url, {
-      method: 'DELETE',
+      method: "DELETE",
       headers,
     })
-      .then(res => res.json())
-      .catch(err => Promise.reject(err));
+      .then((res) => res.json())
+      .catch((err) => Promise.reject(err));
   },
 };

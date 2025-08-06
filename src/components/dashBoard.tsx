@@ -14,19 +14,17 @@ import dashboard02 from "../assets/dashboard02.png";
 import dashboard03 from "../assets/dashboard03.png";
 import dashboard04 from "../assets/dashboard04.png";
 import dashboard05 from "../assets/dashboard05.png";
+import sample from "../assets/sample3.png";
 import dashboard06 from "../assets/dashboard06.png";
 import TopApplicationComponent from "./topapplication";
 
 function Dashboard() {
-  
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [Data, setData] = useState([]);
-
   useEffect(() => {
     getproject();
   }, []);
-
   const getproject = async () => {
     setLoading(true);
     try {
@@ -49,7 +47,6 @@ function Dashboard() {
       console.log(error, "Error Message");
     }
   };
-
   const deleteproject = async (id: any) => {
     const Comfirmation = window.confirm(
       "Are you sure you want to delete this project?"
@@ -189,6 +186,12 @@ function Dashboard() {
         </div>
         <div className="bg-[#fff] w-1/3 rounded-[10px]">
           <h2 className="text-[20px]">sss</h2>
+        </div>
+      </div>
+      <div className="w-[20%] h-[25%] relative ">
+        <img src={sample} alt="" className="w-full h-full rounded-[20px]" />
+        <div className="absolute top-7 right-9 bg-white rounded-l-[20px] w-[50px] h-[50px]">
+          <h3>tick</h3>
         </div>
       </div>
     </div>

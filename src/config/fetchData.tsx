@@ -144,7 +144,7 @@ export const authApi = {
     console.log(query, "query");
     return api.getMethod(query);
   },
-    GetReject: async (
+  GetReject: async (
     page = 1,
     limit = 10,
     search = "",
@@ -191,5 +191,13 @@ export const authApi = {
   Getallreject: async (): Promise<any> => {
     const url = `/lead/reject`;
     return api.getMethod(url);
+  },
+  Sentemail: async (payload: any): Promise<any> => {
+    const url = `/user/sendotp`;
+    return api.postMethod(url, payload);
+  },
+  otpverify: async (payload: any,accesstoken:string): Promise<any> => {
+    const url = `/user/verifyotp`;
+    return api.postMethod(url, payload,accesstoken);
   },
 };

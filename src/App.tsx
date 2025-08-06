@@ -5,36 +5,28 @@ import Layoutpage from "./components/layout";
 import Dashboard from "./components/dashBoard";
 import AddProject from "./components/addProject";
 import UpdateProject from "./components/updateProject";
-import TaskDashboard from "./components/TaskDashboard";
-import Createtask from "./components/createtask";
-import UpdateTask from "./components/UpdateTask";
 import Createapplication from "./components/createapplication";
-import Applicationlist from "./components/applicationlist";
 import Applicationslist from "./components/applicationslist";
 import Login from "./components/login";
 import UpdateApplication from "./components/updateapplication";
 import ManageApplication from "./components/manageapplication";
-import Employeelist from "./components/employeelist";
 import Adminlist from "./components/adminlist";
 import Adduser from "./components/adduser";
 import Updateuser from "./components/updateuser";
 import Updateemployee from "./components/Updateemployee";
 import Addemployee from "./components/addemployee";
 import Clientmanagement from "./components/clientmanagement";
-import Rejectapplication from "./components/rejectapplication";
 import Applicationdetails from "./components/applicationdetails";
 import Applicationdetailsmanual from "./components/applicationdetailmanual";
 import Admincreation from "./components/admincreation";
-import ProspectlistApplication from "./components/prospectlist";
-import ProspectMoveLeads from "./components/prospect_move";
 import Adminupdation from "./components/adminupdation";
 import LogoutPopup from "./components/logout";
 import ForgotPassword from "./components/forgotpassword";
 import Otpscreen from "./components/otpscreen";
-import { InputOTPDemo } from "./components/otp";
 import NewPassword from "./components/newpassword";
 import Leaddetails from "./components/leaddetails";
 import RejectTable from "./components/rejecttable";
+import Employeelist from "./components/Employeelist";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -54,14 +46,6 @@ function App(): JSX.Element {
                   element={<Applicationdetails />}
                 />
                 <Route path="/manageleadlist" element={<ManageApplication />} />
-                <Route
-                  path="/ProspectlistApplication"
-                  element={<ProspectMoveLeads />}
-                />
-                <Route
-                  path="/ProspectMoveLeads"
-                  element={<ProspectMoveLeads />}
-                />
                 <Route path="/Admincreation" element={<Admincreation />} />
                 <Route path="/Adminupdation" element={<Adminupdation />} />
                 <Route path="/RejectTable" element={<RejectTable />} />
@@ -73,21 +57,8 @@ function App(): JSX.Element {
                   path="/Applicationdetailsmanual"
                   element={<Applicationdetailsmanual />}
                 />
-                <Route
-                  path="/Rejectapplication"
-                  element={<Rejectapplication />}
-                />
                 <Route path="/Applicationlist" element={<Applicationslist />} />
-                <Route
-                  path="/Logout"
-                  element={
-                    <LogoutPopup
-                      open={undefined}
-                      onOpenChange={undefined}
-                      onConfirm={undefined}
-                    />
-                  }
-                />
+                <Route path="/Logout" element={<LogoutPopup />} />
                 <Route path="/AddProject" element={<AddProject />} />
                 <Route path="/Employeelist" element={<Employeelist />} />
                 <Route path="/addemployee" element={<Addemployee />} />
@@ -101,9 +72,6 @@ function App(): JSX.Element {
                   element={<Updateemployee />}
                 />
                 <Route path="/UpdateProject/:id" element={<UpdateProject />} />
-                <Route path="/TaskDashboard" element={<TaskDashboard />} />
-                <Route path="/CreateTask" element={<Createtask />} />
-                <Route path="/UpdateTask/:id" element={<UpdateTask />} />
                 <Route
                   path="/createapplication"
                   element={<Createapplication />}
@@ -131,7 +99,6 @@ function App(): JSX.Element {
             <Route path="*" element={<Navigate to="/login" replace />} />
             <Route path="/ForgotPassword" element={<ForgotPassword />} />
             <Route path="/Otpscreen" element={<Otpscreen />} />
-            <Route path="/InputOTPDemo" element={<InputOTPDemo />} />
             <Route path="/NewPassword" element={<NewPassword />} />
           </Routes>
         )}

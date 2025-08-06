@@ -7,12 +7,7 @@ import { toast } from "react-toastify";
 import { authApi } from "@/config/fetchData";
 import { useNavigate } from "react-router-dom";
 
-interface ForgotPasswordProps {
-  isDrawerOpen: boolean;
-  setIsDrawerOpen: (isOpen: boolean) => void;
-}
-
-const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
+const ForgotPassword: React.FC = () => {
   const navigate = useNavigate();
   const validationSchema = Yup.object().shape({
     Email: Yup.string()
@@ -21,30 +16,30 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isDrawerOpen, setIsDraw
   });
 
   const handleSubmit = async (values: { Email: string }) => {
-    // try {
-    //   // Replace with your actual API call
-    //   const res = await axios.post(`${authApi}/send-otp`, {
-    //     email: values.Email,
-    //   });
-
-    //   if (res.data.success) {
-    //     toast.success("OTP sent to your email!");
-    //   } else {
-    //     toast.error(res.data.message || "Something went wrong!");
-    //   }
-    // } catch (error: any) {
-    //   toast.error(error?.response?.data?.message || "Server error");
-    // }
-    navigate("/Otpscreen");
+    try {
+      const sendotp = await authApi?.Sentemail({
+        email: values.Email,
+      });
+      if (sendotp?.success) {
+        toast?.success(sendotp?.message);
+        navigate("/Otpscreen", { state: { value: sendotp?.token } });
+      } else {
+        toast?.error(sendotp?.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast?.error("Something went wrong");
+    }
   };
-
   return (
     <section className="h-screen flex items-center justify-center">
       <div className="flex w-full h-full">
         {/* Left: Form */}
         <div className="w-1/2 flex items-center justify-center">
           <div className="w-[70%]">
-            <h1 className="text-[42px] font-bold font-poppins mb-6">Forgot Password!</h1>
+            <h1 className="text-[42px] font-bold font-poppins mb-6">
+              Forgot Password!
+            </h1>
             <Formik
               initialValues={{ Email: "" }}
               validationSchema={validationSchema}
@@ -52,7 +47,9 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isDrawerOpen, setIsDraw
             >
               {({ values, errors, touched, handleChange, handleSubmit }) => (
                 <form className="flex flex-col" onSubmit={handleSubmit}>
-                  <label className="font-poppins text-[#2D3748]  mb-1">Email</label>
+                  <label className="font-poppins text-[#2D3748]  mb-1">
+                    Email
+                  </label>
                   <input
                     type="email"
                     name="Email"
@@ -60,18 +57,19 @@ const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isDrawerOpen, setIsDraw
                     onChange={handleChange}
                     placeholder="Enter Your registered Email address"
                     className="border border-[#E2E8F0] text-[#2D3748] placeholder:text-[#A0AEC0] rounded-xl font-poppins p-3 mb-1"
-                    
                   />
                   {touched.Email && errors.Email && (
-                    <div className="text-red-500 text-sm mb-2">{errors.Email}</div>
+                    <div className="text-red-500 text-sm mb-2">
+                      {errors.Email}
+                    </div>
                   )}
                   <a href="/Otpscreen">
-                  <button 
-                    type="submit"
-                    className="bg-[#BF9FFF] hover:bg-[#9b77e2] text-white font-bold rounded-xl w-full font-poppins py-3 px-4 mt-4"
-                  >
-                    Get OTP
-                  </button>
+                    <button
+                      type="submit"
+                      className="bg-[#BF9FFF] hover:bg-[#9b77e2] text-white font-bold rounded-xl w-full font-poppins py-3 px-4 mt-4"
+                    >
+                      Get OTP
+                    </button>
                   </a>
                 </form>
               )}

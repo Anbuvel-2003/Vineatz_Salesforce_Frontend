@@ -4,7 +4,6 @@ import { FaFileAlt } from 'react-icons/fa';
 import { ImProfile } from 'react-icons/im';
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineArrowDropDown, MdDelete } from 'react-icons/md';
-import RejectApplication from '../components/rejectapplication';
 import { Button } from './ui/button';
 import { MdOutlineEmail } from "react-icons/md";
 import { MdOutlineLocalPhone } from "react-icons/md";
@@ -80,14 +79,14 @@ Applicationdetails() {
                 <td>{item.icon}</td>
                 <td>{item.profile}</td>
                 <td className="w-[80px] flex items-center">
-                  <RejectApplication appid={item.appid} clientname={item.clientname}>
+                  {/* <RejectApplication appid={item.appid} clientname={item.clientname}>
                     <Button
                       type="button"
                       className='bg-[#FEF4F5] hover:bg-red-500 hover:text-white text-[#E71D36] flex items-center gap-1 text-xs px-2 py-1'
                     >
                       <MdDelete className='text-lg' /> Reject
                     </Button>
-                  </RejectApplication>
+                  </RejectApplication> */}
                 </td>
               </tr>
             ))}

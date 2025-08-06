@@ -313,7 +313,7 @@ const getFieldsByStage = (
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     setFieldValue("expectedAmount", e.target.value)
                   }
-                  onKeyDown={(e) => {
+                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => { 
                     if (
                       !/[0-9]/.test(e.key) &&
                       e.key !== "Backspace" &&

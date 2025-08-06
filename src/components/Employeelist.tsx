@@ -8,8 +8,6 @@ import { GoPlus } from "react-icons/go";
 import { useNavigate } from "react-router-dom";
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
-import RejectApplication from "./rejectapplication";
-import DeleteApplication from "./deleteapplication";
 import { authApi } from "../config/fetchData";
 import { set } from "date-fns";
 import { toast } from "react-toastify";

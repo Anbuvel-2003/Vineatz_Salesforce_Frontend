@@ -168,7 +168,7 @@ const RejectTable: React.FC = () => {
                 //     });
                 //   }}
                 >
-                  {/* <td className="p-3 border text-center text-[#707070]">
+                  {/* <td className="p-3 border text-center text-[#707070]">  
                   {lead.Id}
                 </td> */}
                   <td className="p-3 border text-center text-[#707070]">

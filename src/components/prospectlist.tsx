@@ -5,7 +5,6 @@ import { FaFileAlt } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { IoIosMore } from "react-icons/io";
 import { useState } from "react";
-import RejectApplication from "../components/rejectapplication";
 import { Button } from "antd";
 import { GiMove } from "react-icons/gi";
 import { BiSolidEditAlt } from "react-icons/bi";
@@ -200,7 +199,7 @@ function ProspectlistApplication() {
                                                     <BiSolidEditAlt />
                                                     Edit
                                                 </button>
-                                                <RejectApplication
+                                                {/* <RejectApplication
                                                     appid={item.appid}
                                                     clientname={item.clientname}
                                                 >
@@ -208,7 +207,7 @@ function ProspectlistApplication() {
                                                         <MdDelete className='text-lg ' />
                                                         Reject
                                                     </button>
-                                                </RejectApplication>
+                                                </RejectApplication> */}
                                             </div>
                                         )}
                                     </div>

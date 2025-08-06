@@ -5,7 +5,6 @@ import { FaFileAlt } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { IoIosMore } from "react-icons/io";
 import { useState } from "react";
-import RejectApplication from "../components/rejectapplication";
 import { BiSolidEditAlt } from "react-icons/bi";
 import { GiMove } from "react-icons/gi";
 import { useNavigate } from "react-router-dom";
@@ -185,11 +184,11 @@ function ManageApplication() {
                         <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-[#BF9FFF]">
                           Move
                         </button>
-                        <RejectApplication>
+                        {/* <RejectApplication>
                           <button className="block w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500">
                             Reject
                           </button>
-                        </RejectApplication>
+                        </RejectApplication> */}
                       </div>
                     )}
                   </div>

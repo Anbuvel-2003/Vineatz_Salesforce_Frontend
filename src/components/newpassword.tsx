@@ -5,12 +5,9 @@ import img1 from "../assets/login_img.png";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { Navigate, useNavigate } from "react-router-dom";
 
-interface LoginProps {
-  isDrawerOpen: boolean;
-  setIsDrawerOpen: (isOpen: boolean) => void;
-}
 
-const NewPassword: React.FC<LoginProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
+
+const NewPassword: React.FC = () => {
     const navigate = useNavigate();
   const [showPassword, setShowPassword] = React.useState(false);
       const [showConfirm, setShowConfirm] = useState(false);

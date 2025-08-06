@@ -6,17 +6,14 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { authApi } from "@/config/fetchData";
 import { InputOTPDemo } from "./otp";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 
-
-interface OTPProps {
-  isDrawerOpen: boolean;
-  setIsDrawerOpen: (isOpen: boolean) => void;
-}
-
-const Otpscreen: React.FC<OTPProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
+const Otpscreen: React.FC = () => {
+  const params = useParams();
   const navigate = useNavigate();
+  let { state } = useLocation();
+  console.log(state, "))))");
   const validationSchema = Yup.object().shape({
     otp: Yup.string()
       .matches(/^\d{6}$/, "OTP must be exactly 6 digits")
@@ -24,7 +21,23 @@ const Otpscreen: React.FC<OTPProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
   });
 
   const handleSubmit = async (values: { otp: string }) => {
-    navigate("/NewPassword");
+    try {
+      const sendotp = await authApi?.otpverify(
+        {
+          otp: values.otp,
+        },
+        state?.value
+      );
+      if (sendotp?.success) {
+        toast?.success(sendotp?.message);
+        navigate("/NewPassword");
+      } else {
+        toast?.error(sendotp?.message);
+      }
+    } catch (error) {
+      console.log("error", error);
+      toast?.error("Something went wrong");
+    }
   };
 
   return (
@@ -51,7 +64,9 @@ const Otpscreen: React.FC<OTPProps> = ({ isDrawerOpen, setIsDrawerOpen }) => {
                 handleSubmit,
               }) => (
                 <form className="flex flex-col" onSubmit={handleSubmit}>
-                  <label className="font-poppins text-[#2D3748] mb-1">OTP</label>
+                  <label className="font-poppins text-[#2D3748] mb-1">
+                    OTP
+                  </label>
 
                   <InputOTPDemo
                     value={values.otp}

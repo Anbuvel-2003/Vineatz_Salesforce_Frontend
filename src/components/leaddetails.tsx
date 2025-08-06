@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import AddedLead from "./inputfield";
 import TabComponent from "./leaddetailstab";
-import { RejectApplication } from "./rejectapplication";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 function Leaddetails() {
