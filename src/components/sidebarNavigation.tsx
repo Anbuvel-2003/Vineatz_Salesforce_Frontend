@@ -4,6 +4,7 @@ import { RiPieChart2Fill } from "react-icons/ri";
 import { MdBarChart } from "react-icons/md";
 import { GrUserWorker } from "react-icons/gr";
 import { HiOutlineLogout } from "react-icons/hi";
+import { RiTeamFill } from "react-icons/ri";
 import { toast } from "react-toastify";
 
 function SidebarNavigation() {
@@ -22,24 +23,42 @@ function SidebarNavigation() {
       icon: <MdBarChart size={24} />,
       to: "/Applicationlist",
     },
-    {
-      name: "reject ",
-      label: "Reject Leads",
-      icon: <MdBarChart size={24} />,
-      to: "/RejectTable",
-    },
     // {
-    //   name: "employees",
-    //   label: "Employees",
-    //   icon: <GrUserWorker size={24} />,
-    //   to: "/Employeelist",
+    //   name: "reject ",
+    //   label: "snapscrolling",
+    //   icon: <MdBarChart size={24} />,
+    //   to: "/snapscrolling",
     // },
+    {
+      name: "teamlist",
+      label: "Teams List",
+      icon: <RiTeamFill size={24} />,
+      to: "/Teamlist",
+    },
+    {
+      name: "teamlead",
+      label: "Teamlead List",
+      icon: <GrUserWorker size={24} />,
+      to: "/Teamleadlist",
+    },
+    {
+      name: "employees",
+      label: "Employees",
+      icon: <RiTeamFill size={24} />,
+      to: "/Employeelist",
+    },
     // {
     //   name: "admins",
     //   label: "Admins",
     //   icon: <GrUserWorker size={24} />,
     //   to: "/adminlist",
     // },
+    {
+      name: "reject ",
+      label: "Reject Leads",
+      icon: <MdBarChart size={24} />,
+      to: "/RejectTable",
+    },
     {
       name: "logout",
       label: "Log Out",

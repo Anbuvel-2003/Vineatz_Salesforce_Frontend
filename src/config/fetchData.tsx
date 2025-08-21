@@ -196,8 +196,12 @@ export const authApi = {
     const url = `/user/sendotp`;
     return api.postMethod(url, payload);
   },
-  otpverify: async (payload: any,accesstoken:string): Promise<any> => {
+  otpverify: async (payload: any, accesstoken: string): Promise<any> => {
     const url = `/user/verifyotp`;
-    return api.postMethod(url, payload,accesstoken);
+    return api.postMethod(url, payload, accesstoken);
   },
+  // Newpassword: async (payload: any): Promise<any> => {
+  //   const url = `/user/newpassword`;
+  //   return api.postMethod(url, payload);
+  // },
 };

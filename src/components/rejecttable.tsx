@@ -73,7 +73,6 @@ const RejectTable: React.FC = () => {
       setSortOrder("asc");
     }
   };
-
   const statusMap: Record<number, string> = {
     0: "Initial",
     1: "Prospect",
@@ -83,7 +82,6 @@ const RejectTable: React.FC = () => {
     5: "Onboard",
     6: "Account",
   };
-
   const statusColorMap: Record<string, string> = {
     Initial: "text-blue-500 border-blue-500",
     Prospect: "text-purple-500 border-purple-500",
@@ -94,10 +92,9 @@ const RejectTable: React.FC = () => {
     Account: "text-gray-500 border-gray-500",
     Unknown: "text-gray-400 border-gray-400",
   };
-
   return (
     <div className="p-6">
-      {/* <h2 className="text-xl font-semibold mb-4"> Leads Table</h2> */}
+      <h2 className="text-xl font-semibold mb-4"> Rejected Table</h2>
       {/* Filters */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-4 justify-between w-full">
         <div className="flex items-center gap-2 w-[90%]">

@@ -27,6 +27,9 @@ import NewPassword from "./components/newpassword";
 import Leaddetails from "./components/leaddetails";
 import RejectTable from "./components/rejecttable";
 import Employeelist from "./components/Employeelist";
+import Snapscrolling from "./components/snapscrolling";
+import Teamleadlist from "./components/teamleadlist";
+import Teamlist from "./components/teamlist";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -75,6 +78,18 @@ function App(): JSX.Element {
                 <Route
                   path="/createapplication"
                   element={<Createapplication />}
+                />
+                <Route
+                  path="/snapscrolling"
+                  element={<Snapscrolling />}
+                />
+                <Route
+                  path="/Teamlist"
+                  element={<Teamlist />}
+                />
+                <Route
+                  path="/Teamleadlist"
+                  element={<Teamleadlist />}
                 />
                 <Route
                   path="/UpdateApplication/:id"

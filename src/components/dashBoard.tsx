@@ -175,7 +175,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <div className="m-10  flex gap-10">
+      {/* <div className="m-10  flex gap-10">
         <div className="bg-[#fff] w-[100%]  rounded-[10px]">
           <div className="px-10 py-4">
             <h2 className="text-[20px] text-[#05004E]  font-medium">
@@ -187,13 +187,13 @@ function Dashboard() {
         <div className="bg-[#fff] w-1/3 rounded-[10px]">
           <h2 className="text-[20px]">sss</h2>
         </div>
-      </div>
-      <div className="w-[20%] h-[25%] relative ">
+      </div> */}
+      {/* <div className="w-[20%] h-[25%] relative ">
         <img src={sample} alt="" className="w-full h-full rounded-[20px]" />
         <div className="absolute top-7 right-9 bg-white rounded-l-[20px] w-[50px] h-[50px]">
           <h3>tick</h3>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

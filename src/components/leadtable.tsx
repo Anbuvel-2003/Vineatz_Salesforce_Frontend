@@ -96,7 +96,7 @@ const LeadTableSimple: React.FC = () => {
   };
   return (
     <div className="p-6">
-      {/* <h2 className="text-xl font-semibold mb-4"> Leads Table</h2> */}
+      <h2 className="text-xl font-semibold mb-4"> Leads Table</h2>
       {/* Filters */}
       <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-4 justify-between w-full">
         <div className="flex items-center gap-2 w-[90%]">

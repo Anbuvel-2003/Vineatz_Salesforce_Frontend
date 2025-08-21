@@ -5,15 +5,13 @@ import img1 from "../assets/login_img.png";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import { Navigate, useNavigate } from "react-router-dom";
 
-
-
 const NewPassword: React.FC = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = React.useState(false);
-      const [showConfirm, setShowConfirm] = useState(false);
-      
-       const togglePassword = () => setShowPassword(!showPassword);
-    const toggleConfirm = () => setShowConfirm(!showConfirm);
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const togglePassword = () => setShowPassword(!showPassword);
+  const toggleConfirm = () => setShowConfirm(!showConfirm);
   const validationSchema = Yup.object().shape({
     Password: Yup.string()
       .required("Password is required *")
@@ -23,8 +21,8 @@ const NewPassword: React.FC = () => {
         "Password must contain uppercase, lowercase, number, and special character *"
       ),
     ConfirmPassword: Yup.string()
-        .oneOf([Yup.ref("Password")], "Passwords must match")
-        .required("Required confirm password"),
+      .oneOf([Yup.ref("Password")], "Passwords must match")
+      .required("Required confirm password"),
   });
   return (
     <section className="h-screen flex items-center justify-center">
@@ -32,17 +30,23 @@ const NewPassword: React.FC = () => {
         {/* Left: Form */}
         <div className="w-1/2 flex items-center justify-center">
           <div className="w-[70%]">
-            <h1 className="text-[42px] text-[#111111] font-bold font-poppins mb-6">Change Password!</h1>
+            <h1 className="text-[42px] text-[#111111] font-bold font-poppins mb-6">
+              Change Password!
+            </h1>
             <Formik
               initialValues={{ Password: "", ConfirmPassword: "" }}
               validationSchema={validationSchema}
               onSubmit={async (values) => {
-                navigate("/Login");
+                try {
+                  console.log("Submitted Values:", values);
+                } catch (error) {
+                  console.log(error, "Error Message");
+                }
+                // navigate("/Login");
               }}
             >
               {({ values, errors, touched, handleChange, handleSubmit }) => (
                 <form className="flex flex-col" onSubmit={handleSubmit}>
-                
                   <label className="text-[#2D3748]">New Password</label>
                   <div className="relative">
                     <input
@@ -95,7 +99,7 @@ const NewPassword: React.FC = () => {
                       {errors.ConfirmPassword}
                     </div>
                   )}
-                 
+
                   <button
                     type="submit"
                     className="bg-[#BF9FFF] hover:bg-[#9b77e2] text-white font-bold rounded-xl font-poppins py-3 px-4 mt-4"
