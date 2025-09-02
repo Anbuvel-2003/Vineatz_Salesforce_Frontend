@@ -199,7 +199,7 @@ const Addemployee = () => {
                     <PopoverTrigger asChild>
                       <button
                         type="button"
-                        className="w-[600px] h-[50px] flex justify-between  items-center px-4 border border-[#BF9FFF] rounded-xl text-left bg-transparent text-[#AD46FF] placeholder:text-[#BF9FFF] font-poppins"
+                        className="w-[100%] h-[50px] flex justify-between  items-center px-4 border border-[#BF9FFF] rounded-xl text-left bg-transparent text-[#AD46FF] placeholder:text-[#BF9FFF] font-poppins"
                       >
                         {values.joiningDate ? (
                           format(values.joiningDate, "dd-MM-yyyy")
@@ -305,7 +305,7 @@ const InputField = ({
 
       return (
         <div className="py-3">
-          <div className="flex px-3 border rounded-xl w-[600px] h-[50px] border-[#BF9FFF] items-center">
+          <div className="flex px-3 border rounded-xl w-[100%] h-[50px] border-[#BF9FFF] items-center">
             <div className="mr-2 text-[#BF9FFF]">{icon}</div>
             <input
               {...field}

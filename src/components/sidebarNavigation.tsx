@@ -19,9 +19,15 @@ function SidebarNavigation() {
     },
     {
       name: "application",
-      label: "Leads",
+      label: "Application",
       icon: <MdBarChart size={24} />,
       to: "/Applicationlist",
+    },
+    {
+      name: "lead",
+      label: "Leads",
+      icon: <MdBarChart size={24} />,
+      to: "/Leadlist",
     },
     // {
     //   name: "reject ",

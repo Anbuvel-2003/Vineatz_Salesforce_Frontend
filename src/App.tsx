@@ -31,6 +31,7 @@ import Snapscrolling from "./components/snapscrolling";
 import Teamleadlist from "./components/teamleadlist";
 import Teamlist from "./components/teamlist";
 import Addteamlead from "./components/createteamlead";
+import Leadtable from "./components/leadtable";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -39,7 +40,7 @@ function App(): JSX.Element {
   return (
     <>
       <BrowserRouter>
-        {parsedUser ? (
+        {!parsedUser ? (
           <>
             <Layoutpage />
             <div className="sm:ml-64">
@@ -62,6 +63,8 @@ function App(): JSX.Element {
                   element={<Applicationdetailsmanual />}
                 />
                 <Route path="/Applicationlist" element={<Applicationslist />} />
+                <Route path="/Createapplication" element={<Createapplication />} />
+                <Route path="/Leadlist" element={<Leadtable />} />
                 <Route path="/Logout" element={<LogoutPopup />} />
                 <Route path="/AddProject" element={<AddProject />} />
                 <Route path="/Employeelist" element={<Employeelist />} />

@@ -1,60 +1,239 @@
-import vineatz from "../assets/vineatz.png";
-import accrix from "../assets/accrix.png";
+import React, { useState, useEffect } from "react";
+import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
+import { MdOutlineFilterAlt } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import Leadtable from "./leadtable";
+import ViewIcon from "../assets/viewicon.png";
+import FilterSection from "./filtersection";
+import { GoPlus } from "react-icons/go";
+import { authApi } from "@/config/fetchData";
 
-const apps = [
-  {
-    name: "Vineatz Technologies",
-    image: vineatz,
-    link: "/manageleadlist",
-    leads: "5000",
-    growth: "+8% from yesterday",
-  },
-  {
-    name: "Accrix",
-    image: accrix,
-    link: "/manageleadlist",
-    leads: "3200",
-    growth: "+12% from yesterday",
-  },
-];
+interface LeadData {
+  _id: string;
+  Application_Name: string;
+  Application_Description: string;
+  Application_ID: string;
+  Application_url: string;
+  Application_lunch_date:string;
+}
 
-function Applicationslist() {
+const Applicationslist: React.FC = () => {
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortField, setSortField] = useState<keyof LeadData | "">("");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
+  const [leads, setLeads] = useState<LeadData[]>([]);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [activeFilters, setActiveFilters] = useState({
+    leadStages: [] as string[],
+  });
+  const [loading, setLoading] = useState(false);
+  const fetchLeads = async () => {
+    setLoading(true);
+    try {
+      const res = await authApi.GetApplication(
+        currentPage + 1,
+        itemsPerPage,
+        searchTerm,
+        sortField,
+        sortOrder,
+        activeFilters.leadStages
+      );
+      setLeads(res?.data);
+      console.log("checking",sortOrder);
+      console.log("data,",sortField);
+      console.log("response",res?.data);
+      setTotalPages(res?.pagination?.totalPages);
+    } catch (err) {
+      console.error("Failed to fetch leads:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    fetchLeads();
+  }, [
+    searchTerm,
+    sortField,
+    sortOrder,
+    currentPage,
+    itemsPerPage,
+    activeFilters,
+  ]);
+
+  const handleSort = (field: keyof LeadData) => {
+    console.log(field, "field");
+    if (sortField === field) {
+      setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
+    } else {
+      setSortField(field);
+      setSortOrder("asc");
+    }
+  };
   return (
-    <div className="bg-[#FDFBFF] min-h-screen w-full">
-      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 px-5 mx-10 py-10">
-        {apps.map((app, index) => (
-          <div
-            key={index}
-            className="rounded-[15px] bg-white py-5 shadow hover:shadow-lg transition duration-300 cursor-pointer text-center"
-            onClick={() => navigate(app.link)}
-          >
-            <img
-              src={app.image}
-              alt={app.name}
-              className="w-[76px] h-[48px] mx-auto my-4"
+    <div className="p-6">
+      <h2 className="text-xl font-semibold mb-4"> Application Table</h2>
+      {/* Filters */}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-4 justify-between w-full">
+        <div className="flex items-center gap-2 w-[90%]">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(0); // reset page on search
+            }}
+            className="p-2 border border-[#BF9FFF] rounded w-full sm:w-1/2 placeholder-[#989898] text-sm focus:outline-none focus:border-[#BF9FFF] focus:ring-1 focus:ring-[#BF9FFF]"
+          />
+            <div
+                      className="group flex items-center gap-1 border border-[#BF9FFF] rounded p-2 hover:bg-[#BF9FFF] cursor-pointer"
+                      onClick={() => navigate("/Createapplication")}
+                    >
+                      <GoPlus
+                        size={20}
+                        className="text-[#BF9FFF] group-hover:text-white transition-colors duration-200"
+                      />
+                      <h2 className="text-sm text-[#BF9FFF] group-hover:text-white">
+                        Create 
+                      </h2>
+                    </div>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 text-sm">
+            <label htmlFor="itemsPerPage">Rows </label>
+            <input
+              id="itemsPerPage"
+              type="number"
+              min={1}
+              value={itemsPerPage}
+              onChange={(e) => {
+                const value = Math.max(1, Number(e.target.value));
+                setItemsPerPage(value);
+                setCurrentPage(0);
+              }}
+              className="w-16 p-2 border border-[#BF9FFF] rounded text-[#BF9FFF] focus:outline-none focus:border-[#BF9FFF] focus:ring-1 focus:ring-[#BF9FFF]"
             />
-            <h2 className="text-[#030229] font-poppins text-[20px] font-semibold">
-              {app.name}
-            </h2>
-            <p className="text-[14px] my-2 font-poppins text-[#030229]">
-              Total Leads
-            </p>
-            <p className="text-[24px] font-bold text-[#030229]">
-              {app.leads}
-            </p>
-            <p className="text-sm text-[#4079ED] font-poppins">
-              {app.growth}
-            </p>
           </div>
-        ))}
-      </div> */}
-      <Leadtable/>
+        </div>
+      </div>
+      {/* Table */}
+      <div className="overflow-x-auto bg-white shadow rounded-lg">
+        <table className="min-w-full text-left border">
+          <thead className="bg-[#e6daff] text-sm font-medium text-[#1d1d1d]">
+          <tr>
+  {[
+    "Product Id",
+    "Product Name",
+    "Product Url",
+    "Date"
+  ].map((col) => {
+    const sortableCols = ["Product Id", "Product Name"]; // 👈 only these are sortable
+    const isSortable = sortableCols.includes(col);
+
+    return (
+      <th
+        key={col}
+        className={`p-3 border select-none uppercase text-center ${
+          isSortable ? "cursor-pointer" : "cursor-default"
+        }`}
+        onClick={() => isSortable && handleSort(col as keyof LeadData)}
+      >
+        {col.toUpperCase()}{" "}
+        {isSortable && sortField === col && (sortOrder === "asc" ? "▲" : "▼")}
+      </th>
+    );
+  })}
+</tr>
+          </thead>
+          <tbody>
+            {leads.map((lead, index) => {
+              return (
+                <tr
+                  key={index}
+                  className="text-sm hover:bg-[#f1ebfb] cursor-pointer"
+                  onClick={() => {
+                    // navigate(`/leaddetails/${lead.leadID}`);
+                    navigate(`/leaddetails/${lead._id}`, {
+                      state: { value: lead },
+                    });
+                  }}
+                >
+                  {/* <td className="p-3 border text-center text-[#707070]">
+                  {lead.Id}
+                </td> */}
+                  <td className="p-3 border text-center text-[#707070]">
+                    {lead.Application_ID}
+                  </td>
+                  <td className="p-3 border text-center text-[#707070]">
+                    {lead.Application_Name}
+                  </td>
+                  <td className="p-3 border text-center text-[#707070]">
+                    {lead.Application_url}
+                  </td>
+                  <td className="p-3 border text-center text-[#707070]">
+                    {new Date(lead?.Application_lunch_date).toLocaleDateString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </td>
+                </tr>
+              );
+            })}
+            {leads.length === 0 && !loading && (
+              <tr>
+                <td colSpan={8} className="p-4 text-center text-gray-500">
+                  No data found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex justify-between items-center mt-4">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+            disabled={currentPage === 0}
+            className="px-4 py-2 rounded border border-[#BF9FFF] hover:bg-[#BF9FFF] text-[#BF9FFF] hover:text-white flex items-center gap-2 disabled:opacity-50"
+          >
+            <IoChevronBackOutline />
+            Previous
+          </button>
+          <span className="text-sm text-[#707070]">
+            Page <span className="text-[#1d1d1d]">{currentPage + 1}</span> of{" "}
+            {totalPages}
+          </span>
+          <button
+            onClick={() =>
+              setCurrentPage((prev) => Math.min(prev + 1, totalPages - 1))
+            }
+            disabled={currentPage >= totalPages - 1}
+            className="px-4 py-2 rounded border border-[#BF9FFF] hover:bg-[#BF9FFF] text-[#BF9FFF] hover:text-white flex items-center gap-2 disabled:opacity-50"
+          >
+            Next
+            <IoChevronForwardOutline />
+          </button>
+        </div>
+      )}
+      {/* Drawer Filter */}
+      <FilterSection
+        isDrawerOpen={isDrawerOpen}
+        setIsDrawerOpen={setIsDrawerOpen}
+        onFilterApply={(filters) => {
+          setActiveFilters({
+            leadStages: filters.leadStages.map(String),
+          });
+        }}
+      />
     </div>
   );
-}
+};
 
 export default Applicationslist;

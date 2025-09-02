@@ -139,7 +139,7 @@ const Teamlist: React.FC = () => {
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 text-sm">
-            <label htmlFor="itemsPerPage">Rows :</label>
+            <label htmlFor="itemsPerPage">Rows </label>
             <input
               id="itemsPerPage"
               type="number"

@@ -5,8 +5,24 @@ export interface LoginPayload {
   Email: string;
   Password: string;
 }
-export interface EmployeePayload {
+export interface Employeedata {
+  Employee_Id: string;
   Employee_Name: string;
+  Employee_Email: string;
+  Employee_Mobilenumber: string;
+  Employee_Alternative_Mobilenumber: string;
+  Employee_Address: string;
+  Role: string;
+  Employee_Bike_Number: string;
+  Employee_Driving_License_Number:string;
+  createdAt:string;
+  Employee_Password: string;
+  Employee_joining_date: string;
+  TeamId:string;
+  Teamname:string;
+}
+export interface EmployeePayload {
+    Employee_Name: string;
   Employee_Email: string;
   Employee_Mobilenumber: string;
   Employee_Alternative_Mobilenumber: string;
@@ -15,6 +31,12 @@ export interface EmployeePayload {
   Employee_Driving_License_Number: string;
   Employee_Password: string;
   Employee_joining_date: string;
+}
+export interface ApplicationPayload {
+  Application_Description: string;
+  Application_Name: string;
+  Application_lunch_date: string;
+  Application_url: string;
 }
 export interface TeamleadPayload {
   Name: string;
@@ -73,7 +95,7 @@ export interface PaginationMeta {
 }
 export interface GetEmployeesResponse {
   success: boolean;
-  data: EmployeePayload[];
+  data: Employeedata[];
   pagination: PaginationMeta;
 }
 export interface GetAdminResponse {
@@ -93,6 +115,12 @@ export interface TeamLeadResponse {
   totalPages: number;
   pagination: PaginationMeta;
 }
+export interface ApplicationResponse {
+ success: boolean;
+ data:any[];
+ totalPages:number;
+ pagination:PaginationMeta;
+}
 // Exported API functions
 export const authApi = {
   LoginApi: async (payload: LoginPayload): Promise<LoginResponse> => {
@@ -107,14 +135,18 @@ export const authApi = {
     const url = `/employee`;
     return api.postMethod(url, payload);
   },
+  CreateApplication: async (payload:ApplicationPayload): Promise<any> => {
+    const url = `/Application`;
+    return api.postMethod(url, payload);
+  },
   Createteamlead: async (payload: TeamleadPayload): Promise<any> => {
     const url = `/teamlead`;
     return api.postMethod(url, payload);
   },
-  GetEmployee: async (page = 1, limit = 10): Promise<GetEmployeesResponse> => {
-    const url = `/employee?page=${page}&limit=${limit}`;
-    return api.getMethod(url);
-  },
+  // GetEmployee: async (page = 1, limit = 10): Promise<GetEmployeesResponse> => {
+  //   const url = `/employee?page=${page}&limit=${limit}`;
+  //   return api.getMethod(url);
+  // },
   updateEmployee: async (
     payload: updateEmployeePayload,
     id: string
@@ -164,6 +196,73 @@ export const authApi = {
     console.log(sortBy, "sortBy");
 
     console.log(query, "query");
+    return api.getMethod(query);
+  },
+  GetEmployee: async (
+    page = 1,
+    limit = 10,
+    search = "",
+    sortBy = "",
+    sortOrder = "asc",
+    status: string[] = []
+  ): Promise<GetEmployeesResponse> => {
+    let query = `/employee?page=${page}&limit=${limit}&role=employee`;
+    if (search) query += `&search=${search}`;
+    if (sortBy)
+      query += `&sortBy=${
+        sortBy == "ProductID"
+          ? "Application_Id"
+          : sortBy == "ProductName"
+          ? "Application_Name"
+          : sortBy
+      }&order=${sortOrder}`;
+    if (status.length > 0) query += `&status=${status.join(",")}`;
+    console.log(sortBy, "sortBy");
+
+    console.log(query, "query");
+    return api.getMethod(query);
+  },
+   Getteamlead: async (
+    page = 1,
+    limit = 10,
+    search = "",
+    sortBy = "",
+    sortOrder = "asc",
+    status: string[] = []
+  ): Promise<GetEmployeesResponse> => {
+    let query = `/employee?page=${page}&limit=${limit}&role=teamlead`;
+    if (search) query += `&search=${search}`;
+    if (sortBy)
+      query += `&sortBy=${
+        sortBy == "ProductID"
+          ? "Application_Id"
+          : sortBy == "ProductName"
+          ? "Application_Name"
+          : sortBy
+      }&order=${sortOrder}`;
+    if (status.length > 0) query += `&status=${status.join(",")}`;
+    console.log(sortBy, "sortBy");
+
+    console.log(query, "query");
+    return api.getMethod(query);
+  },
+  
+  GetApplication: async (
+    page = 1,
+    limit = 10,
+    search = "",
+    sortBy = "",
+    sortOrder = "asc",
+    status: string[] = []
+  ): Promise<ApplicationResponse> => {
+    let query = `/application?page=${page}&limit=${limit}`;
+    if (search) query += `&search=${search}`;
+    if (sortBy)
+      query += `&sortBy=${sortBy == "Product Id" ? "Application_ID":"Application_Name"
+      }&order=${sortOrder}`;
+      console.log("log data",sortBy);
+      
+    if (status.length > 0) query += `&status=${status.join(",")}`;
     return api.getMethod(query);
   },
   GetTeamLeads: async (

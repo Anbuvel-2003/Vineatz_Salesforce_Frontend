@@ -21,7 +21,7 @@ function HeaderNavigation() {
   useEffect(() => {
     getuserdata();
     getNotificationData();
-  }, []);
+  }, []); 
   const getuserdata = () => {
     try {
       const user = localStorage.getItem("user_data");
@@ -49,7 +49,7 @@ function HeaderNavigation() {
   return (
     <nav className=" border-gray-200 bg-[#FDFBFF]">
       <div className="flex justify-between !p-3">
-        <div className="!pl-[15%]">
+        <div className="!pl-[20%]">
           <h2 className="text-[24px] font-bold">{`Hi,${userdata?.first_Name}`}</h2>
           <h2>Let’s check your Dashboard</h2>
         </div>

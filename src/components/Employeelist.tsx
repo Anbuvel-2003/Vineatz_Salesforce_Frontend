@@ -7,27 +7,33 @@ import FilterSection from "./filtersection";
 import { GoPlus } from "react-icons/go";
 import { authApi } from "@/config/fetchData";
 
-interface LeadData {
+interface Employeedata {
   _id: string;
-  Name: string;
-  Mobilenumber: string;
-  Id: string;
-  Application_Id: string;
-  Status: number;
-  Joining_Date: string;
-  Application_Name: string;
-  Is_rejected: boolean;
+  Employee_Id: string;
+  Employee_Name: string;
+  Employee_Email: string;
+  Employee_Mobilenumber: string;
+  Employee_Alternative_Mobilenumber: string;
+  Employee_Address: string;
+  Role: string;
+  Employee_Bike_Number: string;
+  Employee_Driving_License_Number:string;
+  createdAt:string;
+  TeamId: string | null;
+  Teamname: string | null;
+  Teamleadname:string | null;
+
 }
 
 const Employeelist: React.FC = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
-  const [sortField, setSortField] = useState<keyof LeadData | "">("");
+  const [sortField, setSortField] = useState<keyof Employeedata | "">("");
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("asc");
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
-  const [leads, setLeads] = useState<LeadData[]>([]);
+  const [leads, setLeads] = useState<Employeedata[]>([]);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [activeFilters, setActiveFilters] = useState({
     leadStages: [] as string[],
@@ -36,7 +42,7 @@ const Employeelist: React.FC = () => {
   const fetchLeads = async () => {
     setLoading(true);
     try {
-      const res = await authApi.GetLeads(
+      const res = await authApi.GetEmployee(
         currentPage + 1,
         itemsPerPage,
         searchTerm,
@@ -44,10 +50,27 @@ const Employeelist: React.FC = () => {
         sortOrder,
         activeFilters.leadStages
       );
-      setLeads(res.data);
+     setLeads(
+  res?.data?.map((emp: any) => ({
+    _id: emp._id ?? "",  // ensure exists
+    Employee_Id: emp.Employee_Id,
+    Employee_Name: emp.Employee_Name,
+    Employee_Email: emp.Employee_Email,
+    Employee_Mobilenumber: emp.Employee_Mobilenumber,
+    Employee_Alternative_Mobilenumber: emp.Employee_Alternative_Mobilenumber,
+    Employee_Address: emp.Employee_Address,
+    Role: emp.Role,
+    Employee_Bike_Number: emp.Employee_Bike_Number,
+    Employee_Driving_License_Number: emp.Employee_Driving_License_Number,
+    createdAt: emp.createdAt,
+    TeamId: emp.TeamId ?? null,
+    Teamname: emp.Teamname ?? null,
+    Teamleadname:emp?.Teamleadname ?? null
+  }))
+);
       console.log("res", res?.data);
 
-      setTotalPages(res?.totalPages);
+      setTotalPages(res?.pagination?.totalPages);
     } catch (err) {
       console.error("Failed to fetch leads:", err);
     } finally {
@@ -66,7 +89,7 @@ const Employeelist: React.FC = () => {
     activeFilters,
   ]);
 
-  const handleSort = (field: keyof LeadData) => {
+  const handleSort = (field: keyof Employeedata) => {
     console.log(field, "field");
     if (sortField === field) {
       setSortOrder((prev) => (prev === "asc" ? "desc" : "asc"));
@@ -74,26 +97,6 @@ const Employeelist: React.FC = () => {
       setSortField(field);
       setSortOrder("asc");
     }
-  };
-
-  const statusMap: Record<number, string> = {
-    0: "Initial",
-    1: "Prospect",
-    2: "Qualify",
-    3: "Demo",
-    4: "Proposal",
-    5: "Onboard",
-    6: "Account",
-  };
-  const statusColorMap: Record<string, string> = {
-    Initial: "text-blue-500 border-blue-500",
-    Prospect: "text-purple-500 border-purple-500",
-    Qualify: "text-yellow-500 border-yellow-500",
-    Demo: "text-pink-500 border-pink-500",
-    Proposal: "text-orange-500 border-orange-500",
-    Onboard: "text-green-500 border-green-500",
-    Account: "text-gray-500 border-gray-500",
-    Unknown: "text-gray-400 border-gray-400",
   };
   return (
     <div className="p-6">
@@ -113,18 +116,6 @@ const Employeelist: React.FC = () => {
           />
           <div
             className="group flex items-center gap-1 border border-[#BF9FFF] rounded p-2 hover:bg-[#BF9FFF] cursor-pointer"
-            onClick={() => setIsDrawerOpen(true)}
-          >
-            <MdOutlineFilterAlt
-              size={20}
-              className="text-[#BF9FFF] group-hover:text-white transition-colors duration-200"
-            />
-            <h2 className="text-sm text-[#BF9FFF] group-hover:text-white">
-              Filter
-            </h2>
-          </div>
-          <div
-            className="group flex items-center gap-1 border border-[#BF9FFF] rounded p-2 hover:bg-[#BF9FFF] cursor-pointer"
             onClick={() => navigate("/addemployee")}
           >
             <GoPlus
@@ -138,7 +129,7 @@ const Employeelist: React.FC = () => {
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 text-sm">
-            <label htmlFor="itemsPerPage">Rows :</label>
+            <label htmlFor="itemsPerPage">Rows </label>
             <input
               id="itemsPerPage"
               type="number"
@@ -170,7 +161,7 @@ const Employeelist: React.FC = () => {
                 <th
                   key={col}
                   className="p-3 border cursor-pointer select-none uppercase text-center"
-                  onClick={() => handleSort(col as keyof LeadData)}
+                  onClick={() => handleSort(col as keyof Employeedata)}
                 >
                   {col.toUpperCase()}{" "}
                   {sortField === col && (sortOrder === "asc" ? "▲" : "▼")}
@@ -179,54 +170,41 @@ const Employeelist: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {leads.map((lead, index) => {
-              console.log("lead", lead?.Is_rejected == true);
-              // if (lead?.Is_rejected == true) {
-              //   return null;
-              // }
-              const statusLabel = statusMap[lead.Status] || "Unknown";
-              const colorClass =
-                statusColorMap[statusLabel] || "text-gray-400 border-gray-400";
+            {leads?.map((lead, index) => {
               return (
                 <tr
                   key={index}
                   className="text-sm hover:bg-[#f1ebfb] cursor-pointer"
-                  onClick={() => {
-                    // navigate(`/leaddetails/${lead.leadID}`);
-                    navigate(`/leaddetails/${lead._id}`, {
-                      state: { value: lead },
-                    });
-                  }}
                 >
                   {/* <td className="p-3 border text-center text-[#707070]">
                   {lead.Id}
                 </td> */}
                   <td className="p-3 border text-center text-[#707070]">
-                    {lead.Name}
+                    {lead?.Employee_Id}
                   </td>
                   <td className="p-3 border text-center text-[#707070]">
-                    {lead.Mobilenumber}
+                    {lead.Employee_Name}
                   </td>
                   <td className="p-3 border text-center text-[#707070]">
-                    {lead.Application_Id}
+                    {lead.Employee_Mobilenumber}
                   </td>
-                  <td className="p-3 border text-center text-[#707070]">
-                    {lead.Application_Name}
+                  <td className={`p-3 border text-center capitalize ${lead?.Teamname == null ? "text-red-400":"text-[#707070]" }`}>
+                    {lead?.Teamname == null ? "Unassigned":lead?.Teamname}
                   </td>
                   <td
                     className={`p-3 border text-center text-[#707070] place-items-center `}
                   >
                     <div
-                      className={`flex items-center justify-center border py-1 w-[70%] rounded-[10px] ${colorClass}`}
+                      className={`flex items-center justify-center  py-1 w-[70%] rounded-[10px] `}
                     >
-                      <h2 className="">
-                        {" "}
-                        {statusMap[lead.Status] || "Unknown"}
+                      <h2 className={`${lead?.Teamleadname == null ? "text-red-400":"text-[#707070]" }`}>
+                        {lead?.Teamleadname == null ? "Unassigned" : lead?.Teamleadname}
+                        
                       </h2>
                     </div>
                   </td>
                   <td className="p-3 border text-center text-[#707070]">
-                    {new Date(lead?.Joining_Date).toLocaleDateString("en-GB", {
+                    {new Date(lead?.createdAt).toLocaleDateString("en-GB", {
                       day: "2-digit",
                       month: "short",
                       year: "numeric",
@@ -272,16 +250,6 @@ const Employeelist: React.FC = () => {
           </button>
         </div>
       )}
-      {/* Drawer Filter */}
-      <FilterSection
-        isDrawerOpen={isDrawerOpen}
-        setIsDrawerOpen={setIsDrawerOpen}
-        onFilterApply={(filters) => {
-          setActiveFilters({
-            leadStages: filters.leadStages.map(String),
-          });
-        }}
-      />
     </div>
   );
 };

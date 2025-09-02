@@ -126,7 +126,7 @@ const LeadTableSimple: React.FC = () => {
 
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 text-sm">
-            <label htmlFor="itemsPerPage">Rows :</label>
+            <label htmlFor="itemsPerPage">Rows </label>
             <input
               id="itemsPerPage"
               type="number"
@@ -199,8 +199,10 @@ const LeadTableSimple: React.FC = () => {
                     {lead.Application_Id}
                   </td>
                   <td className="p-3 border text-center text-[#707070]">
-                    {lead.Application_Name}
-                  </td>
+  {lead.Application_Name.length > 25
+    ? lead.Application_Name.substring(0, 25) + "..."
+    : lead.Application_Name}
+</td>
                   <td
                     className={`p-3 border text-center text-[#707070] place-items-center `}
                   >
