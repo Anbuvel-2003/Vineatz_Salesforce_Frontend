@@ -30,6 +30,7 @@ import Employeelist from "./components/Employeelist";
 import Snapscrolling from "./components/snapscrolling";
 import Teamleadlist from "./components/teamleadlist";
 import Teamlist from "./components/teamlist";
+import Addteamlead from "./components/createteamlead";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -90,6 +91,10 @@ function App(): JSX.Element {
                 <Route
                   path="/Teamleadlist"
                   element={<Teamleadlist />}
+                />
+                <Route
+                  path="/Addteamlead"
+                  element={<Addteamlead />}
                 />
                 <Route
                   path="/UpdateApplication/:id"

@@ -11,21 +11,15 @@ const Snapscrolling: React.FC = () => {
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
-
     const wrapper = section.querySelector(".wrapper");
     const items = wrapper?.querySelectorAll(".item") ?? [];
-
-
     if (items.length === 0) return;
-
-
     // Reset and set initial state
     items.forEach((item, index) => {
       gsap.set(item, {
         yPercent: index === 0 ? 0 : 150,
       });
     });
-
     const timeline = gsap.timeline({
       scrollTrigger: {
         trigger: section,
@@ -38,7 +32,6 @@ const Snapscrolling: React.FC = () => {
       },
       defaults: { ease: "none" },
     });
-
     items.forEach((item, index) => {
       // Animate current item scale
       timeline.to(item, {
@@ -57,8 +50,6 @@ const Snapscrolling: React.FC = () => {
         );
       }
     });
-
-
     // Cleanup on unmount
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());

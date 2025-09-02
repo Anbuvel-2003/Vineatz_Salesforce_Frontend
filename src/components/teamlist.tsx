@@ -3,6 +3,7 @@ import { IoChevronBackOutline, IoChevronForwardOutline } from "react-icons/io5";
 import { MdOutlineFilterAlt } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import ViewIcon from "../assets/viewicon.png";
+import { GoPlus } from "react-icons/go";
 import FilterSection from "./filtersection";
 import { authApi } from "@/config/fetchData";
 
@@ -120,6 +121,18 @@ const Teamlist: React.FC = () => {
             />
             <h2 className="text-sm text-[#BF9FFF] group-hover:text-white">
               Filter
+            </h2>
+          </div>
+          <div
+            className="group flex items-center gap-1 border border-[#BF9FFF] rounded p-2 hover:bg-[#BF9FFF] cursor-pointer"
+            onClick={() => navigate("/addemployee")}
+          >
+            <GoPlus
+              size={20}
+              className="text-[#BF9FFF] group-hover:text-white transition-colors duration-200"
+            />
+            <h2 className="text-sm text-[#BF9FFF] group-hover:text-white">
+              Create
             </h2>
           </div>
         </div>

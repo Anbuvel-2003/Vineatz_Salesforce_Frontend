@@ -16,6 +16,17 @@ export interface EmployeePayload {
   Employee_Password: string;
   Employee_joining_date: string;
 }
+export interface TeamleadPayload {
+  Name: string;
+  Email: string;
+  Mobilenumber: string;
+  Alternative_Mobilenumber: string;
+  Address: string;
+  Bike_Number: string;
+  Driving_License_Number: string;
+  Password: string;
+  joining_date: string;
+}
 export interface UserPayload {
   first_Name: string;
   last_Name: string;
@@ -76,6 +87,12 @@ export interface LeadResponse {
   totalPages: number;
   pagination: PaginationMeta;
 }
+export interface TeamLeadResponse {
+  success: boolean;
+  data: any[];
+  totalPages: number;
+  pagination: PaginationMeta;
+}
 // Exported API functions
 export const authApi = {
   LoginApi: async (payload: LoginPayload): Promise<LoginResponse> => {
@@ -88,6 +105,10 @@ export const authApi = {
   },
   CreateEmployee: async (payload: EmployeePayload): Promise<any> => {
     const url = `/employee`;
+    return api.postMethod(url, payload);
+  },
+  Createteamlead: async (payload: TeamleadPayload): Promise<any> => {
+    const url = `/teamlead`;
     return api.postMethod(url, payload);
   },
   GetEmployee: async (page = 1, limit = 10): Promise<GetEmployeesResponse> => {
@@ -141,7 +162,22 @@ export const authApi = {
       }&order=${sortOrder}`;
     if (status.length > 0) query += `&status=${status.join(",")}`;
     console.log(sortBy, "sortBy");
+
     console.log(query, "query");
+    return api.getMethod(query);
+  },
+  GetTeamLeads: async (
+    page = 1,
+    limit = 10,
+    search = "",
+    sortBy = "",
+    sortOrder = "asc",
+    status: string[] = []
+  ): Promise<TeamLeadResponse> => {
+    let query = `/teamlead?page=${page}&limit=${limit}`;
+    if (search) query += `&search=${search}`;
+    if (status.length > 0) query += `&status=${status.join(",")}`;
+    if (sortBy) query += `&sortBy=${sortBy}&order=${sortOrder}`;
     return api.getMethod(query);
   },
   GetReject: async (
