@@ -114,7 +114,7 @@ const Teamleadlist: React.FC = () => {
             }}
             className="p-2 border border-[#BF9FFF] rounded w-full sm:w-1/2 placeholder-[#989898] text-sm focus:outline-none focus:border-[#BF9FFF] focus:ring-1 focus:ring-[#BF9FFF]"
           />
-          <div
+          {/* <div
             className="group flex items-center gap-1 border border-[#BF9FFF] rounded p-2 hover:bg-[#BF9FFF] cursor-pointer"
             onClick={() => navigate("/addemployee")}
           >
@@ -125,7 +125,7 @@ const Teamleadlist: React.FC = () => {
             <h2 className="text-sm text-[#BF9FFF] group-hover:text-white">
               Create 
             </h2>
-          </div>
+          </div> */}
         </div>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 text-sm">

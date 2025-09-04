@@ -57,6 +57,14 @@ export interface UserPayload {
   Password: string;
   Address: string;
 }
+export interface Teampayload {
+  Team_Name: string;
+  Team_Description: string;
+  Teamlead_Id?: string;
+  Teamleadname?: string;
+  Teammembers_ID: string[];
+}
+
 export interface updateUserPayload {
   first_Name: string;
   last_Name: string;
@@ -115,6 +123,12 @@ export interface TeamLeadResponse {
   totalPages: number;
   pagination: PaginationMeta;
 }
+export interface GetTeamResponse {
+  success: boolean;
+  data: any[];
+  totalPages: number;
+  pagination: PaginationMeta;
+}
 export interface ApplicationResponse {
  success: boolean;
  data:any[];
@@ -143,10 +157,10 @@ export const authApi = {
     const url = `/teamlead`;
     return api.postMethod(url, payload);
   },
-  // GetEmployee: async (page = 1, limit = 10): Promise<GetEmployeesResponse> => {
-  //   const url = `/employee?page=${page}&limit=${limit}`;
-  //   return api.getMethod(url);
-  // },
+  Createteam:async(payload:Teampayload):Promise<any> =>{
+    const url = `/team`;
+    return api.postMethod(url,payload)
+  },
   updateEmployee: async (
     payload: updateEmployeePayload,
     id: string
@@ -207,6 +221,30 @@ export const authApi = {
     status: string[] = []
   ): Promise<GetEmployeesResponse> => {
     let query = `/employee?page=${page}&limit=${limit}&role=employee`;
+    if (search) query += `&search=${search}`;
+    if (sortBy)
+      query += `&sortBy=${
+        sortBy == "ProductID"
+          ? "Application_Id"
+          : sortBy == "ProductName"
+          ? "Application_Name"
+          : sortBy
+      }&order=${sortOrder}`;
+    if (status.length > 0) query += `&status=${status.join(",")}`;
+    console.log(sortBy, "sortBy");
+
+    console.log(query, "query");
+    return api.getMethod(query);
+  },
+  GetTeam: async (
+    page = 1,
+    limit = 10,
+    search = "",
+    sortBy = "",
+    sortOrder = "asc",
+    status: string[] = []
+  ): Promise<GetTeamResponse> => {
+    let query = `/team?page=${page}&limit=${limit}&role=employee`;
     if (search) query += `&search=${search}`;
     if (sortBy)
       query += `&sortBy=${
@@ -313,6 +351,10 @@ export const authApi = {
   GetNotes: async (id: string): Promise<any> => {
     const url = `/lead/${id}`;
     console.log("sssssssssss", url);
+    return api.getMethod(url);
+  },
+  Gettotalemployee: async (): Promise<any> => {
+    const url = `/totalemployeelist`;
     return api.getMethod(url);
   },
   UpdateLead: async (id: string, payload: any): Promise<any> => {

@@ -32,6 +32,7 @@ import Teamleadlist from "./components/teamleadlist";
 import Teamlist from "./components/teamlist";
 import Addteamlead from "./components/createteamlead";
 import Leadtable from "./components/leadtable";
+import Addteam from "./components/createteam";
 
 function App(): JSX.Element {
   const user = localStorage.getItem("user_id");
@@ -90,6 +91,10 @@ function App(): JSX.Element {
                 <Route
                   path="/Teamlist"
                   element={<Teamlist />}
+                />
+                <Route 
+                path="/Addteam"
+                element={<Addteam />}
                 />
                 <Route
                   path="/Teamleadlist"
