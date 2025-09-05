@@ -6,6 +6,8 @@ import ViewIcon from "../assets/viewicon.png";
 import FilterSection from "./filtersection";
 import { GoPlus } from "react-icons/go";
 import { authApi } from "@/config/fetchData";
+import { BiSolidCommentEdit } from "react-icons/bi";
+import { RiChatDeleteFill } from "react-icons/ri";
 
 interface LeadData {
   _id: string;
@@ -130,7 +132,8 @@ const Applicationslist: React.FC = () => {
     "Product Id",
     "Product Name",
     "Product Url",
-    "Date"
+    "Date",
+    "Details"
   ].map((col) => {
     const sortableCols = ["Product Id", "Product Name"]; // 👈 only these are sortable
     const isSortable = sortableCols.includes(col);
@@ -155,7 +158,7 @@ const Applicationslist: React.FC = () => {
               return (
                 <tr
                   key={index}
-                  className="text-sm hover:bg-[#f1ebfb] cursor-pointer"
+                  className="text-sm hover:bg-[#f1ebfb]"
                   onClick={() => {
                     // navigate(`/leaddetails/${lead.leadID}`);
                     navigate(`/leaddetails/${lead._id}`, {
@@ -172,7 +175,7 @@ const Applicationslist: React.FC = () => {
                   <td className="p-3 border text-center text-[#707070]">
                     {lead.Application_Name}
                   </td>
-                  <td className="p-3 border text-center text-[#707070]">
+                  <td className="p-3 border text-center text-[#707070]">  
                     {lead.Application_url}
                   </td>
                   <td className="p-3 border text-center text-[#707070]">
@@ -181,6 +184,24 @@ const Applicationslist: React.FC = () => {
                       month: "short",
                       year: "numeric",
                     })}
+                  </td>
+                  <td className="p-3 border text-center text-[#707070]">
+                    <div className="flex justify-evenly ">
+                      <div className="cursor-pointer hover:scale-110 transition-transform" onClick={()=>{
+                        console.log("changed");
+                        
+                      }}>
+                        <BiSolidCommentEdit size={25} color="green" />
+                      </div>
+                       <div 
+                       className="cursor-pointer hover:scale-110 transition-transform"  
+                       onClick={()=>{
+                        console.log("changed");
+                        
+                       }}>
+                        <RiChatDeleteFill size={25} color="red" />
+                      </div>
+                    </div>
                   </td>
                 </tr>
               );

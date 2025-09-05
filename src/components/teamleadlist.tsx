@@ -6,6 +6,8 @@ import ViewIcon from "../assets/viewicon.png";
 import FilterSection from "./filtersection";
 import { GoPlus } from "react-icons/go";
 import { authApi } from "@/config/fetchData";
+import { BiSolidCommentEdit } from "react-icons/bi";
+import { RiChatDeleteFill } from "react-icons/ri";
 
 interface Employeedata {
   _id: string;
@@ -17,12 +19,11 @@ interface Employeedata {
   Employee_Address: string;
   Role: string;
   Employee_Bike_Number: string;
-  Employee_Driving_License_Number:string;
-  createdAt:string;
+  Employee_Driving_License_Number: string;
+  createdAt: string;
   TeamId: string | null;
   Teamname: string | null;
-  Teamleadname:string | null;
-
+  Teamleadname: string | null;
 }
 
 const Teamleadlist: React.FC = () => {
@@ -50,24 +51,25 @@ const Teamleadlist: React.FC = () => {
         sortOrder,
         activeFilters.leadStages
       );
-     setLeads(
-  res?.data?.map((emp: any) => ({
-    _id: emp._id ?? "",  // ensure exists
-    Employee_Id: emp.Employee_Id,
-    Employee_Name: emp.Employee_Name,
-    Employee_Email: emp.Employee_Email,
-    Employee_Mobilenumber: emp.Employee_Mobilenumber,
-    Employee_Alternative_Mobilenumber: emp.Employee_Alternative_Mobilenumber,
-    Employee_Address: emp.Employee_Address,
-    Role: emp.Role,
-    Employee_Bike_Number: emp.Employee_Bike_Number,
-    Employee_Driving_License_Number: emp.Employee_Driving_License_Number,
-    createdAt: emp.createdAt,
-    TeamId: emp.TeamId ?? null,
-    Teamname: emp.Teamname ?? null,
-    Teamleadname:emp?.Teamleadname ?? null
-  }))
-);
+      setLeads(
+        res?.data?.map((emp: any) => ({
+          _id: emp._id ?? "", // ensure exists
+          Employee_Id: emp.Employee_Id,
+          Employee_Name: emp.Employee_Name,
+          Employee_Email: emp.Employee_Email,
+          Employee_Mobilenumber: emp.Employee_Mobilenumber,
+          Employee_Alternative_Mobilenumber:
+            emp.Employee_Alternative_Mobilenumber,
+          Employee_Address: emp.Employee_Address,
+          Role: emp.Role,
+          Employee_Bike_Number: emp.Employee_Bike_Number,
+          Employee_Driving_License_Number: emp.Employee_Driving_License_Number,
+          createdAt: emp.createdAt,
+          TeamId: emp.TeamId ?? null,
+          Teamname: emp.Teamname ?? null,
+          Teamleadname: emp?.Teamleadname ?? null,
+        }))
+      );
       console.log("res", res?.data);
 
       setTotalPages(res?.pagination?.totalPages);
@@ -157,6 +159,7 @@ const Teamleadlist: React.FC = () => {
                 "Team Name",
                 "Team Leadername",
                 "Date",
+                "details",
               ].map((col) => (
                 <th
                   key={col}
@@ -188,8 +191,12 @@ const Teamleadlist: React.FC = () => {
                   <td className="p-3 border text-center text-[#707070]">
                     {lead.Employee_Mobilenumber}
                   </td>
-                  <td className={`p-3 border text-center capitalize ${lead?.Teamname == null ? "text-red-400":"text-[#707070]" }`}>
-                    {lead?.Teamname == null ? "Unassigned":lead?.Teamname}
+                  <td
+                    className={`p-3 border text-center capitalize ${
+                      lead?.Teamname == null ? "text-red-400" : "text-[#707070]"
+                    }`}
+                  >
+                    {lead?.Teamname == null ? "Unassigned" : lead?.Teamname}
                   </td>
                   <td
                     className={`p-3 border text-center text-[#707070] place-items-center `}
@@ -197,9 +204,16 @@ const Teamleadlist: React.FC = () => {
                     <div
                       className={`flex items-center justify-center  py-1 w-[70%] rounded-[10px] `}
                     >
-                      <h2 className={`${lead?.Teamleadname == null ? "text-red-400":"text-[#707070]" }`}>
-                        {lead?.Teamleadname == null ? "Unassigned" : lead?.Teamleadname}
-                        
+                      <h2
+                        className={`${
+                          lead?.Teamleadname == null
+                            ? "text-red-400"
+                            : "text-[#707070]"
+                        }`}
+                      >
+                        {lead?.Teamleadname == null
+                          ? "Unassigned"
+                          : lead?.Teamleadname}
                       </h2>
                     </div>
                   </td>
@@ -209,6 +223,28 @@ const Teamleadlist: React.FC = () => {
                       month: "short",
                       year: "numeric",
                     })}
+                  </td>
+                  <td className="p-3 border text-center text-[#707070]">
+                    <div className="flex justify-evenly ">
+                      <div
+                        className="cursor-pointer hover:scale-110 transition-transform"
+                        onClick={() => {
+                          navigate(`/updateemployee/${lead?._id}`, {
+                            state: { value: lead },
+                          });
+                        }}
+                      >
+                        <BiSolidCommentEdit size={25} color="green" />
+                      </div>
+                      <div
+                        className="cursor-pointer hover:scale-110 transition-transform"
+                        onClick={() => {
+                          console.log("changed");
+                        }}
+                      >
+                        <RiChatDeleteFill size={25} color="red" />
+                      </div>
+                    </div>
                   </td>
                 </tr>
               );
@@ -255,3 +291,4 @@ const Teamleadlist: React.FC = () => {
 };
 
 export default Teamleadlist;
+  

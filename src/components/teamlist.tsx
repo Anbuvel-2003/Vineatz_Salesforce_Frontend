@@ -6,6 +6,8 @@ import ViewIcon from "../assets/viewicon.png";
 import { GoPlus } from "react-icons/go";
 import FilterSection from "./filtersection";
 import { authApi } from "@/config/fetchData";
+import { BiSolidCommentEdit } from "react-icons/bi";
+import { RiChatDeleteFill } from "react-icons/ri";
 
 interface Team {
   _id: string;
@@ -142,6 +144,7 @@ const Teamlist: React.FC = () => {
                 "Total Members",
                 "Completed Leads",
                 "Reject Leads",
+                "details"
               ].map((col) => (
                 <th
                   key={col}
@@ -188,6 +191,24 @@ const Teamlist: React.FC = () => {
                   <td className="p-3 border text-center text-[#707070]">
                     {lead?.rejectedlead}
                   </td>
+                   <td className="p-3 border text-center text-[#707070]">
+                                      <div className="flex justify-evenly ">
+                                        <div className="cursor-pointer hover:scale-110 transition-transform" onClick={()=>{
+                                          console.log("changed");
+                                          
+                                        }}>
+                                          <BiSolidCommentEdit size={25} color="green" />
+                                        </div>
+                                         <div 
+                                         className="cursor-pointer hover:scale-110 transition-transform"
+                                         onClick={()=>{
+                                          console.log("changed");
+                                          
+                                         }}>
+                                          <RiChatDeleteFill size={25} color="red" />
+                                        </div>
+                                      </div>
+                                    </td>
                 </tr>
               );
             })}

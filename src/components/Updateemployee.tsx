@@ -60,15 +60,17 @@ const Updateemployee = () => {
 
   const navigate = useNavigate();
   let { state } = useLocation();
+  console.log("state",state);
+  
   const initialValues: FormValues = {
     name: state?.value?.Employee_Name || "",
-    email: state?.value?.Employee_Email || "",
+    email: state?.value?.Employee_Email || "",  
     contact: state?.value?.Employee_Mobilenumber || "",
     address: state?.value?.Employee_Address || "",
     emergencyContact: state?.value?.Employee_Alternative_Mobilenumber || "",
     bikeNumber: state?.value?.Employee_Bike_Number || "",
     licenseNumber: state?.value?.Employee_Driving_License_Number || "",
-    joiningDate: new Date(state?.value?.Employee_joining_date || ""),
+    joiningDate: new Date(state?.value?.createdAt || ""),
   };
   const handleSubmit = async (values: FormValues) => {
     if (!params.id) {
@@ -84,8 +86,8 @@ const Updateemployee = () => {
         Employee_Address: values.address,
         Employee_Bike_Number: values.bikeNumber,
         Employee_Driving_License_Number: values.licenseNumber,
-        Employee_joining_date: values.joiningDate
-          ? values.joiningDate.toISOString()
+        Employee_joining_date: values?.joiningDate
+          ? values?.joiningDate.toISOString()
           : "",
       },
       params.id
@@ -100,7 +102,7 @@ const Updateemployee = () => {
     }
   };
   return (
-    <div className="bg-[#FDFAFE] w-full min-h-screen px-20">
+    <div className="bg-[#FDFAFE] w-full  min-h-screen px-20">
       <p className="text-black text-[18px] font-semibold py-6">
         Update Employee
       </p>
@@ -110,7 +112,7 @@ const Updateemployee = () => {
         validationSchema={validationSchema}
       >
         {({ values, setFieldValue }) => (
-          <Form className="min-w-full bg-white rounded-xl px-16 pb-8 shadow-xl">
+          <Form className="min-w-full  bg-white rounded-xl px-16 pb-8 shadow-xl">
             {/* Personal Details */}
             <Section title="Personal Details" />
             <div className="grid grid-cols-2 gap-y-4 gap-x-10 px-5">
@@ -167,10 +169,10 @@ const Updateemployee = () => {
                     <PopoverTrigger asChild>
                       <button
                         type="button"
-                        className="w-[600px] h-[50px] flex justify-between  items-center px-4 border border-[#BF9FFF] rounded-xl text-left bg-transparent text-[#BF9FFF] font-poppins"
+                        className="w-[100%] h-[50px] flex justify-between  items-center px-4 border border-[#BF9FFF] rounded-xl text-left bg-transparent text-[#BF9FFF] font-poppins"
                       >
-                        {values.joiningDate ? (
-                          format(values.joiningDate, "dd-MM-yyyy")
+                        {values?.joiningDate ? (
+                          format(values?.joiningDate, "dd-MM-yyyy")
                         ) : (
                           <span className="text-[#A0AEC0] pl-8">
                             Joining Date
@@ -261,7 +263,7 @@ const InputField = ({
       };
       return (
         <div className="py-3">
-          <div className="flex px-3 border rounded-xl w-[600px] h-[50px] border-[#BF9FFF] items-center">
+          <div className="flex px-3 border rounded-xl w-[100%] h-[50px] border-[#BF9FFF] items-center">
             <div className="mr-2 text-[#BF9FFF]">{icon}</div>
             <input
               {...field}

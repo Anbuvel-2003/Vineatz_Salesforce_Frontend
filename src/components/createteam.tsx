@@ -39,7 +39,15 @@ const step2Schema = Yup.object().shape({
 const Addteam = () => {
   const navigate = useNavigate();
   const [employeelist, setEmployeelist] = useState<
-    { _id: string; Employee_Name: string;Employee_Email:string;Employee_Mobilenumber:string;Employee_Id:string;Role:string;TeamId:string}[]
+    {
+      _id: string;
+      Employee_Name: string;
+      Employee_Email: string;
+      Employee_Mobilenumber: string;
+      Employee_Id: string;
+      Role: string;
+      TeamId: string;
+    }[]
   >([]);
   const [search, setSearch] = useState("");
 
@@ -61,31 +69,31 @@ const Addteam = () => {
   };
 
   const handleSubmit = async (values: FormValues) => {
-  if (step === 1) {
-    setStep(2);
-  } else {
-    const teamLeadData = employeelist.find(emp => emp._id === values.teamLead);
+    if (step === 1) {
+      setStep(2);
+    } else {
+      const teamLeadData = employeelist.find(
+        (emp) => emp._id === values.teamLead
+      );
 
-    if (!teamLeadData) {
-      toast.error("Please select a valid team lead");
-      return;
+      if (!teamLeadData) {
+        toast.error("Please select a valid team lead");
+        return;
+      }
+
+      const finalData: Teampayload = {
+        Team_Name: values.teamName,
+        Team_Description: values.teamDescription,
+        Teamlead_Id: teamLeadData._id, // ✅ safe string
+        Teamleadname: teamLeadData.Employee_Name, // ✅ safe string
+        Teammembers_ID: values.teamMembers.map((id) => id),
+      };
+
+      await authApi.Createteam(finalData);
+      toast.success("Team Created Successfully!");
+      navigate("/teamlist");
     }
-
-    const finalData: Teampayload = {
-      Team_Name: values.teamName,
-      Team_Description: values.teamDescription,
-      Teamlead_Id: teamLeadData._id,                  // ✅ safe string
-      Teamleadname: teamLeadData.Employee_Name,       // ✅ safe string
-      Teammembers_ID: values.teamMembers.map(id => id),
-    };
-
-    await authApi.Createteam(finalData);
-    toast.success("Team Created Successfully!");
-    navigate('/teamlist')
-  }
-};
-
-
+  };
 
   return (
     <div className="bg-[#FDFAFE] w-full min-h-screen px-20">
@@ -125,90 +133,146 @@ const Addteam = () => {
               </>
             ) : (
               <>
-               {/* Step 2: Assign Employees */}
-<Section title="Assign Employees" />
+                {/* Step 2: Assign Employees */}
+                <Section title="Assign Employees" />
 
-<div className="px-5">
-  {/* 🔍 Search Bar */}
-  <input
-    type="text"
-    placeholder="Search employees..."
-    value={search}
-    onChange={(e) => setSearch(e.target.value)}
-    className="mb-4 w-full px-3 py-2 border border-[#BF9FFF] rounded-xl text-[#AD46FF] font-poppins focus:outline-none"
-  />
+                <div className="px-5">
+                  {/* 🔍 Search Bar */}
+                  <input
+                    type="text"
+                    placeholder="Search employees..."
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    className="mb-4 w-full px-3 py-2 border border-[#BF9FFF] rounded-xl text-[#AD46FF] font-poppins focus:outline-none"
+                  />
 
-  <table className="w-full border border-gray-200 rounded-lg">
-    <thead className="bg-[#F3EFFF]">
-      <tr>
-        <th className="p-2 text-left">Select</th>
-        <th className="p-2 text-left">Employee Name</th>
-        <th className="p-2 text-left">ID</th>
-        <th className="p-2 text-left">Mobile Number</th>
-      </tr>
-    </thead>
-    <tbody>
-      {employeelist
-        .filter(
-    (emp) =>
-      emp.Role === "employee" && !emp.TeamId && 
-      emp._id !== values.teamLead && 
-    // ✅ only employees without team
-      (
-        emp.Employee_Name.toLowerCase().includes(search.toLowerCase()) ||
-        emp.Employee_Email?.toLowerCase().includes(search.toLowerCase()) ||
-        emp.Employee_Id?.toLowerCase().includes(search.toLowerCase()) ||
-        emp.Employee_Mobilenumber?.toLowerCase().includes(search.toLowerCase())
-      )
-  )
-        .map((emp) => (
-          <tr key={emp._id} className="border-t">
-            <td className="p-2">
-              <input
-                type="checkbox"
-                value={emp._id}
-                checked={values.teamMembers.includes(emp._id)}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setFieldValue("teamMembers", [
-                      ...values.teamMembers,
-                      emp._id,
-                    ]);
-                  } else {
-                    setFieldValue(
-                      "teamMembers",
-                      values.teamMembers.filter((id) => id !== emp._id)
-                    );
-                  }
-                }}
-              />
-            </td>
-            <td className="p-2">{emp.Employee_Name}</td>
-            <td className="p-2">{emp.Employee_Id}</td>
-            <td className="p-2">{emp.Employee_Mobilenumber}</td>
-          </tr>
-        ))}
-    </tbody>
-  </table>
+                  <table className="w-full border border-gray-200 rounded-lg">
+                    <thead className="bg-[#F3EFFF]">
+                      <tr>
+                        <th className="p-2 text-left">Select</th>
+                        <th className="p-2 text-left">Employee Name</th>
+                        <th className="p-2 text-left">ID</th>
+                        <th className="p-2 text-left">Mobile Number</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {employeelist.filter(
+                        (emp) =>
+                          emp.Role === "employee" &&
+                          !emp.TeamId &&
+                          emp._id !== values.teamLead &&
+                          // ✅ only employees without team
+                          (emp.Employee_Name.toLowerCase().includes(
+                            search.toLowerCase()
+                          ) ||
+                            emp.Employee_Email?.toLowerCase().includes(
+                              search.toLowerCase()
+                            ) ||
+                            emp.Employee_Id?.toLowerCase().includes(
+                              search.toLowerCase()
+                            ) ||
+                            emp.Employee_Mobilenumber?.toLowerCase().includes(
+                              search.toLowerCase()
+                            ))
+                      ).length === 0 ? (
+                        <tr>
+                          <td
+                            colSpan={4}
+                            className="p-4 text-center text-gray-500"
+                          >
+                            🚨 No employees found. Please create an employee
+                            first.<span className="text-[#BF9FFF] cursor-pointer" onClick={()=>{
+                              navigate('/employeelist')
+                            }}> Create employee</span>
+                          </td>
+                        </tr>
+                      ) : (
+                        employeelist
+                          .filter(
+                            (emp) =>
+                              emp.Role === "employee" &&
+                              !emp.TeamId &&
+                              emp._id !== values.teamLead &&
+                              (emp.Employee_Name.toLowerCase().includes(
+                                search.toLowerCase()
+                              ) ||
+                                emp.Employee_Email?.toLowerCase().includes(
+                                  search.toLowerCase()
+                                ) ||
+                                emp.Employee_Id?.toLowerCase().includes(
+                                  search.toLowerCase()
+                                ) ||
+                                emp.Employee_Mobilenumber?.toLowerCase().includes(
+                                  search.toLowerCase()
+                                ))
+                          )
+                          .map((emp) => (
+                            <tr key={emp._id} className="border-t">
+                              <td className="p-2">
+                                <input
+                                  type="checkbox"
+                                  value={emp._id}
+                                  checked={values.teamMembers.includes(emp._id)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      setFieldValue("teamMembers", [
+                                        ...values.teamMembers,
+                                        emp._id,
+                                      ]);
+                                    } else {
+                                      setFieldValue(
+                                        "teamMembers",
+                                        values.teamMembers.filter(
+                                          (id) => id !== emp._id
+                                        )
+                                      );
+                                    }
+                                  }}
+                                />
+                              </td>
+                              <td className="p-2">{emp.Employee_Name}</td>
+                              <td className="p-2">{emp.Employee_Id}</td>
+                              <td className="p-2">
+                                {emp.Employee_Mobilenumber}
+                              </td>
+                            </tr>
+                          ))
+                      )}
+                    </tbody>
+                  </table>
 
-  <ErrorMessage
-    name="teamMembers"
-    component="div"
-    className="text-red-500 text-sm mt-2"
-  />
-</div>
-
+                  <ErrorMessage
+                    name="teamMembers"
+                    component="div"
+                    className="text-red-500 text-sm mt-2"
+                  />
+                </div>
               </>
             )}
 
             {/* Submit Button */}
-            <div className="px-5 pt-6">
+            <div className="px-5 pt-6 ">
               <button
                 type="submit"
                 className="bg-[#BF9FFF] text-white px-6 py-2 rounded-lg hover:bg-[#a982ff] font-medium"
               >
-                {step === 1 ? "Next" : "Create Team"}
+                {step === 1
+                  ? "Next"
+                  : employeelist?.length == 0
+                  ? "Back"
+                  : "Create Team"}
               </button>
+              {step == 1 ? null : (
+                <button
+                  type="submit"
+                  className="bg-[#BF9FFF] text-white px-6 py-2 !ml-5 rounded-lg hover:bg-[#a982ff] font-medium"
+                  onClick={()=>{
+                    setStep(1);
+                  }}
+                >
+                  back
+                </button>
+              )}
             </div>
           </Form>
         )}

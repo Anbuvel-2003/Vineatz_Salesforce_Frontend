@@ -70,7 +70,6 @@ function App(): JSX.Element {
                 <Route path="/AddProject" element={<AddProject />} />
                 <Route path="/Employeelist" element={<Employeelist />} />
                 <Route path="/addemployee" element={<Addemployee />} />
-                <Route path="/updateemployee" element={<Updateemployee />} />
                 <Route path="/adminlist" element={<Adminlist />} />
                 <Route path="/adduser" element={<Adduser />} />
                 <Route path="/leaddetails/:id" element={<Leaddetails />} />
